@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net40", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40.csproj", "{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net35", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

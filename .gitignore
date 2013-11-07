@@ -1,0 +1,7 @@
+# User-specific Visual Studio configuration files
+*.suo
+*.user
+
+# Build output
+*/bin/
+*/obj/
