@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.n
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570", "Testing.Rfc6570\Testing.Rfc6570.csproj", "{DED3C364-37C4-4A9F-95E8-24ED7098BD78}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net40", "Docs.UriTemplate\Docs.UriTemplate.net40.shfbproj", "{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net35", "Docs.UriTemplate\Docs.UriTemplate.net35.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,12 @@ Global
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
