@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="a7a93c4d-4c37-4c1b-a244-5b83805f733e" visible="False" isMSHVRoot="true" isSelected="true" title="URI Template API">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="URI Template API" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd" visible="True" isDefault="true" title="Welcome">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="Welcome" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="80f90212-4ffe-4164-aff3-0272ea42814a" visible="True" title="License Agreement">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="license agreement" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="14557a8c-df73-468e-9b75-56e038b79f36" visible="True" title="Preliminary Features" />
+</Topics>
