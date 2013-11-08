@@ -179,11 +179,11 @@
                         break;
 
                     case UriTemplatePartType.Query:
-                        part = new UriTemplatePartQueryExpansion(variables);
+                        part = new UriTemplatePartQueryExpansion(variables, false);
                         break;
 
                     case UriTemplatePartType.QueryContinuation:
-                        part = new UriTemplatePartQueryContinuationExpansion(variables);
+                        part = new UriTemplatePartQueryExpansion(variables, true);
                         break;
 
                     case UriTemplatePartType.Literal:

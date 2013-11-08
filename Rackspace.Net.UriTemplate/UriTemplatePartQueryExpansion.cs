@@ -8,18 +8,30 @@
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
 
+    /// <summary>
+    /// Represents a URI Template expression of the form <c>{?x,y}</c> or <c>{&x,y}</c>.
+    /// </summary>
     internal sealed class UriTemplatePartQueryExpansion : UriTemplatePartExpansion
     {
-        public UriTemplatePartQueryExpansion(IEnumerable<VariableReference> variables)
+        private readonly bool _continuation;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UriTemplatePartQueryExpansion"/> class
+        /// with the specified values.
+        /// </summary>
+        /// <param name="variables">The variable references within this expression.</param>
+        /// <param name="continuation"><c>true</c> if this is a query continuation expression; otherwise, <c>false</c>.</param>
+        public UriTemplatePartQueryExpansion(IEnumerable<VariableReference> variables, bool continuation)
             : base(variables)
         {
+            _continuation = continuation;
         }
 
         public override UriTemplatePartType Type
         {
             get
             {
-                return UriTemplatePartType.Query;
+                return _continuation ? UriTemplatePartType.QueryContinuation : UriTemplatePartType.Query;
             }
         }
 
@@ -48,7 +60,7 @@
             {
                 if (variable.Composite)
                 {
-                    builder.Append(first && firstElement ? '?' : '&');
+                    builder.Append(Type == UriTemplatePartType.Query && first && firstElement ? '?' : '&');
                     AppendText(builder, variable, entry.Key.ToString(), true);
                     builder.Append('=');
                     AppendText(builder, variable, entry.Value.ToString(), true);
@@ -71,7 +83,7 @@
                 throw new ArgumentNullException("variableValue");
 
             if (firstElement || variable.Composite)
-                builder.Append(firstVariable && firstElement ? '?' : '&').Append(variable.Name).Append('=');
+                builder.Append(Type == UriTemplatePartType.Query && firstVariable && firstElement ? '?' : '&').Append(variable.Name).Append('=');
             else if (!firstElement)
                 builder.Append(',');
 
@@ -80,7 +92,7 @@
 
         public override string ToString()
         {
-            return string.Format("{{?{0}}}", string.Join(",", Variables.Select(i => i.Name).ToArray()));
+            return string.Format("{{{0}{1}}}", Type == UriTemplatePartType.Query ? '?' : '&', string.Join(",", Variables.Select(i => i.Name).ToArray()));
         }
     }
 }
