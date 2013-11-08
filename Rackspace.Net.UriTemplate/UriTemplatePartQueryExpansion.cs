@@ -9,7 +9,7 @@
     using IEnumerable = System.Collections.IEnumerable;
 
     /// <summary>
-    /// Represents a URI Template expression of the form <c>{?x,y}</c> or <c>{&x,y}</c>.
+    /// Represents a URI Template expression of the form <c>{?x,y}</c> or <c>{&amp;x,y}</c>.
     /// </summary>
     internal sealed class UriTemplatePartQueryExpansion : UriTemplatePartExpansion
     {

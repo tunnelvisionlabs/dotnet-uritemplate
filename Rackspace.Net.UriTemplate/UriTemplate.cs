@@ -67,7 +67,7 @@
         /// <summary>
         /// This is the backing field for the <see cref="Template"/> property.
         /// </summary>
-        public readonly string _template;
+        private readonly string _template;
 
         private readonly UriTemplatePart[] _parts;
 
@@ -212,8 +212,18 @@
             }
         }
 
+        /// <summary>
+        /// Creates a new URI from the template and the collection of parameters.
+        /// </summary>
+        /// <param name="parameters">The parameter values.</param>
+        /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <c>null</c>.</exception>
+        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(IDictionary<string, object> parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             StringBuilder builder = new StringBuilder();
             foreach (UriTemplatePart part in _parts)
                 part.Render(builder, parameters);
@@ -221,8 +231,30 @@
             return new Uri(builder.ToString(), UriKind.RelativeOrAbsolute);
         }
 
+        /// <summary>
+        /// Creates a new URI from the template and the collection of parameters. The URI formed
+        /// by the expanded template is resolved against <paramref name="baseAddress"/> to produce
+        /// an absolute URI.
+        /// </summary>
+        /// <param name="baseAddress">The base address of the URI.</param>
+        /// <param name="parameters">The parameter values.</param>
+        /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="parameters"/> is <c>null</c>.</para>
+        /// </exception>
+        /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
+        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, object> parameters)
         {
+            if (baseAddress == null)
+                throw new ArgumentNullException("baseAddress");
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+            if (!baseAddress.IsAbsoluteUri)
+                throw new ArgumentException("baseAddress must be an absolute URI", "baseAddress");
+
             return new Uri(baseAddress, BindByName(parameters));
         }
 

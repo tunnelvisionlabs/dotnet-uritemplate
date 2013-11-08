@@ -1,12 +1,20 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net40", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40.csproj", "{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net35", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570", "Testing.Rfc6570\Testing.Rfc6570.csproj", "{DED3C364-37C4-4A9F-95E8-24ED7098BD78}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net40", "Docs.UriTemplate\Docs.UriTemplate.net40.shfbproj", "{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net35", "Docs.UriTemplate\Docs.UriTemplate.net35.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E11CC5F0-815F-436C-9A98-82E8C341404B}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +34,12 @@ Global
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

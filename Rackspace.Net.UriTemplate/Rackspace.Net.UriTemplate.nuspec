@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Rackspace.Net.UriTemplate</id>
+    <version>0.0.0</version>
+    <title>Rackspace URI Template Library</title>
+    <authors>Sam Harwell</authors>
+    <owners>Sam Harwell</owners>
+    <licenseUrl>https://raw.github.com/rackerlabs/dotnet-uritemplate/v$version$/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/rackerlabs/dotnet-uritemplate</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An implementation of RFC 6570 URI Templates (Level 4) for .NET</description>
+    <releaseNotes>https://github.com/rackerlabs/dotnet-uritemplate/releases/v$version$</releaseNotes>
+    <copyright>Copyright © Sam Harwell 2013</copyright>
+    <tags>uritemplate rfc6570</tags>
+  </metadata>
+  <files>
+
+    <!-- Runtime libraries -->
+    <file src="bin\net35\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net35"/>
+    <file src="bin\ne35\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net35\Rackspace.Net.UriTemplate.xml" target="lib\net35"/>
+
+    <file src="bin\net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net40"/>
+    <file src="bin\net40\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net40"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net40\Rackspace.Net.UriTemplate.xml" target="lib\net40"/>
+
+    <!-- Source code -->
+    <file src="**\*.cs" target="src" />
+
+  </files>
+</package>
