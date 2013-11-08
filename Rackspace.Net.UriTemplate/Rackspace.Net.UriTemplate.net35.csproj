@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\net35\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,7 +26,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\net35\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -40,6 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UriTemplate.cs" />
+    <Compile Include="UriTemplatePart.cs" />
+    <Compile Include="UriTemplatePartExpansion.cs" />
+    <Compile Include="UriTemplatePartFragmentExpansion.cs" />
+    <Compile Include="UriTemplatePartLabelExpansion.cs" />
+    <Compile Include="UriTemplatePartLiteral.cs" />
+    <Compile Include="UriTemplatePartPathParametersExpansion.cs" />
+    <Compile Include="UriTemplatePartPathSegmentExpansion.cs" />
+    <Compile Include="UriTemplatePartQueryExpansion.cs" />
+    <Compile Include="UriTemplatePartSimpleExpansion.cs" />
+    <Compile Include="UriTemplatePartType.cs" />
+    <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
