@@ -67,7 +67,7 @@
         /// <summary>
         /// This is the backing field for the <see cref="Template"/> property.
         /// </summary>
-        public readonly string _template;
+        private readonly string _template;
 
         private readonly UriTemplatePart[] _parts;
 
