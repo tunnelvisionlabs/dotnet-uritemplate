@@ -7,5 +7,6 @@
         public const string Level3 = "Level 3";
         public const string Level4 = "Level 4";
         public const string InvalidTemplates = "Invalid Templates";
+        public const string Extended = "Extended";
     }
 }
