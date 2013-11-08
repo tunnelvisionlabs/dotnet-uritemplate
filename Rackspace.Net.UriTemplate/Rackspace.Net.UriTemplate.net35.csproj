@@ -49,7 +49,6 @@
     <Compile Include="UriTemplatePartPathParametersExpansion.cs" />
     <Compile Include="UriTemplatePartPathSegmentExpansion.cs" />
     <Compile Include="UriTemplatePartQueryExpansion.cs" />
-    <Compile Include="UriTemplatePartReservedExpansion.cs" />
     <Compile Include="UriTemplatePartSimpleExpansion.cs" />
     <Compile Include="UriTemplatePartType.cs" />
     <Compile Include="VariableReference.cs" />

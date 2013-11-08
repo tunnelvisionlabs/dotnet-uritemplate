@@ -10,16 +10,19 @@
 
     internal sealed class UriTemplatePartSimpleExpansion : UriTemplatePartExpansion
     {
-        public UriTemplatePartSimpleExpansion(IEnumerable<VariableReference> variables)
+        private readonly bool _escapeReserved;
+
+        public UriTemplatePartSimpleExpansion(IEnumerable<VariableReference> variables, bool escapeReserved)
             : base(variables)
         {
+            _escapeReserved = escapeReserved;
         }
 
         public override UriTemplatePartType Type
         {
             get
             {
-                return UriTemplatePartType.SimpleStringExpansion;
+                return _escapeReserved ? UriTemplatePartType.SimpleStringExpansion : UriTemplatePartType.ReservedStringExpansion;
             }
         }
 
@@ -33,7 +36,7 @@
             if (!first)
                 builder.Append(',');
 
-            AppendText(builder, variable, variableValue.ToString(), true);
+            AppendText(builder, variable, variableValue.ToString(), _escapeReserved);
         }
 
         protected override void RenderEnumerable(StringBuilder builder, VariableReference variable, IEnumerable variableValue, bool first)
@@ -57,9 +60,9 @@
                     if (!first)
                         builder.Append(',');
 
-                    AppendText(builder, variable, entry.Key.ToString(), true);
+                    AppendText(builder, variable, entry.Key.ToString(), _escapeReserved);
                     builder.Append('=');
-                    AppendText(builder, variable, entry.Value.ToString(), true);
+                    AppendText(builder, variable, entry.Value.ToString(), _escapeReserved);
                 }
                 else
                 {
@@ -73,7 +76,7 @@
 
         public override string ToString()
         {
-            return string.Format("{{{0}}}", string.Join(",", Variables.Select(i => i.Name).ToArray()));
+            return string.Format("{{{0}{1}}}", Type == UriTemplatePartType.SimpleStringExpansion ? string.Empty : "+", string.Join(",", Variables.Select(i => i.Name).ToArray()));
         }
     }
 }

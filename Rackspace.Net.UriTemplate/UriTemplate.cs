@@ -155,11 +155,11 @@
                 switch (type)
                 {
                     case UriTemplatePartType.SimpleStringExpansion:
-                        part = new UriTemplatePartSimpleExpansion(variables);
+                        part = new UriTemplatePartSimpleExpansion(variables, true);
                         break;
 
                     case UriTemplatePartType.ReservedStringExpansion:
-                        part = new UriTemplatePartReservedExpansion(variables);
+                        part = new UriTemplatePartSimpleExpansion(variables, false);
                         break;
 
                     case UriTemplatePartType.FragmentExpansion:
