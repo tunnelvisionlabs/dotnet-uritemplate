@@ -8,6 +8,9 @@
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
 
+    /// <summary>
+    /// Represents a URI Template expression of the form <c>{.x,y}</c>.
+    /// </summary>
     internal sealed class UriTemplatePartLabelExpansion : UriTemplatePartExpansion
     {
         public UriTemplatePartLabelExpansion(IEnumerable<VariableReference> variables)
