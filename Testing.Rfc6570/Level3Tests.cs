@@ -24,7 +24,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.SimpleExpansion)]
-        public void TestSimpleExpansionMultpleVariablesInQuery()
+        public void TestSimpleExpansionMultipleVariablesInQuery()
         {
             string template = "map?{x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -35,7 +35,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.SimpleExpansion)]
-        public void TestSimpleExpansionMultpleVariables()
+        public void TestSimpleExpansionMultipleVariables()
         {
             string template = "{x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -46,7 +46,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.ReservedExpansion)]
-        public void TestReservedExpansionMultpleVariables()
+        public void TestReservedExpansionMultipleVariables()
         {
             string template = "{+x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -57,7 +57,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.ReservedExpansion)]
-        public void TestReservedExpansionMultpleVariablesWithSlash()
+        public void TestReservedExpansionMultipleVariablesWithSlash()
         {
             string template = "{+path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -68,7 +68,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.FragmentExpansion)]
-        public void TestFragmentExpansionMultpleVariables()
+        public void TestFragmentExpansionMultipleVariables()
         {
             string template = "{#x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -79,7 +79,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.FragmentExpansion)]
-        public void TestFragmentExpansionMultpleVariablesAndLiteral()
+        public void TestFragmentExpansionMultipleVariablesAndLiteral()
         {
             string template = "{#path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -90,7 +90,7 @@
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
         [TestCategory(TestCategories.LabelExpansion)]
-        public void TestLabelExpansionMultpleVariables()
+        public void TestLabelExpansionMultipleVariables()
         {
             string template = "X{.x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
