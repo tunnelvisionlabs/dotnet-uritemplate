@@ -17,6 +17,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level1)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansion()
         {
             string template = "{var}";
@@ -27,6 +28,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level1)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionEscaping()
         {
             string template = "{hello}";

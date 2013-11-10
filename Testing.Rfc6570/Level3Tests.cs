@@ -23,6 +23,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionMultpleVariablesInQuery()
         {
             string template = "map?{x,y}";
@@ -33,6 +34,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionMultpleVariables()
         {
             string template = "{x,hello,y}";
@@ -43,6 +45,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionMultpleVariables()
         {
             string template = "{+x,hello,y}";
@@ -53,6 +56,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionMultpleVariablesWithSlash()
         {
             string template = "{+path,x}/here";
@@ -63,6 +67,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestFragmentExpansionMultpleVariables()
         {
             string template = "{#x,hello,y}";
@@ -73,6 +78,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestFragmentExpansionMultpleVariablesAndLiteral()
         {
             string template = "{#path,x}/here";
@@ -83,6 +89,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.LabelExpansion)]
         public void TestLabelExpansionMultpleVariables()
         {
             string template = "X{.x,y}";
@@ -93,6 +100,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansion()
         {
             string template = "{/var}";
@@ -103,6 +111,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionMultipleVariables()
         {
             string template = "{/var,x}/here";
@@ -113,6 +122,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionMultipleVariables()
         {
             string template = "{;x,y}";
@@ -123,6 +133,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionEmptyValue()
         {
             string template = "{;x,y,empty}";
@@ -133,6 +144,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionMultipleVariables()
         {
             string template = "{?x,y}";
@@ -143,6 +155,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionEmptyValue()
         {
             string template = "{?x,y,empty}";
@@ -153,6 +166,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansion()
         {
             string template = "?fixed=yes{&x}";
@@ -163,6 +177,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansionMultipleVariables()
         {
             string template = "{&x,y,empty}";

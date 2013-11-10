@@ -68,6 +68,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansion()
         {
             string template = "{/id*}";
@@ -78,6 +79,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundPathSegmentExpansionWithQueryString()
         {
             string template = "{/id*}{?fields,first_name,last.name,token}";
@@ -98,6 +101,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.SimpleExpansion)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestSimpleExpansionWithQueryString()
         {
             string template = "/search.{format}{?q,geocode,lang,locale,page,result_type}";
@@ -114,6 +119,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionWithEncodedCharacters()
         {
             string template = "/test{/Some%20Thing}";
@@ -124,6 +130,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionWithIntegerVariable()
         {
             string template = "/set{?number}";
@@ -134,6 +141,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionWithMultipleDoubleVariable()
         {
             string template = "/loc{?long,lat}";
@@ -144,6 +152,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences1()
         {
             string template = "/base{/group_id,first_name}/pages{/page,lang}{?format,q}";
@@ -154,6 +164,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences2()
         {
             string template = "/sparql{?query}";
@@ -164,6 +175,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences3()
         {
             string template = "/go{?uri}";
@@ -174,6 +186,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences4()
         {
             string template = "/service{?word}";
@@ -184,6 +197,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences5()
         {
             string template = "/lookup{?Stra%C3%9Fe}";
@@ -194,6 +208,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestEscapeSequences6()
         {
             string template = "{random}";
@@ -204,6 +219,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestEscapeSequences7()
         {
             string template = "{?assoc_special_chars*}";
@@ -214,6 +230,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansionCollectionVariable()
         {
             string template = "{/id*}";
@@ -230,6 +247,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundPathSegmentExpansionWithQueryStringCollectionVariable()
         {
             string template = "{/id*}{?fields,token}";
@@ -256,6 +275,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionEmptyList()
         {
             string template = "{/empty_list}";
@@ -266,6 +286,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansionEmptyList()
         {
             string template = "{/empty_list*}";
@@ -276,6 +297,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionEmptyList()
         {
             string template = "{?empty_list}";
@@ -286,6 +308,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionEmptyList()
         {
             string template = "{?empty_list*}";
@@ -296,6 +319,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionEmptyMap()
         {
             string template = "{?empty_assoc}";
@@ -306,6 +330,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionEmptyMap()
         {
             string template = "{?empty_assoc*}";
@@ -316,6 +341,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionNumericKey()
         {
             string template = "{42}";
@@ -326,6 +352,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionNumericKey()
         {
             string template = "{?42}";
@@ -336,6 +363,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionNumericKeyCollectionVariable()
         {
             string template = "{1337}";
@@ -346,6 +374,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionNumericKeyCollectionVariable()
         {
             string template = "{?1337*}";
@@ -356,6 +385,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Extended)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionNumericKeyMapVariable()
         {
             string template = "{?german*}";

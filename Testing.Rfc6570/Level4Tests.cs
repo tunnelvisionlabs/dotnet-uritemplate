@@ -20,6 +20,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionPrefix()
         {
             string template = "{var:3}";
@@ -30,6 +31,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionLongPrefix()
         {
             string template = "{var:30}";
@@ -40,6 +42,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionCollectionVariable()
         {
             string template = "{list}";
@@ -50,6 +53,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestCompoundSimpleExpansionCollectionVariable()
         {
             string template = "{list*}";
@@ -60,6 +64,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansionAssociativeMapVariable()
         {
             string template = "{keys}";
@@ -80,6 +85,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestCompoundSimpleExpansionAssociativeMapVariable()
         {
             string template = "{keys*}";
@@ -100,6 +106,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionPrefixVariable()
         {
             string template = "{+path:6}/here";
@@ -110,6 +117,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionCollectionVariable()
         {
             string template = "{+list}";
@@ -120,6 +128,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestCompoundReservedExpansionCollectionVariable()
         {
             string template = "{+list*}";
@@ -130,6 +139,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionAssociativeMapVariable()
         {
             string template = "{+keys}";
@@ -150,6 +160,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestCompoundReservedExpansionAssociativeMapVariable()
         {
             string template = "{+keys*}";
@@ -170,6 +181,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestFragmentExpansionPrefixVariable()
         {
             string template = "{#path:6}/here";
@@ -180,6 +192,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestFragmentExpansionCollectionVariable()
         {
             string template = "{#list}";
@@ -190,6 +203,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestCompoundFragmentExpansionCollectionVariable()
         {
             string template = "{#list*}";
@@ -200,6 +214,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestFragmentExpansionAssociativeMapVariable()
         {
             string template = "{#keys}";
@@ -220,6 +235,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.FragmentExpansion)]
         public void TestCompoundFragmentExpansionAssociativeMapVariable()
         {
             string template = "{#keys*}";
@@ -240,6 +256,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.LabelExpansion)]
         public void TestLabelExpansionPrefix()
         {
             string template = "X{.var:3}";
@@ -250,6 +267,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.LabelExpansion)]
         public void TestLabelExpansionCollectionVariable()
         {
             string template = "X{.list}";
@@ -260,6 +278,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.LabelExpansion)]
         public void TestCompoundLabelExpansionCollectionVariable()
         {
             string template = "X{.list*}";
@@ -270,6 +289,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.LabelExpansion)]
         public void TestLabelExpansionAssociativeMapVariable()
         {
             string template = "X{.keys}";
@@ -290,6 +310,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionMultipleReferencesPrefix()
         {
             string template = "{/var:1,var}";
@@ -300,6 +321,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionCollectionVariable()
         {
             string template = "{/list}";
@@ -310,6 +332,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansionCollectionVariable()
         {
             string template = "{/list*}";
@@ -320,6 +343,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansionCollectionVariableAndPrefixVariableReference()
         {
             string template = "{/list*,path:4}";
@@ -330,6 +354,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionAssociativeMapVariable()
         {
             string template = "{/keys}";
@@ -350,6 +375,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestCompoundPathSegmentExpansionAssociativeMapVariable()
         {
             string template = "{/keys*}";
@@ -370,6 +396,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionPrefixVariable()
         {
             string template = "{;hello:5}";
@@ -380,6 +407,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionCollectionVariable()
         {
             string template = "{;list}";
@@ -390,6 +418,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestCompoundPathParameterExpansionCollectionVariable()
         {
             string template = "{;list*}";
@@ -400,6 +429,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionAssociativeMapVariable()
         {
             string template = "{;keys}";
@@ -420,6 +450,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestCompoundPathParameterExpansionAssociativeMapVariable()
         {
             string template = "{;keys*}";
@@ -440,6 +471,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionPrefixVariable()
         {
             string template = "{?var:3}";
@@ -450,6 +482,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionCollectionVariable()
         {
             string template = "{?list}";
@@ -460,6 +493,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionCollectionVariable()
         {
             string template = "{?list*}";
@@ -470,6 +504,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionAssociativeMapVariable()
         {
             string template = "{?keys}";
@@ -490,6 +525,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestCompoundQueryExpansionAssociativeMapVariable()
         {
             string template = "{?keys*}";
@@ -510,6 +546,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansionPrefixVariable()
         {
             string template = "{&var:3}";
@@ -520,6 +557,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansionCollectionVariable()
         {
             string template = "{&list}";
@@ -530,6 +568,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestCompoundQueryContinuationExpansionCollectionVariable()
         {
             string template = "{&list*}";
@@ -540,6 +579,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansionAssociativeMapVariable()
         {
             string template = "{&keys}";
@@ -560,6 +600,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestCompoundQueryContinuationExpansionAssociativeMapVariable()
         {
             string template = "{&keys*}";
