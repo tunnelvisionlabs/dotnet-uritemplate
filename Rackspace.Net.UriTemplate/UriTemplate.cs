@@ -75,6 +75,7 @@
         /// Initializes a new instance of the <see cref="UriTemplate"/> class
         /// using the specified template.
         /// </summary>
+        /// <param name="template">The URI template.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="template"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="template"/> is not a valid <c>URI-Template</c> according to RFC 6570.</exception>
