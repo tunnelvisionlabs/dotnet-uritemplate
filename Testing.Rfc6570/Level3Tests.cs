@@ -23,7 +23,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestSimpleExpansionMultpleVariablesInQuery()
+        [TestCategory(TestCategories.SimpleExpansion)]
+        public void TestSimpleExpansionMultipleVariablesInQuery()
         {
             string template = "map?{x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -33,7 +34,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestSimpleExpansionMultpleVariables()
+        [TestCategory(TestCategories.SimpleExpansion)]
+        public void TestSimpleExpansionMultipleVariables()
         {
             string template = "{x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -43,7 +45,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestReservedExpansionMultpleVariables()
+        [TestCategory(TestCategories.ReservedExpansion)]
+        public void TestReservedExpansionMultipleVariables()
         {
             string template = "{+x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -53,7 +56,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestReservedExpansionMultpleVariablesWithSlash()
+        [TestCategory(TestCategories.ReservedExpansion)]
+        public void TestReservedExpansionMultipleVariablesWithSlash()
         {
             string template = "{+path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -63,7 +67,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestFragmentExpansionMultpleVariables()
+        [TestCategory(TestCategories.FragmentExpansion)]
+        public void TestFragmentExpansionMultipleVariables()
         {
             string template = "{#x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -73,7 +78,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestFragmentExpansionMultpleVariablesAndLiteral()
+        [TestCategory(TestCategories.FragmentExpansion)]
+        public void TestFragmentExpansionMultipleVariablesAndLiteral()
         {
             string template = "{#path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -83,7 +89,8 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
-        public void TestLabelExpansionMultpleVariables()
+        [TestCategory(TestCategories.LabelExpansion)]
+        public void TestLabelExpansionMultipleVariables()
         {
             string template = "X{.x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
@@ -93,6 +100,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansion()
         {
             string template = "{/var}";
@@ -103,6 +111,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathSegmentExpansion)]
         public void TestPathSegmentExpansionMultipleVariables()
         {
             string template = "{/var,x}/here";
@@ -113,6 +122,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionMultipleVariables()
         {
             string template = "{;x,y}";
@@ -123,6 +133,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.PathParameterExpansion)]
         public void TestPathParameterExpansionEmptyValue()
         {
             string template = "{;x,y,empty}";
@@ -133,6 +144,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionMultipleVariables()
         {
             string template = "{?x,y}";
@@ -143,6 +155,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryExpansion)]
         public void TestQueryExpansionEmptyValue()
         {
             string template = "{?x,y,empty}";
@@ -153,6 +166,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansion()
         {
             string template = "?fixed=yes{&x}";
@@ -163,6 +177,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level3)]
+        [TestCategory(TestCategories.QueryContinuationExpansion)]
         public void TestQueryContinuationExpansionMultipleVariables()
         {
             string template = "{&x,y,empty}";

@@ -18,6 +18,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level2)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansion()
         {
             string template = "{+var}";
@@ -28,6 +29,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level2)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionEscaping()
         {
             string template = "{+hello}";
@@ -38,6 +40,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level2)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionReservedCharacters()
         {
             string template = "{+path}/here";
@@ -48,6 +51,7 @@
 
         [TestMethod]
         [TestCategory(TestCategories.Level2)]
+        [TestCategory(TestCategories.ReservedExpansion)]
         public void TestReservedExpansionReservedCharactersInQuery()
         {
             string template = "here?ref={+path}";
