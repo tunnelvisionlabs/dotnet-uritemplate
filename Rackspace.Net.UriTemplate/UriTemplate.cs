@@ -61,8 +61,14 @@
         /// </summary>
         internal const string ExpressionPattern = @"{" + OperatorPattern + @"?" + VariableListPattern + @"}";
 
+#if !PORTABLE
+        private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
+#else
+        private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
+#endif
+
         private static readonly Regex ExpressionExpression =
-            new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+            new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", DefaultRegexOptions);
 
         /// <summary>
         /// This is the backing field for the <see cref="Template"/> property.
