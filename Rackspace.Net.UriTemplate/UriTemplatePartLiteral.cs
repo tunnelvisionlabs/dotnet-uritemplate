@@ -7,7 +7,13 @@
 
     internal sealed class UriTemplatePartLiteral : UriTemplatePart
     {
-        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+#if !PORTABLE
+        private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
+#else
+        private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
+#endif
+
+        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", DefaultRegexOptions);
 
         private readonly string _text;
 
