@@ -18,7 +18,7 @@
 
     <!-- Runtime libraries -->
     <file src="bin\net35\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net35"/>
-    <file src="bin\ne35\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35"/>
+    <file src="bin\net35\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35"/>
     <file src="..\Docs.UriTemplate\bin\Api\net35\Rackspace.Net.UriTemplate.xml" target="lib\net35"/>
 
     <file src="bin\net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net40"/>
