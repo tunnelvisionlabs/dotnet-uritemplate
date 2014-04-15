@@ -5,3 +5,6 @@
 # Build output
 */bin/
 */obj/
+
+# NuGet build output
+Build/nuget/
