@@ -28,12 +28,12 @@
             }
         }
 
-        public override sealed void Render(StringBuilder builder, IDictionary<string, object> parameters)
+        public override sealed void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
         {
             bool added = false;
             for (int i = 0; i < _variables.Length; i++)
             {
-                object result;
+                T result;
                 if (!parameters.TryGetValue(_variables[i].Name, out result) || result == null)
                     continue;
 

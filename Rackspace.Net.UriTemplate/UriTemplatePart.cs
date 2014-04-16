@@ -10,7 +10,8 @@
             get;
         }
 
-        public abstract void Render(StringBuilder builder, IDictionary<string, object> parameters);
+        public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
+            where T : class;
 
         protected static bool IsUnreserved(byte b)
         {

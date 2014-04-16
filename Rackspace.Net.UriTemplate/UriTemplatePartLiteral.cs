@@ -35,7 +35,7 @@
             }
         }
 
-        public override void Render(StringBuilder builder, IDictionary<string, object> parameters)
+        public override void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
         {
             builder.Append(_text);
         }
