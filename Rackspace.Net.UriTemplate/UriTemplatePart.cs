@@ -25,14 +25,14 @@
 
             switch ((char)b)
             {
-                case '-':
-                case '.':
-                case '_':
-                case '~':
-                    return true;
+            case '-':
+            case '.':
+            case '_':
+            case '~':
+                return true;
 
-                default:
-                    return false;
+            default:
+                return false;
             }
         }
 
@@ -40,32 +40,32 @@
         {
             switch ((char)b)
             {
-                // gen-delims
-                case ':':
-                case '/':
-                case '?':
-                case '#':
-                case '[':
-                case ']':
-                case '@':
-                    return true;
+            // gen-delims
+            case ':':
+            case '/':
+            case '?':
+            case '#':
+            case '[':
+            case ']':
+            case '@':
+                return true;
 
-                // sub-delims
-                case '!':
-                case '$':
-                case '&':
-                case '\'':
-                case '(':
-                case ')':
-                case '*':
-                case '+':
-                case ',':
-                case ';':
-                case '=':
-                    return true;
+            // sub-delims
+            case '!':
+            case '$':
+            case '&':
+            case '\'':
+            case '(':
+            case ')':
+            case '*':
+            case '+':
+            case ',':
+            case ';':
+            case '=':
+                return true;
 
-                default:
-                    return false;
+            default:
+                return false;
             }
         }
 
