@@ -106,43 +106,43 @@
                 {
                     switch (op.Value)
                     {
-                        case "+":
-                            type = UriTemplatePartType.ReservedStringExpansion;
-                            break;
+                    case "+":
+                        type = UriTemplatePartType.ReservedStringExpansion;
+                        break;
 
-                        case "#":
-                            type = UriTemplatePartType.FragmentExpansion;
-                            break;
+                    case "#":
+                        type = UriTemplatePartType.FragmentExpansion;
+                        break;
 
-                        case ".":
-                            type = UriTemplatePartType.LabelExpansion;
-                            break;
+                    case ".":
+                        type = UriTemplatePartType.LabelExpansion;
+                        break;
 
-                        case "/":
-                            type = UriTemplatePartType.PathSegments;
-                            break;
+                    case "/":
+                        type = UriTemplatePartType.PathSegments;
+                        break;
 
-                        case ";":
-                            type = UriTemplatePartType.PathParameters;
-                            break;
+                    case ";":
+                        type = UriTemplatePartType.PathParameters;
+                        break;
 
-                        case "?":
-                            type = UriTemplatePartType.Query;
-                            break;
+                    case "?":
+                        type = UriTemplatePartType.Query;
+                        break;
 
-                        case "&":
-                            type = UriTemplatePartType.QueryContinuation;
-                            break;
+                    case "&":
+                        type = UriTemplatePartType.QueryContinuation;
+                        break;
 
-                        case "=":
-                        case ",":
-                        case "!":
-                        case "@":
-                        case "|":
-                            throw new NotSupportedException(string.Format("Operator is reserved for future expansion: {0}", op.Value));
+                    case "=":
+                    case ",":
+                    case "!":
+                    case "@":
+                    case "|":
+                        throw new NotSupportedException(string.Format("Operator is reserved for future expansion: {0}", op.Value));
 
-                        default:
-                            throw new NotSupportedException(string.Format("Unrecognized operator: {0}", op.Value));
+                    default:
+                        throw new NotSupportedException(string.Format("Unrecognized operator: {0}", op.Value));
                     }
                 }
 
@@ -161,41 +161,41 @@
                 UriTemplatePart part;
                 switch (type)
                 {
-                    case UriTemplatePartType.SimpleStringExpansion:
-                        part = new UriTemplatePartSimpleExpansion(variables, true);
-                        break;
+                case UriTemplatePartType.SimpleStringExpansion:
+                    part = new UriTemplatePartSimpleExpansion(variables, true);
+                    break;
 
-                    case UriTemplatePartType.ReservedStringExpansion:
-                        part = new UriTemplatePartSimpleExpansion(variables, false);
-                        break;
+                case UriTemplatePartType.ReservedStringExpansion:
+                    part = new UriTemplatePartSimpleExpansion(variables, false);
+                    break;
 
-                    case UriTemplatePartType.FragmentExpansion:
-                        part = new UriTemplatePartFragmentExpansion(variables);
-                        break;
+                case UriTemplatePartType.FragmentExpansion:
+                    part = new UriTemplatePartFragmentExpansion(variables);
+                    break;
 
-                    case UriTemplatePartType.LabelExpansion:
-                        part = new UriTemplatePartLabelExpansion(variables);
-                        break;
+                case UriTemplatePartType.LabelExpansion:
+                    part = new UriTemplatePartLabelExpansion(variables);
+                    break;
 
-                    case UriTemplatePartType.PathSegments:
-                        part = new UriTemplatePartPathSegmentExpansion(variables);
-                        break;
+                case UriTemplatePartType.PathSegments:
+                    part = new UriTemplatePartPathSegmentExpansion(variables);
+                    break;
 
-                    case UriTemplatePartType.PathParameters:
-                        part = new UriTemplatePartPathParametersExpansion(variables);
-                        break;
+                case UriTemplatePartType.PathParameters:
+                    part = new UriTemplatePartPathParametersExpansion(variables);
+                    break;
 
-                    case UriTemplatePartType.Query:
-                        part = new UriTemplatePartQueryExpansion(variables, false);
-                        break;
+                case UriTemplatePartType.Query:
+                    part = new UriTemplatePartQueryExpansion(variables, false);
+                    break;
 
-                    case UriTemplatePartType.QueryContinuation:
-                        part = new UriTemplatePartQueryExpansion(variables, true);
-                        break;
+                case UriTemplatePartType.QueryContinuation:
+                    part = new UriTemplatePartQueryExpansion(variables, true);
+                    break;
 
-                    case UriTemplatePartType.Literal:
-                    default:
-                        throw new InvalidOperationException();
+                case UriTemplatePartType.Literal:
+                default:
+                    throw new InvalidOperationException();
                 }
 
                 parts.Add(part);
