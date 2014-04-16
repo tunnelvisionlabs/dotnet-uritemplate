@@ -5,6 +5,12 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// Represents a literal in a URI Template.
+    /// </summary>
+    /// <seealso href="http://tools.ietf.org/html/rfc6570#section-2.1">Literals (RFC 6570 URI Template)</seealso>
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
     internal sealed class UriTemplatePartLiteral : UriTemplatePart
     {
 #if !PORTABLE
@@ -17,6 +23,13 @@
 
         private readonly string _text;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UriTemplatePartLiteral"/> class
+        /// with the specified literal text.
+        /// </summary>
+        /// <param name="text">The literal text.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="text"/> is <see langword="null"/>.</exception>
+        /// <exception cref="FormatException">If <paramref name="text"/> is not a sequence of <c>literals</c>, as defined by RFC 6570.</exception>
         public UriTemplatePartLiteral(string text)
         {
             if (text == null)
@@ -27,6 +40,8 @@
             _text = text;
         }
 
+        /// <inheritdoc/>
+        /// <value>This method always returns <see cref="UriTemplatePartType.Literal"/>.</value>
         public override UriTemplatePartType Type
         {
             get
@@ -35,11 +50,16 @@
             }
         }
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// This part is rendered by simply appending <see cref="Text"/> to <paramref name="builder"/>.
+        /// </remarks>
         public override void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
         {
             builder.Append(_text);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return _text;

@@ -13,6 +13,9 @@
     /// </summary>
     internal sealed class UriTemplatePartSimpleExpansion : UriTemplatePartExpansion
     {
+        /// <summary>
+        /// <see langword="true"/> to escape reserved characters during rendering; otherwise, <see langword="false"/>.
+        /// </summary>
         private readonly bool _escapeReserved;
 
         public UriTemplatePartSimpleExpansion(IEnumerable<VariableReference> variables, bool escapeReserved)
@@ -21,6 +24,12 @@
             _escapeReserved = escapeReserved;
         }
 
+        /// <inheritdoc/>
+        /// <value>
+        /// <see cref="UriTemplatePartType.SimpleStringExpansion"/> for templates of the form <c>{x,y}</c>.
+        /// <para>-or-</para>
+        /// <para><see cref="UriTemplatePartType.ReservedStringExpansion"/> for templates of the form <c>{+x,y}</c>.</para>
+        /// </value>
         public override UriTemplatePartType Type
         {
             get

@@ -18,6 +18,8 @@
         {
         }
 
+        /// <inheritdoc/>
+        /// <value>This method always returns <see cref="UriTemplatePartType.PathParameters"/>.</value>
         public override UriTemplatePartType Type
         {
             get

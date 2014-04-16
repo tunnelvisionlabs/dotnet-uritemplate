@@ -3,13 +3,26 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// Represents a single part of a decomposed URI Template.
+    /// </summary>
     internal abstract class UriTemplatePart
     {
+        /// <summary>
+        /// Gets the type of this part.
+        /// </summary>
         public abstract UriTemplatePartType Type
         {
             get;
         }
 
+        /// <summary>
+        /// Renders this <see cref="UriTemplatePart"/> to a <see cref="StringBuilder"/>, applying the
+        /// specified <paramref name="parameters"/> as replacements for variables in the template.
+        /// </summary>
+        /// <param name="builder">The <see cref="StringBuilder"/> to render this part to.</param>
+        /// <param name="parameters">A collection of parameters for replacing variable references in the template.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="builder"/> is <see langword="null"/>.</exception>
         public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
             where T : class;
 

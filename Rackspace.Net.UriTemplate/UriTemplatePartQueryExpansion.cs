@@ -27,6 +27,12 @@
             _continuation = continuation;
         }
 
+        /// <inheritdoc/>
+        /// <value>
+        /// <see cref="UriTemplatePartType.Query"/> for templates of the form <c>{?x,y}</c>.
+        /// <para>-or-</para>
+        /// <para><see cref="UriTemplatePartType.QueryContinuation"/> for templates of the form <c>{&amp;x,y}</c>.</para>
+        /// </value>
         public override UriTemplatePartType Type
         {
             get

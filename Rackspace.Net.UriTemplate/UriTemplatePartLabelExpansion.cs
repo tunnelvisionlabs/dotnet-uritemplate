@@ -11,6 +11,8 @@
     /// <summary>
     /// Represents a URI Template expression of the form <c>{.x,y}</c>.
     /// </summary>
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
     internal sealed class UriTemplatePartLabelExpansion : UriTemplatePartExpansion
     {
         public UriTemplatePartLabelExpansion(IEnumerable<VariableReference> variables)
@@ -18,6 +20,8 @@
         {
         }
 
+        /// <inheritdoc/>
+        /// <value>This method always returns <see cref="UriTemplatePartType.LabelExpansion"/>.</value>
         public override UriTemplatePartType Type
         {
             get

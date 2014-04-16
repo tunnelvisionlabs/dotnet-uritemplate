@@ -9,6 +9,8 @@
     /// <summary>
     /// A class that represents an RFC 6570 URI Template.
     /// </summary>
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
     public class UriTemplate
     {
         /// <summary>
@@ -62,11 +64,37 @@
         internal const string ExpressionPattern = @"{" + OperatorPattern + @"?" + VariableListPattern + @"}";
 
 #if !PORTABLE
+        /// <summary>
+        /// The default <see cref="RegexOptions"/> for non-Portable Class Library builds.
+        /// </summary>
         private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #else
+        /// <summary>
+        /// The default <see cref="RegexOptions"/> for Portable Class Library builds.
+        /// </summary>
         private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
 #endif
 
+        /// <summary>
+        /// A regular expression which matches a single <c>expression</c> within a URI Template.
+        /// </summary>
+        /// <remarks>
+        /// This regular expression has the following named captures.
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Name</term>
+        /// <term>Meaning</term>
+        /// </listheader>
+        /// <item>
+        /// <description><c>Operator</c></description>
+        /// <description>The (optional) <c>operator</c> portion of the <c>expression</c>, described by the <see cref="OperatorPattern"/> pattern.</description>
+        /// </item>
+        /// <item>
+        /// <description><c>VariableList</c></description>
+        /// <description>The <c>variable-list</c> portion of the <c>expression</c>, described by the <see cref="VariableListPattern"/> pattern.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         private static readonly Regex ExpressionExpression =
             new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", DefaultRegexOptions);
 
@@ -75,6 +103,10 @@
         /// </summary>
         private readonly string _template;
 
+        /// <summary>
+        /// An array of <see cref="UriTemplatePart"/> instances representing the decomposed URI Template.
+        /// Each part is responsible for rendering its own value.
+        /// </summary>
         private readonly UriTemplatePart[] _parts;
 
         /// <summary>
