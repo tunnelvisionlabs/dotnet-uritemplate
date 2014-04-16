@@ -25,6 +25,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("value", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -36,6 +40,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("Hello%20World!", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
         }
 
         [TestMethod]
@@ -47,6 +55,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("/foo/bar/here", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
         }
 
         [TestMethod]
@@ -58,6 +70,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("here?ref=/foo/bar", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
         }
     }
 }

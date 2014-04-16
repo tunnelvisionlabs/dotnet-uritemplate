@@ -15,14 +15,19 @@ namespace Rackspace.Net
     /// <preliminary/>
     internal sealed class UriTemplatePartLiteral : UriTemplatePart
     {
-#if !PORTABLE
-        private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
-#else
-        private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
-#endif
+        /// <summary>
+        /// This anchored regular expression matches a string that conforms to a sequence of <c>literals</c>.
+        /// </summary>
+        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", UriTemplate.DefaultRegexOptions);
 
-        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", DefaultRegexOptions);
+        /// <summary>
+        /// This singleton is an empty array which is returned by <see cref="Match"/>.
+        /// </summary>
+        private static readonly KeyValuePair<VariableReference, object>[] EmptyMatches = new KeyValuePair<VariableReference, object>[0];
 
+        /// <summary>
+        /// This is the backing field for the <see cref="Text"/> property.
+        /// </summary>
         private readonly string _text;
 
         /// <summary>
@@ -77,6 +82,18 @@ namespace Rackspace.Net
         public override string ToString()
         {
             return _text;
+        }
+
+        /// <inheritdoc/>
+        protected override void BuildPatternBody(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            pattern.Append(Regex.Escape(_text));
+        }
+
+        /// <inheritdoc/>
+        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            return EmptyMatches;
         }
     }
 }

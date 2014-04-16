@@ -69,12 +69,12 @@ namespace Rackspace.Net
         /// <summary>
         /// The default <see cref="RegexOptions"/> for non-Portable Class Library builds.
         /// </summary>
-        private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
+        internal const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #else
         /// <summary>
         /// The default <see cref="RegexOptions"/> for Portable Class Library builds.
         /// </summary>
-        private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
+        internal const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
 #endif
 
         /// <summary>
@@ -127,6 +127,22 @@ namespace Rackspace.Net
                 throw new ArgumentException("template cannot be empty");
 
             _template = template;
+            _parts = ParseTemplate(template);
+        }
+
+        /// <summary>
+        /// Gets the original template text the <see cref="UriTemplate"/> was constructed from.
+        /// </summary>
+        public string Template
+        {
+            get
+            {
+                return _template;
+            }
+        }
+
+        private static UriTemplatePart[] ParseTemplate(string template)
+        {
             List<UriTemplatePart> parts = new List<UriTemplatePart>();
             int previousEnd = 0;
             foreach (Match match in ExpressionExpression.Matches(template))
@@ -239,18 +255,7 @@ namespace Rackspace.Net
             if (previousEnd < template.Length)
                 parts.Add(new UriTemplatePartLiteral(template.Substring(previousEnd)));
 
-            _parts = parts.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the original template text the <see cref="UriTemplate"/> was constructed from.
-        /// </summary>
-        public string Template
-        {
-            get
-            {
-                return _template;
-            }
+            return parts.ToArray();
         }
 
         /// <summary>
@@ -341,6 +346,97 @@ namespace Rackspace.Net
                 throw new ArgumentException("baseAddress must be an absolute URI", "baseAddress");
 
             return new Uri(baseAddress, BindByName(parameters));
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="candidate"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
+        /// </exception>
+        public UriTemplateMatch Match(Uri candidate)
+        {
+            return Match(candidate, new string[0], new string[0]);
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template. Lists are returned as instances of <see cref="IList{String}"/>.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{String, String}"/>.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="candidate"/> is <c>null</c>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <c>null</c>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <c>null</c>.</para>
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
+        /// </exception>
+        public UriTemplateMatch Match(Uri candidate, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            StringBuilder pattern = new StringBuilder();
+            pattern.Append('^');
+            for (int i = 0; i < _parts.Length; i++)
+            {
+                string group = "part" + i;
+                _parts[i].BuildPattern(pattern, group, listVariables, mapVariables);
+            }
+
+            pattern.Append('$');
+
+            Regex expression = new Regex(pattern.ToString());
+            Match match = expression.Match(candidate.ToString());
+            if (match == null || !match.Success)
+                return null;
+
+            List<KeyValuePair<VariableReference, object>> bindings = new List<KeyValuePair<VariableReference, object>>();
+            for (int i = 0; i < _parts.Length; i++)
+            {
+                Group group = match.Groups["part" + i];
+                if (group.Success)
+                {
+                    KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, listVariables, mapVariables);
+                    if (binding == null)
+                        return null;
+
+                    bindings.AddRange(binding);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            return new UriTemplateMatch(this, bindings);
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <param name="baseAddress">The base address.</param>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="candidate"/> is <c>null</c>.</para>
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
+        /// </exception>
+        public UriTemplateMatch Match(Uri baseAddress, Uri candidate)
+        {
+            Uri relative = baseAddress.MakeRelativeUri(candidate);
+            return Match(relative);
         }
 
         /// <summary>

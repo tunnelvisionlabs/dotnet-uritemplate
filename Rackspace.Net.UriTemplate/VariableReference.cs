@@ -10,13 +10,13 @@ namespace Rackspace.Net
     /// </summary>
     /// <threadsafety static="true" instance="true"/>
     /// <preliminary/>
-    internal class VariableReference
+    public class VariableReference
     {
         /// <summary>
         /// This regular expression is used to validate the <see cref="Name"/> property when
         /// a <see cref="VariableReference"/> is initialized.
         /// </summary>
-        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$");
+        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$", UriTemplate.DefaultRegexOptions);
 
         /// <summary>
         /// This is the backing field for the <see cref="Name"/> property.

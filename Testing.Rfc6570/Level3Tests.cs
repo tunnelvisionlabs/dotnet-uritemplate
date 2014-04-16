@@ -30,6 +30,11 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("map?1024,768", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -41,6 +46,12 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("1024,Hello%20World%21,768", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -52,6 +63,16 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("1024,Hello%20World!,768", uri.ToString());
+
+            try
+            {
+                // cannot call match on a uri with multiple reserved variables
+                uriTemplate.Match(uri);
+                Assert.Fail("Expected a NotSupportedException");
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         [TestMethod]
@@ -63,6 +84,16 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("/foo/bar,1024/here", uri.ToString());
+
+            try
+            {
+                // cannot call match on a uri with multiple reserved variables
+                uriTemplate.Match(uri);
+                Assert.Fail("Expected a NotSupportedException");
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         [TestMethod]
@@ -74,6 +105,16 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("#1024,Hello%20World!,768", uri.ToString());
+
+            try
+            {
+                // cannot call match on a uri with multiple fragment variables
+                uriTemplate.Match(uri);
+                Assert.Fail("Expected a NotSupportedException");
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         [TestMethod]
@@ -85,6 +126,16 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("#/foo/bar,1024/here", uri.ToString());
+
+            try
+            {
+                // cannot call match on a uri with multiple fragment variables
+                uriTemplate.Match(uri);
+                Assert.Fail("Expected a NotSupportedException");
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         [TestMethod]
@@ -96,6 +147,16 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("X.1024.768", uri.ToString());
+
+            try
+            {
+                // cannot call match on a uri with multiple label variables
+                uriTemplate.Match(uri);
+                Assert.Fail("Expected a NotSupportedException");
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         [TestMethod]
@@ -107,6 +168,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("/value", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -118,6 +183,11 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("/value/1024/here", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -129,6 +199,11 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual(";x=1024;y=768", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -140,6 +215,12 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual(";x=1024;y=768;empty", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
         }
 
         [TestMethod]
@@ -151,6 +232,11 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("?x=1024&y=768", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -162,6 +248,12 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("?x=1024&y=768&empty=", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
         }
 
         [TestMethod]
@@ -173,6 +265,10 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("?fixed=yes&x=1024", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -184,6 +280,12 @@
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("&x=1024&y=768&empty=", uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
         }
     }
 }

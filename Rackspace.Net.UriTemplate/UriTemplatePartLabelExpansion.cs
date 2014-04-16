@@ -6,6 +6,7 @@ namespace Rackspace.Net
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using DictionaryEntry = System.Collections.DictionaryEntry;
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
@@ -30,6 +31,56 @@ namespace Rackspace.Net
             {
                 return UriTemplatePartType.LabelExpansion;
             }
+        }
+
+        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            for (int i = 0; i < Variables.Count; i++)
+            {
+                if (Variables[i].Prefix != null)
+                    throw new NotImplementedException("Matching prefix variables is not yet supported");
+                if (listVariables.Contains(Variables[i].Name))
+                    throw new NotImplementedException("Matching list variables is not yet supported");
+                if (mapVariables.Contains(Variables[i].Name))
+                    throw new NotImplementedException("Matching associative map variables is not yet supported");
+
+                pattern.Append("(?:");
+                pattern.Append(Regex.Escape("."));
+                pattern.Append(UnreservedCharacterPattern).Append('*');
+            }
+
+            for (int i = 0; i < Variables.Count; i++)
+            {
+                pattern.Append(")?");
+            }
+        }
+
+        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            if (string.IsNullOrEmpty(text))
+                return new KeyValuePair<VariableReference, object>[0];
+
+            if (Variables.Count > 1)
+                throw new NotSupportedException("Matching more than one label variable is not supported");
+
+            if (text[0] != '.')
+                throw new FormatException("The specified text is not a valid label expansion");
+
+            text = text.Substring(1);
+
+            for (int i = 0; i < Variables.Count; i++)
+            {
+                if (Variables[i].Prefix != null)
+                    throw new NotImplementedException("Matching prefix variables is not yet supported");
+                if (listVariables.Contains(Variables[i].Name))
+                    throw new NotImplementedException("Matching list variables is not yet supported");
+                if (mapVariables.Contains(Variables[i].Name))
+                    throw new NotImplementedException("Matching associative map variables is not yet supported");
+            }
+
+            List<KeyValuePair<VariableReference, object>> bindings = new List<KeyValuePair<VariableReference, object>>();
+            bindings.Add(new KeyValuePair<VariableReference, object>(Variables[0], DecodeCharacters(text)));
+            return bindings.ToArray();
         }
 
         protected override void RenderElement(StringBuilder builder, VariableReference variable, object variableValue, bool first)
