@@ -37,9 +37,9 @@ namespace Rackspace.Net
         /// <param name="template">The <see cref="UriTemplate"/> associated with this <see cref="UriTemplateMatch"/> instance.</param>
         /// <param name="bindings">A collection of variable bindings identified by the match operation.</param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="template"/> is <c>null</c>.
+        /// If <paramref name="template"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="bindings"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="bindings"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="FormatException">
         /// If <paramref name="bindings"/> contains two variable bindings for the same variable which do not have the same value, after considering the prefix modifier(s).

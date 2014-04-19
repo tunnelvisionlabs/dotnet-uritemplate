@@ -352,9 +352,9 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
-        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="candidate"/> is <c>null</c>.
+        /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
@@ -370,13 +370,13 @@ namespace Rackspace.Net
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template. Lists are returned as instances of <see cref="IList{String}"/>.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{String, String}"/>.</param>
-        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="candidate"/> is <c>null</c>.
+        /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="listVariables"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
-        /// <para>If <paramref name="mapVariables"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
@@ -424,11 +424,11 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="baseAddress">The base address.</param>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
-        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <c>null</c> if the match failed.</returns>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="candidate"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
