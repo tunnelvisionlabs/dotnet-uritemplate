@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An implementation of RFC 6570 URI Templates (Level 4) for .NET</description>
     <releaseNotes>https://github.com/rackerlabs/dotnet-uritemplate/releases/v$version$</releaseNotes>
-    <copyright>Copyright © Sam Harwell 2013</copyright>
+    <copyright>Copyright © Sam Harwell 2014</copyright>
     <tags>uritemplate rfc6570</tags>
   </metadata>
   <files>
