@@ -69,9 +69,9 @@
     <Compile Include="TestCategories.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40.csproj">
+    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40-client.csproj">
       <Project>{d5f52104-c34d-4877-9bf8-3ec57abd99b5}</Project>
-      <Name>Rackspace.Net.UriTemplate.net40</Name>
+      <Name>Rackspace.Net.UriTemplate.net40-client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

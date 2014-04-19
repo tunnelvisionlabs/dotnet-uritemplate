@@ -17,13 +17,13 @@
   <files>
 
     <!-- Runtime libraries -->
-    <file src="bin\net35\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net35"/>
-    <file src="bin\net35\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35"/>
-    <file src="..\Docs.UriTemplate\bin\Api\net35\Rackspace.Net.UriTemplate.xml" target="lib\net35"/>
+    <file src="bin\net35-client\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net35-client"/>
+    <file src="bin\net35-client\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35-client"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net35-client\Rackspace.Net.UriTemplate.xml" target="lib\net35-client"/>
 
-    <file src="bin\net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net40"/>
-    <file src="bin\net40\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net40"/>
-    <file src="..\Docs.UriTemplate\bin\Api\net40\Rackspace.Net.UriTemplate.xml" target="lib\net40"/>
+    <file src="bin\net40-client\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net40-client"/>
+    <file src="bin\net40-client\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net40-client"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net40-client\Rackspace.Net.UriTemplate.xml" target="lib\net40-client"/>
 
     <file src="bin\portable-net40+sl4+wp7+win8\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\portable-net40+sl4+wp7+win8"/>
     <file src="bin\portable-net40+sl4+wp7+win8\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\portable-net40+sl4+wp7+win8"/>

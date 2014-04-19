@@ -7,20 +7,20 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>a8bbfa32-324b-4da0-bf0d-1cbff6da03dd</ProjectGuid>
+    <ProjectGuid>{cc7f0f12-4736-43c3-a0c0-722875504053}</ProjectGuid>
     <SHFBSchemaVersion>1.9.9.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Docs.UriTemplate</AssemblyName>
     <RootNamespace>Docs.UriTemplate</RootNamespace>
-    <Name>Docs.UriTemplate.net40</Name>
+    <Name>Docs.UriTemplate.net35-client</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
-    <OutputPath>.\bin\Help\net40\</OutputPath>
+    <FrameworkVersion>.NET Framework 3.5</FrameworkVersion>
+    <OutputPath>.\bin\Help\net35-client\</OutputPath>
     <HtmlHelpName>URI Template API Reference</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40.csproj" subFolders="True" />
+      <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj" subFolders="True" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>HtmlHelp1, MSHelpViewer, Website</HelpFileFormat>
@@ -59,7 +59,7 @@
     <ComponentConfigurations>
       <ComponentConfig id="IntelliSense Component" enabled="True">
         <component id="IntelliSense Component">
-          <output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}\..\..\Api\net40" />
+          <output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}\..\..\Api\net35-client" />
         </component>
       </ComponentConfig>
     </ComponentConfigurations>
@@ -109,9 +109,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40.csproj">
-      <Name>Rackspace.Net.UriTemplate.net40</Name>
-      <Project>{d5f52104-c34d-4877-9bf8-3ec57abd99b5}</Project>
+    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj">
+      <Name>Rackspace.Net.UriTemplate.net35-client</Name>
+      <Project>{81c7e452-56d0-46b6-8f65-247b7f18c2bd}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
