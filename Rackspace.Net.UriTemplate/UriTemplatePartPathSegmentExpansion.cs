@@ -20,6 +20,8 @@ namespace Rackspace.Net
         {
         }
 
+        /// <inheritdoc/>
+        /// <value>This method always returns <see cref="UriTemplatePartType.PathSegments"/>.</value>
         public override UriTemplatePartType Type
         {
             get

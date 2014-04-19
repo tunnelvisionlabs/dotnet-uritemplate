@@ -10,18 +10,40 @@ namespace Rackspace.Net
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
 
+    /// <summary>
+    /// This is the base class for <see cref="UriTemplatePart"/> instances which involve
+    /// the expansion of variable references during rendering.
+    /// </summary>
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
     internal abstract class UriTemplatePartExpansion : UriTemplatePart
     {
+        /// <summary>
+        /// This is the backing field for the <see cref="Variables"/> property.
+        /// </summary>
         private readonly VariableReference[] _variables;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UriTemplatePartExpansion"/> class
+        /// with the specified variables.
+        /// </summary>
+        /// <param name="variables">A collection of <see cref="VariableReference"/> instances which describe the expansion variables referenced by this URI Template part.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="variables"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">If <paramref name="variables"/> contains any <see langword="null"/> values.</exception>
         public UriTemplatePartExpansion(IEnumerable<VariableReference> variables)
         {
             if (variables == null)
                 throw new ArgumentNullException("variables");
 
             _variables = variables.ToArray();
+            if (_variables.Contains(null))
+                throw new ArgumentException("variables cannot contain any null values", "variables");
         }
 
+        /// <summary>
+        /// Gets a collection of variables which are referenced by this expansion.
+        /// </summary>
+        /// <value>A read-only collection of <see cref="VariableReference"/> instances describing the variables referenced by this URI Template part.</value>
         public ReadOnlyCollection<VariableReference> Variables
         {
             get
@@ -30,6 +52,35 @@ namespace Rackspace.Net
             }
         }
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// The <see cref="Variables"/> are rendered in order. This method divides the rendering
+        /// process into separate methods according to the type of parameter provided in
+        /// <paramref name="parameters"/> for each of the variables in <see cref="Variables"/>.
+        ///
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Parameter Type</term>
+        /// <term>Render Action</term>
+        /// </listheader>
+        /// <item>
+        /// <description><see cref="IDictionary"/></description>
+        /// <description>The variable is rendered by calling <see cref="RenderDictionary"/>.</description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IEnumerable"/> (except <see cref="String"/>)</description>
+        /// <description>The variable is rendered by calling <see cref="RenderEnumerable"/>.</description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="String"/>, or any other <see cref="Object"/></description>
+        /// <description>The variable is rendered by calling <see cref="RenderElement"/>.</description>
+        /// </item>
+        /// <item>
+        /// <description><see langword="null"/></description>
+        /// <description>The output is not modified.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         public override sealed void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
         {
             bool added = false;
@@ -67,8 +118,35 @@ namespace Rackspace.Net
             }
         }
 
+        /// <summary>
+        /// This helper method writes a string value to the <see cref="StringBuilder"/> output,
+        /// percent-encoding characters and restricting the output according to the variable
+        /// <see cref="VariableReference.Prefix"/> as necessary.
+        /// </summary>
+        /// <remarks>
+        /// Characters which are not <c>unreserved</c> or <c>reserved</c> characters according
+        /// to RFC 6570 are always percent-encoded when they are appended.
+        /// </remarks>
+        /// <param name="builder">The <see cref="StringBuilder"/> to append text to.</param>
+        /// <param name="variable">The variable being rendered.</param>
+        /// <param name="value">The string value of the variable being rendered.</param>
+        /// <param name="escapeReserved"><see langword="true"/> to percent-encode <c>reserved</c> characters defined by RFC 6570; otherwise, <see langword="false"/>.</param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="value"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected static void AppendText(StringBuilder builder, VariableReference variable, string value, bool escapeReserved)
         {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            if (variable == null)
+                throw new ArgumentNullException("variable");
+            if (value == null)
+                throw new ArgumentNullException("value");
+
             string text = value;
             if (variable.Prefix != null && text.Length > variable.Prefix)
                 text = text.Substring(0, variable.Prefix.Value);
@@ -77,10 +155,68 @@ namespace Rackspace.Net
             builder.Append(text);
         }
 
+        /// <summary>
+        /// Render a single variable, where the variable value is an associative map (<see cref="IDictionary"/>).
+        /// </summary>
+        /// <param name="builder">The <see cref="StringBuilder"/> to render to.</param>
+        /// <param name="variable">The variable being rendered.</param>
+        /// <param name="variableValue">The value of the variable being rendered.</param>
+        /// <param name="first">
+        /// <see langword="true"/> if this is the first variable being rendered from this expression; otherwise,
+        /// <see langword="false"/>. Variables which do not have an associated parameter, or whose parameter value
+        /// is <see langword="null"/>, are treated as though they were completely omitted for the purpose of
+        /// determining the first variable.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variableValue"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected abstract void RenderDictionary(StringBuilder builder, VariableReference variable, IDictionary variableValue, bool first);
 
+        /// <summary>
+        /// Render a single variable, where the variable value is a collection (<see cref="IEnumerable"/>).
+        /// </summary>
+        /// <param name="builder">The <see cref="StringBuilder"/> to render to.</param>
+        /// <param name="variable">The variable being rendered.</param>
+        /// <param name="variableValue">The value of the variable being rendered.</param>
+        /// <param name="first">
+        /// <see langword="true"/> if this is the first variable being rendered from this expression; otherwise,
+        /// <see langword="false"/>. Variables which do not have an associated parameter, or whose parameter value
+        /// is <see langword="null"/>, are treated as though they were completely omitted for the purpose of
+        /// determining the first variable.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variableValue"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected abstract void RenderEnumerable(StringBuilder builder, VariableReference variable, IEnumerable variableValue, bool first);
 
+        /// <summary>
+        /// Render a single variable, where the variable value is a <see cref="String"/> or other single-valued
+        /// element.
+        /// </summary>
+        /// <param name="builder">The <see cref="StringBuilder"/> to render to.</param>
+        /// <param name="variable">The variable being rendered.</param>
+        /// <param name="variableValue">The value of the variable being rendered.</param>
+        /// <param name="first">
+        /// <see langword="true"/> if this is the first variable being rendered from this expression; otherwise,
+        /// <see langword="false"/>. Variables which do not have an associated parameter, or whose parameter value
+        /// is <see langword="null"/>, are treated as though they were completely omitted for the purpose of
+        /// determining the first variable.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="variableValue"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected abstract void RenderElement(StringBuilder builder, VariableReference variable, object variableValue, bool first);
     }
 }

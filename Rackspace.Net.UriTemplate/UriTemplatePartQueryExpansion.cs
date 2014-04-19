@@ -22,13 +22,19 @@ namespace Rackspace.Net
         /// with the specified values.
         /// </summary>
         /// <param name="variables">The variable references within this expression.</param>
-        /// <param name="continuation"><c>true</c> if this is a query continuation expression; otherwise, <c>false</c>.</param>
+        /// <param name="continuation"><see langword="true"/> if this is a query continuation expression; otherwise, <see langword="false"/>.</param>
         public UriTemplatePartQueryExpansion(IEnumerable<VariableReference> variables, bool continuation)
             : base(variables)
         {
             _continuation = continuation;
         }
 
+        /// <inheritdoc/>
+        /// <value>
+        /// <see cref="UriTemplatePartType.Query"/> for templates of the form <c>{?x,y}</c>.
+        /// <para>-or-</para>
+        /// <para><see cref="UriTemplatePartType.QueryContinuation"/> for templates of the form <c>{&amp;x,y}</c>.</para>
+        /// </value>
         public override UriTemplatePartType Type
         {
             get

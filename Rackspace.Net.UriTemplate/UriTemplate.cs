@@ -11,6 +11,8 @@ namespace Rackspace.Net
     /// <summary>
     /// A class that represents an RFC 6570 URI Template.
     /// </summary>
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
     public class UriTemplate
     {
         /// <summary>
@@ -64,11 +66,37 @@ namespace Rackspace.Net
         internal const string ExpressionPattern = @"{" + OperatorPattern + @"?" + VariableListPattern + @"}";
 
 #if !PORTABLE
+        /// <summary>
+        /// The default <see cref="RegexOptions"/> for non-Portable Class Library builds.
+        /// </summary>
         private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #else
+        /// <summary>
+        /// The default <see cref="RegexOptions"/> for Portable Class Library builds.
+        /// </summary>
         private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
 #endif
 
+        /// <summary>
+        /// A regular expression which matches a single <c>expression</c> within a URI Template.
+        /// </summary>
+        /// <remarks>
+        /// This regular expression has the following named captures.
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Name</term>
+        /// <term>Meaning</term>
+        /// </listheader>
+        /// <item>
+        /// <description><c>Operator</c></description>
+        /// <description>The (optional) <c>operator</c> portion of the <c>expression</c>, described by the <see cref="OperatorPattern"/> pattern.</description>
+        /// </item>
+        /// <item>
+        /// <description><c>VariableList</c></description>
+        /// <description>The <c>variable-list</c> portion of the <c>expression</c>, described by the <see cref="VariableListPattern"/> pattern.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         private static readonly Regex ExpressionExpression =
             new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", DefaultRegexOptions);
 
@@ -77,6 +105,10 @@ namespace Rackspace.Net
         /// </summary>
         private readonly string _template;
 
+        /// <summary>
+        /// An array of <see cref="UriTemplatePart"/> instances representing the decomposed URI Template.
+        /// Each part is responsible for rendering its own value.
+        /// </summary>
         private readonly UriTemplatePart[] _parts;
 
         /// <summary>
@@ -84,7 +116,7 @@ namespace Rackspace.Net
         /// using the specified template.
         /// </summary>
         /// <param name="template">The URI template.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="template"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="template"/> is not a valid <c>URI-Template</c> according to RFC 6570.</exception>
         public UriTemplate(string template)
@@ -226,7 +258,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         public Uri BindByName(IDictionary<string, string> parameters)
         {
             if (parameters == null)
@@ -244,7 +276,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(IDictionary<string, object> parameters)
         {
@@ -267,9 +299,9 @@ namespace Rackspace.Net
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="parameters"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, string> parameters)
@@ -293,9 +325,9 @@ namespace Rackspace.Net
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="parameters"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
