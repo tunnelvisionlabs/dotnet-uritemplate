@@ -40,6 +40,18 @@
             _text = text;
         }
 
+        /// <summary>
+        /// Gets the raw text of this literal.
+        /// </summary>
+        /// <value>The raw text of this literal.</value>
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+        }
+
         /// <inheritdoc/>
         /// <value>This method always returns <see cref="UriTemplatePartType.Literal"/>.</value>
         public override UriTemplatePartType Type

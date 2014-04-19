@@ -35,7 +35,7 @@
         /// Initializes a new instance of the <see cref="VariableReference"/> class with the specified name.
         /// </summary>
         /// <param name="name">The name of the referenced variable.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
         public VariableReference(string name)
@@ -55,7 +55,7 @@
         /// </summary>
         /// <param name="name">The name of the referenced variable.</param>
         /// <param name="prefix">The number of Unicode code points from the referenced variable expansion to include in the expanded URI.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="ArgumentOutOfRangeException">If <paramref name="prefix"/> is less than or equal to 0, or greater than 9999.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
@@ -74,8 +74,8 @@
         /// Initializes a new instance of the <see cref="VariableReference"/> class with the specified name and composite modifier.
         /// </summary>
         /// <param name="name">The name of the referenced variable.</param>
-        /// <param name="composite"><c>true</c> if this is a composite variable reference; otherwise, <c>false</c>.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <c>null</c>.</exception>
+        /// <param name="composite"><see langword="true"/> if this is a composite variable reference; otherwise, <see langword="false"/>.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
         public VariableReference(string name, bool composite)
@@ -107,7 +107,7 @@
         /// The number of Unicode code points from the referenced variable expansion
         /// to include in the expanded URI.
         /// <para>-or-</para>
-        /// <para><c>null</c> if the number of code points for the expansion is not limited.</para>
+        /// <para><see langword="null"/> if the number of code points for the expansion is not limited.</para>
         /// </value>
         public int? Prefix
         {
@@ -121,7 +121,7 @@
         /// Gets a value indicating whether or not this is a composite variable reference.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this is a composite variable reference (i.e. the explode modified <c>*</c> was used in the template); otherwise, <c>false</c>.
+        /// <see langword="true"/> if this is a composite variable reference (i.e. the explode modified <c>*</c> was used in the template); otherwise, <see langword="false"/>.
         /// </value>
         public bool Composite
         {
@@ -136,7 +136,7 @@
         /// </summary>
         /// <param name="variable">The RFC 6570 variable reference to parse.</param>
         /// <returns>A <see cref="VariableReference"/> object representing the variable reference.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="variable"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="variable"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="variable"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="variable"/> is not a valid <c>varspec</c> according to RFC 6570.</exception>
         public static VariableReference Parse(string variable)

@@ -114,7 +114,7 @@
         /// using the specified template.
         /// </summary>
         /// <param name="template">The URI template.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="template"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="template"/> is not a valid <c>URI-Template</c> according to RFC 6570.</exception>
         public UriTemplate(string template)
@@ -256,7 +256,7 @@
         /// </summary>
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         public Uri BindByName(IDictionary<string, string> parameters)
         {
             if (parameters == null)
@@ -274,7 +274,7 @@
         /// </summary>
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(IDictionary<string, object> parameters)
         {
@@ -297,9 +297,9 @@
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="parameters"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, string> parameters)
@@ -323,9 +323,9 @@
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <c>null</c>.
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="parameters"/> is <c>null</c>.</para>
+        /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>

@@ -20,7 +20,7 @@
         /// with the specified values.
         /// </summary>
         /// <param name="variables">The variable references within this expression.</param>
-        /// <param name="continuation"><c>true</c> if this is a query continuation expression; otherwise, <c>false</c>.</param>
+        /// <param name="continuation"><see langword="true"/> if this is a query continuation expression; otherwise, <see langword="false"/>.</param>
         public UriTemplatePartQueryExpansion(IEnumerable<VariableReference> variables, bool continuation)
             : base(variables)
         {
