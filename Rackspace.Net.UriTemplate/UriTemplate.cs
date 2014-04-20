@@ -356,9 +356,6 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
-        /// </exception>
         public UriTemplateMatch Match(Uri candidate)
         {
             return Match(candidate, new string[0], new string[0]);
@@ -415,9 +412,6 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
-        /// </exception>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
             if (candidate == null)
@@ -446,18 +440,14 @@ namespace Rackspace.Net
             for (int i = 0; i < _parts.Length; i++)
             {
                 Group group = match.Groups["part" + i];
-                if (group.Success)
-                {
-                    KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, listVariables, mapVariables);
-                    if (binding == null)
-                        return null;
+                if (!group.Success)
+                    return null;
 
-                    bindings.AddRange(binding);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
+                KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, listVariables, mapVariables);
+                if (binding == null)
+                    return null;
+
+                bindings.AddRange(binding);
             }
 
             return new UriTemplateMatch(this, bindings);
@@ -474,12 +464,10 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// </exception>
-        /// <exception cref="NotSupportedException">
+        /// <exception cref="InvalidOperationException">
         /// If <paramref name="baseAddress"/> is a relative URI.
         /// <para>-or-</para>
         /// <para>If <paramref name="candidate"/> is a relative URI.</para>
-        /// <para>-or-</para>
-        /// <para>If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.</para>
         /// </exception>
         public UriTemplateMatch Match(Uri baseAddress, Uri candidate)
         {
