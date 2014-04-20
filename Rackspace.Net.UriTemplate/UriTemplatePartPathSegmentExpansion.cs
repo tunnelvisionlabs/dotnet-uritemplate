@@ -4,6 +4,7 @@ namespace Rackspace.Net
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
@@ -33,155 +34,204 @@ namespace Rackspace.Net
 
         protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
-            for (int i = 0; i < Variables.Count; i++)
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+            if (listVariables == null)
+                throw new ArgumentNullException("listVariables");
+            if (mapVariables == null)
+                throw new ArgumentNullException("mapVariables");
+
+            List<string> variablePatterns = new List<string>();
+            foreach (var variable in Variables)
             {
-                bool treatAsList = listVariables.Contains(Variables[i].Name);
-                bool treatAsMap = mapVariables.Contains(Variables[i].Name);
-
-                string countPattern = "*";
-                if (Variables[i].Prefix != null)
-                    countPattern = string.Format("{{0,{0}}}", Variables[i].Prefix);
-
-                string elementFormat = UnreservedCharacterPattern + countPattern;
-                if (treatAsMap)
-                    elementFormat = elementFormat + Regex.Escape(Variables[i].Composite ? "=" : ",") + elementFormat;
-
-                pattern.Append("(?:");
-                pattern.Append(Regex.Escape("/"));
-                pattern.Append(elementFormat);
-
-                if (treatAsList || treatAsMap)
-                {
-                    pattern.Append("(?:");
-                    pattern.Append(Regex.Escape(Variables[i].Composite ? "/" : ","));
-                    pattern.Append(elementFormat);
-                    pattern.Append(")*");
-                }
-
-                pattern.Append(")?");
+                bool allowReservedSet = false;
+                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, listVariables, mapVariables));
             }
+
+            pattern.Append("(?:");
+            AppendZeroOrMoreToEnd(pattern, variablePatterns, 0);
+            pattern.Append(")");
+        }
+
+        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            string characterPattern;
+            if (allowReservedSet)
+                characterPattern = "(?:" + UnreservedCharacterPattern + "|" + ReservedCharacterPattern + ")";
+            else
+                characterPattern = "(?:" + UnreservedCharacterPattern + ")";
+
+            string valueStartPattern;
+            if (!string.IsNullOrEmpty(groupName))
+                valueStartPattern = "(?<" + groupName + ">";
+            else
+                valueStartPattern = "(?:";
+
+            string valueEndPattern = ")";
+
+            string keyStartPattern;
+            if (!string.IsNullOrEmpty(groupName))
+                keyStartPattern = "(?<" + groupName + "key>";
+            else
+                keyStartPattern = "(?:";
+
+            string keyEndPattern = ")";
+
+            string mapValueStartPattern;
+            if (!string.IsNullOrEmpty(groupName))
+                mapValueStartPattern = "(?<" + groupName + "value>";
+            else
+                mapValueStartPattern = "(?:";
+
+            string mapValueEndPattern = ")";
+
+            string countPattern;
+            if (allowReservedSet)
+                countPattern = "*?";
+            else
+                countPattern = "*";
+
+            StringBuilder variablePattern = new StringBuilder();
+
+            if (variable.Prefix != null)
+            {
+                // by this point we know to match the variable as a simple string
+                variablePattern.Append(valueStartPattern);
+                variablePattern.Append(characterPattern);
+                variablePattern.Append("{0,").Append(variable.Prefix).Append("}");
+                variablePattern.Append(valueEndPattern);
+                return variablePattern.ToString();
+            }
+
+            bool treatAsList = listVariables.Contains(variable.Name);
+            bool treatAsMap = mapVariables.Contains(variable.Name);
+
+            variablePattern.Append("(?:");
+
+            if (!variable.Composite && !treatAsList && !treatAsMap)
+            {
+                // could be a simple string
+                variablePattern.Append(valueStartPattern);
+                variablePattern.Append(characterPattern).Append(countPattern);
+                variablePattern.Append(valueEndPattern);
+                variablePattern.Append("|");
+            }
+
+            if (treatAsList || !treatAsMap)
+            {
+                // could be an associative array
+                variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
+                variablePattern.Append("(?:").Append(variable.Composite ? '/' : ',');
+                variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
+                variablePattern.Append(")*?");
+            }
+
+            if (treatAsMap || !treatAsList)
+            {
+                if (!treatAsMap)
+                    variablePattern.Append('|');
+
+                // could be an associative map
+                char separator = variable.Composite ? '=' : ',';
+                variablePattern.Append(valueStartPattern);
+                variablePattern.Append(keyStartPattern);
+                variablePattern.Append(characterPattern).Append(countPattern);
+                variablePattern.Append(keyEndPattern);
+                variablePattern.Append(separator).Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
+                variablePattern.Append(valueEndPattern);
+                variablePattern.Append("(?:").Append(variable.Composite ? '/' : ',');
+                variablePattern.Append(valueStartPattern);
+                variablePattern.Append(keyStartPattern);
+                variablePattern.Append(characterPattern).Append(countPattern);
+                variablePattern.Append(keyEndPattern);
+                variablePattern.Append(separator).Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
+                variablePattern.Append(valueEndPattern);
+                variablePattern.Append(")*?");
+            }
+
+            variablePattern.Append(")");
+
+            return variablePattern.ToString();
+        }
+
+        private static void AppendZeroOrMoreToEnd(StringBuilder pattern, List<string> patterns, int startIndex)
+        {
+            if (startIndex >= patterns.Count)
+                throw new ArgumentException();
+
+            for (int i = startIndex; i < patterns.Count; i++)
+                pattern.Append("(?:/").Append(patterns[i]).Append(")?");
         }
 
         protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
-            if (string.IsNullOrEmpty(text))
-                return new KeyValuePair<VariableReference, object>[0];
-
-            if (text[0] != '/')
-                throw new FormatException("The specified text is not a valid path segment expansion");
-
-            text = text.Substring(1);
-
-            int listIndex = -1;
-            int mapIndex = -1;
+            List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
-                if (listVariables.Contains(Variables[i].Name))
-                {
-                    if (listIndex >= 0)
-                        throw new NotSupportedException("Matching multiple list variables in a single expansion is not supported.");
-
-                    listIndex = i;
-                }
-                else if (mapVariables.Contains(Variables[i].Name))
-                {
-                    if (mapIndex >= 0)
-                        throw new NotSupportedException("Matching multiple map variables in a single expansion is not supported.");
-
-                    mapIndex = i;
-                }
+                bool allowReservedSet = false;
+                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, listVariables, mapVariables));
             }
 
-            List<KeyValuePair<VariableReference, object>> bindings = new List<KeyValuePair<VariableReference, object>>();
-            string[] bound = text.Split('/');
+            StringBuilder matchPattern = new StringBuilder();
+            matchPattern.Append("^");
+            AppendZeroOrMoreToEnd(matchPattern, variablePatterns, 0);
+            matchPattern.Append("$");
 
-            int mapStart = -1;
-            int mapEnd = -1;
-            Dictionary<string, string> mapVariable = mapIndex >= 0 ? new Dictionary<string, string>() : null;
-            if (mapIndex >= 0)
+            Regex matchExpression = new Regex(matchPattern.ToString());
+            Match match = matchExpression.Match(text);
+
+            List<KeyValuePair<VariableReference, object>> results = new List<KeyValuePair<VariableReference, object>>();
+            for (int i = 0; i < Variables.Count; i++)
             {
-                if (Variables[mapIndex].Composite)
+                Group group = match.Groups["var" + i];
+                if (!group.Success || group.Captures.Count == 0)
+                    continue;
+
+                if (Variables[i].Prefix != null)
                 {
-                    for (int i = bound.FindIndex(x => x.IndexOf('=') >= 0); i >= 0 && i < bound.Length && bound[i].IndexOf('=') >= 0; i++)
+                    if (group.Success && group.Captures.Count == 1)
                     {
-                        if (mapVariable.Count == 0)
-                            mapStart = i;
-
-                        string[] keyValue = bound[i].Split('=');
-                        if (keyValue.Length != 2)
-                            throw new FormatException();
-
-                        mapVariable.Add(DecodeCharacters(keyValue[0]), DecodeCharacters(keyValue[1]));
+                        results.Add(new KeyValuePair<VariableReference, object>(Variables[i], DecodeCharacters(group.Captures[0].Value)));
                     }
 
-                    mapEnd = mapStart + mapVariable.Count;
+                    continue;
                 }
-                else
+
+                bool treatAsList = listVariables.Contains(Variables[i].Name);
+                bool treatAsMap = mapVariables.Contains(Variables[i].Name);
+
+                bool considerString = !Variables[i].Composite && !treatAsList && !treatAsMap;
+                bool considerList = treatAsList || !treatAsMap;
+                bool considerMap = treatAsMap || !treatAsList;
+
+                // first check for a map
+                Group mapKeys = match.Groups["var" + i + "key"];
+                if (mapKeys.Success && mapKeys.Captures.Count > 0)
                 {
-                    if (Variables.Count != 1)
-                        throw new NotImplementedException("Matching non-compound associative map variables with other variables is not yet supported.");
-                    if (bound.Length != 1)
-                        throw new FormatException();
+                    Debug.Assert(considerMap);
+                    Group mapValues = match.Groups["var" + i + "value"];
+                    Dictionary<string, string> map = new Dictionary<string, string>();
+                    for (int j = 0; j < mapKeys.Captures.Count; j++)
+                        map.Add(DecodeCharacters(mapKeys.Captures[j].Value), DecodeCharacters(mapValues.Captures[j].Value));
 
-                    bound = bound[0].Split(',');
-                    if ((bound.Length % 2) != 0)
-                        throw new FormatException();
-
-                    for (int i = 0; i < bound.Length; i += 2)
-                    {
-                        mapVariable.Add(DecodeCharacters(bound[i]), DecodeCharacters(bound[i + 1]));
-                    }
-
-                    bindings.Add(new KeyValuePair<VariableReference, object>(Variables[0], mapVariable));
-                    return bindings.ToArray();
+                    results.Add(new KeyValuePair<VariableReference, object>(Variables[i], map));
+                    continue;
                 }
+
+                // next try a list
+                if (!considerString || group.Captures.Count > 1)
+                {
+                    Debug.Assert(considerList);
+                    List<string> list = new List<string>(group.Captures.Cast<Capture>().Select(capture => DecodeCharacters(capture.Value)));
+                    results.Add(new KeyValuePair<VariableReference, object>(Variables[i], list));
+                    continue;
+                }
+
+                Debug.Assert(considerString);
+                results.Add(new KeyValuePair<VariableReference, object>(Variables[i], DecodeCharacters(group.Captures[0].Value)));
             }
 
-            if (listIndex >= 0)
-            {
-                if (Variables.Count != 1)
-                    throw new NotImplementedException("Matching list variables with other variables is not yet supported.");
-
-                if (Variables[listIndex].Composite)
-                {
-                    bindings.Add(new KeyValuePair<VariableReference, object>(Variables[0], bound.ConvertAll(DecodeCharacters)));
-                }
-                else
-                {
-                    if (bound.Length != 1)
-                        throw new FormatException();
-
-                    bound = bound[0].Split(',');
-                    bindings.Add(new KeyValuePair<VariableReference, object>(Variables[0], bound.ConvertAll(DecodeCharacters)));
-                }
-            }
-            else
-            {
-                for (int i = 0; i < bound.Length; i++)
-                {
-                    if (i == mapStart)
-                    {
-                        if (!mapVariables.Contains(Variables[i].Name))
-                            throw new InvalidOperationException();
-
-                        bindings.Add(new KeyValuePair<VariableReference, object>(Variables[i], mapVariable));
-                        i = mapEnd - 1;
-                        continue;
-                    }
-
-                    bindings.Add(new KeyValuePair<VariableReference, object>(Variables[i], DecodeCharacters(bound[i])));
-                }
-            }
-
-            return bindings.ToArray();
-            //List<KeyValuePair<VariableReference, object>> bindings = new List<KeyValuePair<VariableReference, object>>();
-            //string[] bound = text.Split('/');
-            //for (int i = 0; i < bound.Length; i++)
-            //{
-            //    bindings.Add(new KeyValuePair<VariableReference, object>(Variables[i], DecodeCharacters(bound[i])));
-            //}
-
-            //return bindings.ToArray();
+            return results.ToArray();
         }
 
         protected override void RenderElement(StringBuilder builder, VariableReference variable, object variableValue, bool first)

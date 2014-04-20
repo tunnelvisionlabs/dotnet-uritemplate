@@ -365,8 +365,47 @@ namespace Rackspace.Net
         }
 
         /// <summary>
-        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>. A successful
+        /// match operation results in an assignment of values to variables in the URI Template
+        /// which is capable of producing the <paramref name="candidate"/> URI through the
+        /// <see cref="BindByName"/> operation.
         /// </summary>
+        /// <remarks>
+        /// There are several limitations in the current implementation of this operation.
+        ///
+        /// <list type="bullet">
+        ///   <item>
+        ///     If more than one assignment of values to variables exists which is capable of
+        ///     producing the <paramref name="candidate"/> URI through the <see cref="BindByName"/>
+        ///     operation, this method may fail with a <see cref="NotSupportedException"/>. If
+        ///     the method does return a successful match, it is unspecified which assignment
+        ///     of values is chosen.
+        ///   </item>
+        ///   <item>
+        ///     Not all expansion types are supported by the current implementation. If this
+        ///     operation is used on a template containing an unsupported expansion types, a
+        ///     <see cref="NotSupportedException"/> will be thrown.
+        ///   </item>
+        ///   <item>
+        ///     Simple string values will always be returned as a <see cref="String"/>.
+        ///     Associative array values will always be returned as a <see cref="IList{T}"/> whose
+        ///     values are of type <see cref="String"/>. Associative map values will always be
+        ///     returned as a <see cref="IDictionary{TKey, TValue}"/> whose keys and values are
+        ///     of type <see cref="String"/>. No other deserialization or coercion of values is
+        ///     performed by this library.
+        ///   </item>
+        /// </list>
+        ///
+        /// <para>
+        /// A template variable which is not explicitly listed in <paramref name="listVariables"/>
+        /// or <paramref name="mapVariables"/> will only be treated as a list or associative map
+        /// if no assignment of values to variables is possible with that variable as a string.
+        /// The variable will only be treated as an associative map if no assignment of values to
+        /// variables is possible with that variable as a string or list. The exception to this
+        /// rule is template variables which use the explode modifier; in that case a list of
+        /// length 1 will be used in place of a string.
+        /// </para>
+        /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template. Lists are returned as instances of <see cref="IList{String}"/>.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{String, String}"/>.</param>
@@ -378,11 +417,23 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="listVariables"/> contains a <see langword="null"/> or empty value.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
+        /// </exception>
         /// <exception cref="NotSupportedException">
         /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
         /// </exception>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
+            if (candidate == null)
+                throw new ArgumentNullException("candidate");
+            if (listVariables == null)
+                throw new ArgumentNullException("listVariables");
+            if (mapVariables == null)
+                throw new ArgumentNullException("mapVariables");
+
             StringBuilder pattern = new StringBuilder();
             pattern.Append('^');
             for (int i = 0; i < _parts.Length; i++)
@@ -431,10 +482,19 @@ namespace Rackspace.Net
         /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.
+        /// If <paramref name="baseAddress"/> is a relative URI.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="candidate"/> is a relative URI.</para>
+        /// <para>-or-</para>
+        /// <para>If the URI Template contains an irreversible template construct <placeholder>which needs to be described here</placeholder>.</para>
         /// </exception>
         public UriTemplateMatch Match(Uri baseAddress, Uri candidate)
         {
+            if (baseAddress == null)
+                throw new ArgumentNullException("baseAddress");
+            if (candidate == null)
+                throw new ArgumentNullException("candidate");
+
             Uri relative = baseAddress.MakeRelativeUri(candidate);
             return Match(relative);
         }

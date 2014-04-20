@@ -236,7 +236,7 @@
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(((string)variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
         }
 
         [TestMethod]
@@ -289,15 +289,9 @@
 
             CollectionAssert.Contains(allowed, uri.ToString());
 
-            try
-            {
-                // no way to distinguish a comma in a value from a comma separating key/value pairs
-                uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
-                Assert.Fail("Expected a FormatException");
-            }
-            catch (FormatException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -453,7 +447,7 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(((string)variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
         }
 
         [TestMethod]

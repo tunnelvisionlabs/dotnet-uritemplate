@@ -64,15 +64,11 @@
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("1024,Hello%20World!,768", uri.ToString());
 
-            try
-            {
-                // cannot call match on a uri with multiple reserved variables
-                uriTemplate.Match(uri);
-                Assert.Fail("Expected a NotSupportedException");
-            }
-            catch (NotSupportedException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -85,15 +81,10 @@
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("/foo/bar,1024/here", uri.ToString());
 
-            try
-            {
-                // cannot call match on a uri with multiple reserved variables
-                uriTemplate.Match(uri);
-                Assert.Fail("Expected a NotSupportedException");
-            }
-            catch (NotSupportedException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -106,15 +97,11 @@
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("#1024,Hello%20World!,768", uri.ToString());
 
-            try
-            {
-                // cannot call match on a uri with multiple fragment variables
-                uriTemplate.Match(uri);
-                Assert.Fail("Expected a NotSupportedException");
-            }
-            catch (NotSupportedException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -127,15 +114,10 @@
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("#/foo/bar,1024/here", uri.ToString());
 
-            try
-            {
-                // cannot call match on a uri with multiple fragment variables
-                uriTemplate.Match(uri);
-                Assert.Fail("Expected a NotSupportedException");
-            }
-            catch (NotSupportedException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -148,15 +130,10 @@
             Uri uri = uriTemplate.BindByName(variables);
             Assert.AreEqual("X.1024.768", uri.ToString());
 
-            try
-            {
-                // cannot call match on a uri with multiple label variables
-                uriTemplate.Match(uri);
-                Assert.Fail("Expected a NotSupportedException");
-            }
-            catch (NotSupportedException)
-            {
-            }
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]

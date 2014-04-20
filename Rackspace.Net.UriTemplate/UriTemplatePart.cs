@@ -33,18 +33,67 @@ namespace Rackspace.Net
         public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
             where T : class;
 
+        /// <summary>
+        /// Build a regular expression pattern which matches this template part in a URI.
+        /// </summary>
+        /// <remarks>
+        /// This method delegates the construction of the actual pattern building operation to
+        /// <see cref="BuildPatternBody"/>. The results of that call are then wrapped in a regular
+        /// expression named capture group.
+        /// </remarks>
+        /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
+        /// <param name="groupName">The name to use for the named capture in the regular expression matching this template part.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="groupName"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="groupName"/> is empty.
+        /// </exception>
         public void BuildPattern(StringBuilder pattern, string groupName, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
-            pattern.Append("(?");
-            if (!string.IsNullOrEmpty(groupName))
-                pattern.Append('<').Append(groupName).Append('>');
-            else
-                pattern.Append(':');
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+            if (groupName == null)
+                throw new ArgumentNullException("groupName");
+            if (listVariables == null)
+                throw new ArgumentNullException("listVariables");
+            if (mapVariables == null)
+                throw new ArgumentNullException("mapVariables");
+            if (string.IsNullOrEmpty(groupName))
+                throw new ArgumentException("groupName cannot be empty");
 
+            pattern.Append("(?<").Append(groupName).Append('>');
             BuildPatternBody(pattern, listVariables, mapVariables);
             pattern.Append(')');
         }
 
+        /// <summary>
+        /// Provides the implementation of <see cref="BuildPattern"/> for a specific <see cref="UriTemplatePart"/> type.
+        /// </summary>
+        /// <remarks>
+        /// This method is part of the <see cref="UriTemplate.Match"/> algorithm. If the match operation is
+        /// successful, the text of the candidate URI matched by the segment of the regular expression added
+        /// to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
+        /// method for associating the results with specific variables.
+        /// </remarks>
+        /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected abstract void BuildPatternBody(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables);
 
         /// <summary>
@@ -180,6 +229,20 @@ namespace Rackspace.Net
             return Encoding.UTF8.GetString(data, 0, length);
         }
 
+        /// <summary>
+        /// Implements the assignment of values to variables for the match operation.
+        /// </summary>
+        /// <param name="text">The text which was matched by the regular expression segment created by <see cref="BuildPatternBody"/>.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <returns>An array containing the assignment of values to variables for the current part.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="text"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
         protected internal abstract KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables);
     }
 }

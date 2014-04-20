@@ -91,6 +91,9 @@ namespace Rackspace.Net
         }
 
         /// <inheritdoc/>
+        /// <remarks>
+        /// Since a literal URI part cannot have variable references, this method simply returns an empty array.
+        /// </remarks>
         protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
             return EmptyMatches;

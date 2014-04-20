@@ -79,7 +79,7 @@
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["id"], match.Bindings["id"].Value);
+            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["id"], match.Bindings["id"].Value);
+            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
             CollectionAssert.AreEqual((ICollection)variables1["fields"], (ICollection)match.Bindings["fields"].Value);
             Assert.AreEqual(variables1["first_name"], match.Bindings["first_name"].Value);
             Assert.AreEqual(variables1["last.name"], match.Bindings["last.name"].Value);
