@@ -377,14 +377,7 @@ namespace Rackspace.Net
         ///   <item>
         ///     If more than one assignment of values to variables exists which is capable of
         ///     producing the <paramref name="candidate"/> URI through the <see cref="BindByName"/>
-        ///     operation, this method may fail with a <see cref="NotSupportedException"/>. If
-        ///     the method does return a successful match, it is unspecified which assignment
-        ///     of values is chosen.
-        ///   </item>
-        ///   <item>
-        ///     Not all expansion types are supported by the current implementation. If this
-        ///     operation is used on a template containing an unsupported expansion types, a
-        ///     <see cref="NotSupportedException"/> will be thrown.
+        ///     operation, it is unspecified which assignment of values is chosen.
         ///   </item>
         ///   <item>
         ///     Simple string values will always be returned as a <see cref="String"/>.
@@ -397,13 +390,13 @@ namespace Rackspace.Net
         /// </list>
         ///
         /// <para>
-        /// A template variable which is not explicitly listed in <paramref name="listVariables"/>
-        /// or <paramref name="mapVariables"/> will only be treated as a list or associative map
-        /// if no assignment of values to variables is possible with that variable as a string.
-        /// The variable will only be treated as an associative map if no assignment of values to
-        /// variables is possible with that variable as a string or list. The exception to this
-        /// rule is template variables which use the explode modifier; in that case a list of
-        /// length 1 will be used in place of a string.
+        /// The matching algorithm prefers to use simple string values for all variables not
+        /// explicitly listed in <paramref name="listVariables"/> or <paramref name="mapVariables"/>.
+        /// If no assignment of values to variables is possible using this choice, one or more
+        /// variables may be treated as lists and/or maps in order to produce a successful
+        /// assignment. The exception to this rule is compound template variables (which use the
+        /// explode modifier); these variables prefer to match as lists instead of simple strings,
+        /// even if the result produces a list containing exactly one string.
         /// </para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
