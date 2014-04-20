@@ -259,7 +259,11 @@ namespace Rackspace.Net
         /// <param name="text">The text which was matched by the regular expression segment created by <see cref="BuildPatternBody"/>.</param>
         /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
-        /// <returns>An array containing the assignment of values to variables for the current part.</returns>
+        /// <returns>
+        /// An array containing the assignment of values to variables for the current part.
+        /// <para>-or-</para>
+        /// <para><see langword="null"/> if the matched <paramref name="text"/> does not provide a valid match for this template part.</para>
+        /// </returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="text"/> is <see langword="null"/>.
         /// <para>-or-</para>

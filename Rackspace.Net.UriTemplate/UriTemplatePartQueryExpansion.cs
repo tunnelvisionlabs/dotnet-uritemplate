@@ -229,7 +229,6 @@ namespace Rackspace.Net
 
         protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
         {
-#warning TODO: Check the cardinality of group var0name against the variable.Composite property.
             List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
@@ -248,9 +247,23 @@ namespace Rackspace.Net
             List<KeyValuePair<VariableReference, object>> results = new List<KeyValuePair<VariableReference, object>>();
             for (int i = 0; i < Variables.Count; i++)
             {
+                VariableReference variable = Variables[i];
+
                 Group group = match.Groups["var" + i];
                 if (!group.Success || group.Captures.Count == 0)
                     continue;
+
+                if (!variable.Composite)
+                {
+                    /* &id=x&id=y is only valid for {&id*};
+                     * {&id} would produce &id=x,y instead.
+                     */
+                    Group nameGroup = match.Groups["var" + i + "name"];
+                    if (nameGroup.Success && nameGroup.Captures.Count > 1)
+                        return null;
+
+                    Debug.Assert(nameGroup.Success && nameGroup.Captures.Count == 1);
+                }
 
                 if (Variables[i].Prefix != null)
                 {
