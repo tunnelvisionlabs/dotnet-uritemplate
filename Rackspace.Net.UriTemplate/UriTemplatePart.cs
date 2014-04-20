@@ -79,7 +79,7 @@ namespace Rackspace.Net
         /// Provides the implementation of <see cref="BuildPattern"/> for a specific <see cref="UriTemplatePart"/> type.
         /// </summary>
         /// <remarks>
-        /// This method is part of the <see cref="UriTemplate.Match"/> algorithm. If the match operation is
+        /// This method is part of the <see cref="O:Rackspace.Net.UriTemplate.Match"/> algorithm. If the match operation is
         /// successful, the text of the candidate URI matched by the segment of the regular expression added
         /// to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
         /// method for associating the results with specific variables.

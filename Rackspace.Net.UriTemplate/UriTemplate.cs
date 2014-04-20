@@ -368,7 +368,7 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>. A successful
         /// match operation results in an assignment of values to variables in the URI Template
         /// which is capable of producing the <paramref name="candidate"/> URI through the
-        /// <see cref="BindByName"/> operation.
+        /// <see cref="O:Rackspace.Net.UriTemplate.BindByName"/> operation.
         /// </summary>
         /// <remarks>
         /// There are several limitations in the current implementation of this operation.
@@ -376,7 +376,7 @@ namespace Rackspace.Net
         /// <list type="bullet">
         ///   <item>
         ///     If more than one assignment of values to variables exists which is capable of
-        ///     producing the <paramref name="candidate"/> URI through the <see cref="BindByName"/>
+        ///     producing the <paramref name="candidate"/> URI through the <see cref="O:Rackspace.Net.UriTemplate.BindByName"/>
         ///     operation, it is unspecified which assignment of values is chosen.
         ///   </item>
         ///   <item>
