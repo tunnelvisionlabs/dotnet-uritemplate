@@ -194,34 +194,58 @@ namespace Rackspace.Net
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Decodes text of a URI.
+        /// </summary>
+        /// <remarks>
+        /// The URI is assumed to be formed by first using the UTF-8 encoding to obtain
+        /// a sequence of bytes, and then percent-encoding octets which are not allowed
+        /// in the URI syntax. This method decodes text from a URI which was encoded by
+        /// this process.
+        /// </remarks>
+        /// <param name="text">The URI text.</param>
+        /// <returns>The decoded URI text.</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="text"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">If <paramref name="text"/> contains a <c>%</c> character which is not part of an percent-encoded triplet.</exception>
+        /// <exception cref="ArgumentException">If the byte sequence after decoding the percent-encoded triplets is not a valid UTF-8 byte sequence.</exception>
         protected static string DecodeCharacters(string text)
         {
-            byte[] data = new byte[text.Length];
+            if (text == null)
+                throw new ArgumentNullException("text");
+
+            byte[] sourceData = Encoding.UTF8.GetBytes(text);
+            byte[] data = new byte[sourceData.Length];
             int length = 0;
 
-            // the current position in text
+            // the current position in sourceData
             int position = 0;
-            // the index of the current % character in text
+            // the index of the current % character in sourceData
             int index = -1;
-            for (index = text.IndexOf('%', index + 1); index >= 0; index = text.IndexOf('%', index + 1))
+            for (index = Array.IndexOf(sourceData, (byte)'%', index + 1); index >= 0; index = Array.IndexOf(sourceData, (byte)'%', index + 1))
             {
                 while (position < index)
                 {
-                    data[length] = (byte)text[position];
+                    data[length] = sourceData[position];
                     length++;
                     position++;
                 }
 
-                string hex = text.Substring(index + 1, 2);
-                int value = int.Parse(hex, NumberStyles.AllowHexSpecifier);
-                data[length] = (byte)value;
+                if (index > sourceData.Length - 3)
+                    throw new ArgumentException("text contains a % character which is not part of a percent-encoded triplet");
+
+                string hex = ((char)sourceData[index + 1]).ToString() + (char)sourceData[index + 2];
+                byte value;
+                if (!byte.TryParse(hex, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out value))
+                    throw new ArgumentException("text contains a % character which is not part of a percent-encoded triplet");
+
+                data[length] = value;
                 length++;
                 position = index + 3;
             }
 
-            while (position < text.Length)
+            while (position < sourceData.Length)
             {
-                data[length] = (byte)text[position];
+                data[length] = sourceData[position];
                 length++;
                 position++;
             }
