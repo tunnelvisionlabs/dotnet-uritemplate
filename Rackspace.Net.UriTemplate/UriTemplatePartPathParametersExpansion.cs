@@ -130,9 +130,13 @@ namespace Rackspace.Net
             bool treatAsList = listVariables.Contains(variable.Name);
             bool treatAsMap = mapVariables.Contains(variable.Name);
 
+            bool considerString = !variable.Composite && !treatAsList && !treatAsMap;
+            bool considerList = treatAsList || !treatAsMap;
+            bool considerMap = treatAsMap || !treatAsList;
+
             variablePattern.Append("(?:");
 
-            if (!variable.Composite && !treatAsList && !treatAsMap)
+            if (considerString)
             {
                 // could be a simple string
                 variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
@@ -144,12 +148,13 @@ namespace Rackspace.Net
                 variablePattern.Append(valueEndPattern);
                 variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
                 variablePattern.Append(")");
-
-                variablePattern.Append("|");
             }
 
-            if (treatAsList || !treatAsMap)
+            if (considerList)
             {
+                if (considerString)
+                    variablePattern.Append('|');
+
                 // could be an associative array
                 variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
 
@@ -183,9 +188,9 @@ namespace Rackspace.Net
                 }
             }
 
-            if (treatAsMap || !treatAsList)
+            if (considerMap)
             {
-                if (!treatAsMap)
+                if (considerString || considerList)
                     variablePattern.Append('|');
 
                 // could be an associative map
