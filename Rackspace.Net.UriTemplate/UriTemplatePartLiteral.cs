@@ -85,7 +85,7 @@ namespace Rackspace.Net
         }
 
         /// <inheritdoc/>
-        protected override void BuildPatternBody(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override void BuildPatternBody(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             pattern.Append(Regex.Escape(_text));
         }
@@ -94,7 +94,7 @@ namespace Rackspace.Net
         /// <remarks>
         /// Since a literal URI part cannot have variable references, this method simply returns an empty array.
         /// </remarks>
-        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             return EmptyMatches;
         }

@@ -32,7 +32,7 @@ namespace Rackspace.Net
             }
         }
 
-        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
@@ -45,7 +45,7 @@ namespace Rackspace.Net
             foreach (var variable in Variables)
             {
                 bool allowReservedSet = false;
-                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, arrayVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, requiredVariables, arrayVariables, mapVariables));
             }
 
             pattern.Append("(?:");
@@ -53,7 +53,7 @@ namespace Rackspace.Net
             pattern.Append(")");
         }
 
-        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             string characterPattern;
             if (allowReservedSet)
@@ -169,13 +169,13 @@ namespace Rackspace.Net
                 pattern.Append("(?:/").Append(patterns[i]).Append(")?");
         }
 
-        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override KeyValuePair<VariableReference, object>[] MatchImpl(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
                 bool allowReservedSet = false;
-                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, arrayVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, requiredVariables, arrayVariables, mapVariables));
             }
 
             StringBuilder matchPattern = new StringBuilder();
