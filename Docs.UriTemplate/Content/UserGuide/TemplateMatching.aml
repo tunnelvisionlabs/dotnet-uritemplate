@@ -5,7 +5,11 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <introduction>
-      <para>Required introduction</para>
+      <para>
+        Template matching is the inverse operation of template expansion. While this
+        operation is not directly defined by RFC 6570, it is useful in verifying and
+        extracting specific information from a URI which is provided in a known format.
+      </para>
     </introduction>
 
     <section address="Section1">
