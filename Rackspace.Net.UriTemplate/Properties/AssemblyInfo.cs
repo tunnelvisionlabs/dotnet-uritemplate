@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Rackspace Inc.")]
 [assembly: AssemblyProduct("Rackspace.Net.UriTemplate")]
-[assembly: AssemblyCopyright("Copyright © Sam Harwell 2013")]
+[assembly: AssemblyCopyright("Copyright © Sam Harwell 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
@@ -25,4 +25,4 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0-dev")]
+[assembly: AssemblyInformationalVersion("1.0.0.0-beta001")]
