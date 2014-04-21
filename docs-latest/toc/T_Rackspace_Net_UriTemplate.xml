@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOCNode Title="UriTemplate Class" Url="html/T_Rackspace_Net_UriTemplate.htm">
+  <HelpTOCNode Title="UriTemplate Constructor " Url="html/M_Rackspace_Net_UriTemplate__ctor.htm" />
+  <HelpTOCNode Title="UriTemplate Methods" Url="html/Methods_T_Rackspace_Net_UriTemplate.htm" HasChildren="true" />
+  <HelpTOCNode Title="UriTemplate Properties" Url="html/Properties_T_Rackspace_Net_UriTemplate.htm" HasChildren="true" />
+</HelpTOCNode>

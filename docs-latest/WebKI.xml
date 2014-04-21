@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="BindByName method" Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm" />
+  <HelpKINode Title="Bindings property" Url="html/P_Rackspace_Net_UriTemplateMatch_Bindings.htm" />
+  <HelpKINode Title="Composite property" Url="html/P_Rackspace_Net_VariableReference_Composite.htm" />
+  <HelpKINode Title="license agreement" Url="html/80f90212-4ffe-4164-aff3-0272ea42814a.htm" />
+  <HelpKINode Title="Match method" Url="html/Overload_Rackspace_Net_UriTemplate_Match.htm" />
+  <HelpKINode Title="Name property" Url="html/P_Rackspace_Net_VariableReference_Name.htm" />
+  <HelpKINode Title="Prefix property" Url="html/P_Rackspace_Net_VariableReference_Prefix.htm" />
+  <HelpKINode Title="Rackspace.Net namespace" Url="html/N_Rackspace_Net.htm" />
+  <HelpKINode Title="Rackspace.Net.UriTemplate class" Url="html/T_Rackspace_Net_UriTemplate.htm" />
+  <HelpKINode Title="Rackspace.Net.UriTemplateMatch class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm" />
+  <HelpKINode Title="Rackspace.Net.VariableReference class" Url="html/T_Rackspace_Net_VariableReference.htm" />
+  <HelpKINode Title="Template property">
+    <HelpKINode Title="UriTemplate.Template Property " Url="html/P_Rackspace_Net_UriTemplate_Template.htm" />
+    <HelpKINode Title="UriTemplateMatch.Template Property " Url="html/P_Rackspace_Net_UriTemplateMatch_Template.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToString method">
+    <HelpKINode Title="UriTemplate.ToString Method " Url="html/M_Rackspace_Net_UriTemplate_ToString.htm" />
+    <HelpKINode Title="VariableReference.ToString Method " Url="html/M_Rackspace_Net_VariableReference_ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="URI Template API" Url="html/a7a93c4d-4c37-4c1b-a244-5b83805f733e.htm" />
+  <HelpKINode Title="UriTemplate class">
+    <HelpKINode Title="UriTemplate Class" Url="html/T_Rackspace_Net_UriTemplate.htm" />
+    <HelpKINode Title="about UriTemplate class" Url="html/T_Rackspace_Net_UriTemplate.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Rackspace_Net_UriTemplate__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Rackspace_Net_UriTemplate.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Rackspace_Net_UriTemplate.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UriTemplate.BindByName method" Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm" />
+  <HelpKINode Title="UriTemplate.Match method" Url="html/Overload_Rackspace_Net_UriTemplate_Match.htm" />
+  <HelpKINode Title="UriTemplate.Template property" Url="html/P_Rackspace_Net_UriTemplate_Template.htm" />
+  <HelpKINode Title="UriTemplate.ToString method" Url="html/M_Rackspace_Net_UriTemplate_ToString.htm" />
+  <HelpKINode Title="UriTemplate.UriTemplate constructor" Url="html/M_Rackspace_Net_UriTemplate__ctor.htm" />
+  <HelpKINode Title="UriTemplateMatch class">
+    <HelpKINode Title="UriTemplateMatch Class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm" />
+    <HelpKINode Title="about UriTemplateMatch class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Rackspace_Net_UriTemplateMatch.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Rackspace_Net_UriTemplateMatch.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UriTemplateMatch.Bindings property" Url="html/P_Rackspace_Net_UriTemplateMatch_Bindings.htm" />
+  <HelpKINode Title="UriTemplateMatch.Template property" Url="html/P_Rackspace_Net_UriTemplateMatch_Template.htm" />
+  <HelpKINode Title="VariableReference class">
+    <HelpKINode Title="VariableReference Class" Url="html/T_Rackspace_Net_VariableReference.htm" />
+    <HelpKINode Title="about VariableReference class" Url="html/T_Rackspace_Net_VariableReference.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Rackspace_Net_VariableReference.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Rackspace_Net_VariableReference.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VariableReference.Composite property" Url="html/P_Rackspace_Net_VariableReference_Composite.htm" />
+  <HelpKINode Title="VariableReference.Name property" Url="html/P_Rackspace_Net_VariableReference_Name.htm" />
+  <HelpKINode Title="VariableReference.Prefix property" Url="html/P_Rackspace_Net_VariableReference_Prefix.htm" />
+  <HelpKINode Title="VariableReference.ToString method" Url="html/M_Rackspace_Net_VariableReference_ToString.htm" />
+  <HelpKINode Title="Welcome" Url="html/6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" />
+</HelpKI>
