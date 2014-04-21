@@ -19,14 +19,17 @@
             <linkText>NuGet</linkText>
             <linkAlternateText>NuGet Package Manager Home</linkAlternateText>
             <linkUri>https://www.nuget.org</linkUri>
-          </externalLink>. In addition to the release binaries, symbol files and source code
+          </externalLink> with the package ID <externalLink>
+            <linkText>Rackspace.Net.UriTemplate</linkText>
+            <linkUri>https://www.nuget.org/packages/Rackspace.Net.UriTemplate</linkUri>
+          </externalLink>.  In addition to the release binaries, symbol files and source code
           are published to <externalLink>
             <linkText>SymbolSource</linkText>
             <linkUri>https://www.symbolsource.org/</linkUri>
           </externalLink>. By <externalLink>
-            <linkText>configuring Visual Studio</linkText>
+            <linkText>configuring Visual Studio (or another supported debugger)</linkText>
             <linkUri>https://www.symbolsource.org/Public/Wiki/Using</linkUri>
-          </externalLink> to use Symbol Source for debugging symbols, library users will be
+          </externalLink> to use SymbolSource for debugging symbols, library users will be
           able to automatically step into the source code for this library if necessary during
           debugging.
         </para>
