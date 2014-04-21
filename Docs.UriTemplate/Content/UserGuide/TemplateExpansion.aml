@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c41f4654-8fdb-4bf8-9b29-9d9a6f270496" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>
+        Template expansion is the process of expanding a URI Template according
+        to specific values for its variables. This is the core operation defined
+        by RFC 6570 and the primary feature provided by this library.
+      </para>
+    </introduction>
+
+    <section address="Section1">
+      <title>Optional section title</title>
+      <content>
+        <para>Add one or more sections with content</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6a7fb475-8e7d-4b8e-9f66-c33506fe0115" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>
+        This library provides support for URI Templates (Level 4) as defined by RFC 6570.
+      </para>
+    </introduction>
+
+    <section address="ProjectResources">
+      <title>Project Resources</title>
+      <content>
+        <para>
+          The following links go directly to the latest information available
+          about the project.
+        </para>
+
+        <list class="bullet">
+          <listItem>
+            <para>
+              Latest Release: <externalLink>
+                <linkText>GitHub Releases</linkText>
+                <linkAlternateText>Release notes for the latest release on GitHub</linkAlternateText>
+                <linkUri>https://github.com/rackerlabs/dotnet-uritemplate/releases/latest</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Source Code: <externalLink>
+                <linkText>GitHub Repository</linkText>
+                <linkAlternateText>Source code for the project on GitHub</linkAlternateText>
+                <linkUri>https://github.com/rackerlabs/dotnet-uritemplate</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Documentation: <externalLink>
+                <linkText>API Documentation</linkText>
+                <linkAlternateText>Documentation for the latest release hosted on GitHub Pages</linkAlternateText>
+                <linkUri>https://rackerlabs.github.io/dotnet-uritemplate/docs-latest</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Issue Tracker: <externalLink>
+                <linkText>GitHub Issues</linkText>
+                <linkAlternateText>Project issue tracker on GitHub Issues</linkAlternateText>
+                <linkUri>https://github.com/rackerlabs/dotnet-uritemplate/issues</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <section address="URITemplates">
+      <title>URI Templates</title>
+      <content>
+        <para>
+          The following text from the introduction to RFC 6570 defines the basic
+          purpose of a URI Template.
+        </para>
+        <quote>
+          A URI Template is a compact sequence of characters for describing a
+          range of Uniform Resource Identifiers through variable expansion.
+          This specification defines the URI Template syntax and the process
+          for expanding a URI Template into a URI reference, along with
+          guidelines for the use of URI Templates on the Internet.
+        </quote>
+        <para>
+          In this library, URI Templates are represented by instances of the
+          <codeEntityReference>T:Rackspace.Net.UriTemplate</codeEntityReference> class.
+        </para>
+      </content>
+      <sections>
+        <section>
+          <title>Example</title>
+          <content>
+            <para>
+              The following example shows a URI template describing the path to information
+              about a package hosted at NuGet.
+            </para>
+            <code language="none">
+              /packages/{id}{/version}
+            </code>
+            <para>
+              This URI Template contains two expansion variables. The <codeInline>id</codeInline>
+              variable represents the package ID, and the <codeInline>version</codeInline>
+              variable represents the specific version of the package. By providing specific values
+              for these variables, a URI instance can be obtained which references a specific
+              desired NuGet package. The following list shows two specific ways these values could
+              be assigned:
+            </para>
+            <list class="bullet">
+              <listItem>
+                <para>
+                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>,
+                  but the <codeInline>version</codeInline> is left unspecified, the template expansion
+                  operation produces the relative URI <fictitiousUri>/packages/Rackspace.Net.UriTemplate</fictitiousUri>.
+                  Since this URI does not specify a specific version, NuGet will display the information
+                  for the latest version of the package.
+                </para>
+              </listItem>
+              <listItem>
+                <para>
+                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>
+                  and the <codeInline>version</codeInline> is specified as <literal>1.0.0</literal>,
+                  the template expansion operation produces the relative URI
+                  <fictitiousUri>/packages/Rackspace.Net.UriTemplate/1.0.0</fictitiousUri>. This is the
+                  path to information about version 1.0.0 of the package.
+                </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+      </sections>
+    </section>
+
+    <section address="Operations">
+      <title>Basic Operations</title>
+      <content>
+        <para>
+          The following sections describe the basic operations supported by this library
+          for operating on URI Templates.
+        </para>
+      </content>
+      <sections>
+        <section>
+          <title>Expansion</title>
+          <content>
+            <para>
+              Template expansion is the process of assigning values to the expressions in a URI
+              Template to produce a URI. The expansion functionality is provided by the
+              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              method and described in further detail in the
+              <link xlink:href="c41f4654-8fdb-4bf8-9b29-9d9a6f270496"/> topic.
+            </para>
+          </content>
+        </section>
+        <section>
+          <title>Matching</title>
+          <content>
+            <para>
+              Matching is the process of extracting values of individual variables from a constructed
+              URI according to the form described by a particular URI Template. This operation is the
+              (imperfect) inverse of the expansion operation described previously. The matching
+              functionality is provided by the
+              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+              method and described in further detail in the
+              <link xlink:href="7e56a038-ad98-4922-9342-7f68a5b89283"/> topic.
+            </para>
+          </content>
+        </section>
+      </sections>
+    </section>
+
+    <relatedTopics>
+      <externalLink>
+        <linkText>RFC 6570 (URI Template)</linkText>
+        <linkAlternateText>RFC 6570 (URI Template)</linkAlternateText>
+        <linkUri>http://tools.ietf.org/html/rfc6570</linkUri>
+      </externalLink>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

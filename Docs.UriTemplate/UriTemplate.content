@@ -16,4 +16,9 @@
     </HelpKeywords>
   </Topic>
   <Topic id="14557a8c-df73-468e-9b75-56e038b79f36" visible="True" title="Preliminary Features" />
+  <Topic id="6a7fb475-8e7d-4b8e-9f66-c33506fe0115" visible="True" isExpanded="true" title="User Guide">
+    <Topic id="56dfe688-42d6-46f0-9cb7-a9d7176ef249" visible="True" title="Installation" />
+    <Topic id="c41f4654-8fdb-4bf8-9b29-9d9a6f270496" visible="True" title="Template Expansion" />
+    <Topic id="7e56a038-ad98-4922-9342-7f68a5b89283" visible="True" title="Template Matching" />
+  </Topic>
 </Topics>

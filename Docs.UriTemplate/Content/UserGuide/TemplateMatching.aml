@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="7e56a038-ad98-4922-9342-7f68a5b89283" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>
+        Template matching is the inverse operation of template expansion. While this
+        operation is not directly defined by RFC 6570, it is useful in verifying and
+        extracting specific information from a URI which is provided in a known format.
+      </para>
+    </introduction>
+
+    <section address="Section1">
+      <title>Optional section title</title>
+      <content>
+        <para>Add one or more sections with content</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
