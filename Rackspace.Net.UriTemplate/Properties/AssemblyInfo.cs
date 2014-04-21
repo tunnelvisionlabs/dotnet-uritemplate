@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Rackspace Inc.")]
 [assembly: AssemblyProduct("Rackspace.Net.UriTemplate")]
-[assembly: AssemblyCopyright("Copyright © Sam Harwell 2013")]
+[assembly: AssemblyCopyright("Copyright © Sam Harwell 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
