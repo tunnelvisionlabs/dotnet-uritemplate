@@ -12,12 +12,24 @@ namespace Rackspace.Net
 
     /// <summary>
     /// This is the base class for <see cref="UriTemplatePart"/> instances which involve
-    /// the expansion of variable references during rendering.
+    /// the expansion of variable references during rendering and/or matching.
     /// </summary>
     /// <threadsafety static="true" instance="false"/>
     /// <preliminary/>
     internal abstract class UriTemplatePartExpansion : UriTemplatePart
     {
+        /// <summary>
+        /// This regular expression pattern matches a single <c>unreserved</c> or <c>pct-encoded</c> character.
+        /// </summary>
+        /// <seealso href="http://tools.ietf.org/html/rfc6570#section-1.5">Notational Conventions (RFC 6570 URI Template)</seealso>
+        protected const string UnreservedCharacterPattern = @"(?:[a-zA-Z0-9._~-]|" + UriTemplate.PctEncodedPattern + ")";
+
+        /// <summary>
+        /// This regular expression pattern matches a single <c>reserved</c> character.
+        /// </summary>
+        /// <seealso href="http://tools.ietf.org/html/rfc6570#section-1.5">Notational Conventions (RFC 6570 URI Template)</seealso>
+        protected const string ReservedCharacterPattern = @"(?:[:/?#[\]@!$&'()*+,;=]" + @")";
+
         /// <summary>
         /// This is the backing field for the <see cref="Variables"/> property.
         /// </summary>
@@ -117,6 +129,49 @@ namespace Rackspace.Net
                 added = true;
             }
         }
+
+        /// <inheritdoc/>
+        /// <remarks>
+        /// This method checks that the definitions in <see cref="Variables"/> do not conflict with
+        /// <paramref name="listVariables"/> and <paramref name="mapVariables"/>. It then calls
+        /// <see cref="BuildPatternBodyImpl"/> to construct the actual pattern.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// If <paramref name="listVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.</para>
+        /// </exception>
+        protected override sealed void BuildPatternBody(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            foreach (VariableReference variable in Variables)
+            {
+                if (variable.Prefix != null)
+                {
+                    if (listVariables.Contains(variable.Name))
+                        throw new InvalidOperationException("Cannot treat a variable with a prefix modifier as a list.");
+                    if (mapVariables.Contains(variable.Name))
+                        throw new InvalidOperationException("Cannot treat a variable with a prefix modifier as an associative map.");
+                }
+            }
+
+            BuildPatternBodyImpl(pattern, listVariables, mapVariables);
+        }
+
+        /// <summary>
+        /// Provides the implementation of <see cref="BuildPatternBody"/> after variable constraints are
+        /// checked against <paramref name="listVariables"/> and <paramref name="mapVariables"/>.
+        /// </summary>
+        /// <param name="pattern">The <see cref="StringBuilder"/> to append the regular expression pattern to.</param>
+        /// <param name="listVariables">The names of variables which should be treated as lists during the match operation.</param>
+        /// <param name="mapVariables">The names of variables which should be treated as associative maps during the match operation.</param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        protected abstract void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables);
 
         /// <summary>
         /// This helper method writes a string value to the <see cref="StringBuilder"/> output,

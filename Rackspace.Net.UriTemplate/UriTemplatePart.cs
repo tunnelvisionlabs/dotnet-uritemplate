@@ -4,6 +4,7 @@ namespace Rackspace.Net
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
 
     /// <summary>
@@ -25,11 +26,75 @@ namespace Rackspace.Net
         /// Renders this <see cref="UriTemplatePart"/> to a <see cref="StringBuilder"/>, applying the
         /// specified <paramref name="parameters"/> as replacements for variables in the template.
         /// </summary>
+        /// <typeparam name="T">The type of parameter value provided in <paramref name="parameters"/>.</typeparam>
         /// <param name="builder">The <see cref="StringBuilder"/> to render this part to.</param>
         /// <param name="parameters">A collection of parameters for replacing variable references in the template.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="builder"/> is <see langword="null"/>.</exception>
         public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
             where T : class;
+
+        /// <summary>
+        /// Build a regular expression pattern which matches this template part in a URI.
+        /// </summary>
+        /// <remarks>
+        /// This method delegates the construction of the actual pattern building operation to
+        /// <see cref="BuildPatternBody"/>. The results of that call are then wrapped in a regular
+        /// expression named capture group.
+        /// </remarks>
+        /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
+        /// <param name="groupName">The name to use for the named capture in the regular expression matching this template part.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="groupName"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="groupName"/> is empty.
+        /// </exception>
+        public void BuildPattern(StringBuilder pattern, string groupName, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+            if (groupName == null)
+                throw new ArgumentNullException("groupName");
+            if (listVariables == null)
+                throw new ArgumentNullException("listVariables");
+            if (mapVariables == null)
+                throw new ArgumentNullException("mapVariables");
+            if (string.IsNullOrEmpty(groupName))
+                throw new ArgumentException("groupName cannot be empty");
+
+            pattern.Append("(?<").Append(groupName).Append('>');
+            BuildPatternBody(pattern, listVariables, mapVariables);
+            pattern.Append(')');
+        }
+
+        /// <summary>
+        /// Provides the implementation of <see cref="BuildPattern"/> for a specific <see cref="UriTemplatePart"/> type.
+        /// </summary>
+        /// <remarks>
+        /// This method is part of the <see cref="O:Rackspace.Net.UriTemplate.Match"/> algorithm. If the match operation is
+        /// successful, the text of the candidate URI matched by the segment of the regular expression added
+        /// to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
+        /// method for associating the results with specific variables.
+        /// </remarks>
+        /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        protected abstract void BuildPatternBody(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables);
 
         /// <summary>
         /// Determines if an ASCII character matches the <c>unreserved</c> pattern defined
@@ -128,5 +193,84 @@ namespace Rackspace.Net
 
             return builder.ToString();
         }
+
+        /// <summary>
+        /// Decodes text of a URI.
+        /// </summary>
+        /// <remarks>
+        /// The URI is assumed to be formed by first using the UTF-8 encoding to obtain
+        /// a sequence of bytes, and then percent-encoding octets which are not allowed
+        /// in the URI syntax. This method decodes text from a URI which was encoded by
+        /// this process.
+        /// </remarks>
+        /// <param name="text">The URI text.</param>
+        /// <returns>The decoded URI text.</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="text"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">If <paramref name="text"/> contains a <c>%</c> character which is not part of an percent-encoded triplet.</exception>
+        /// <exception cref="ArgumentException">If the byte sequence after decoding the percent-encoded triplets is not a valid UTF-8 byte sequence.</exception>
+        protected static string DecodeCharacters(string text)
+        {
+            if (text == null)
+                throw new ArgumentNullException("text");
+
+            byte[] sourceData = Encoding.UTF8.GetBytes(text);
+            byte[] data = new byte[sourceData.Length];
+            int length = 0;
+
+            // the current position in sourceData
+            int position = 0;
+            // the index of the current % character in sourceData
+            int index = -1;
+            for (index = Array.IndexOf(sourceData, (byte)'%', index + 1); index >= 0; index = Array.IndexOf(sourceData, (byte)'%', index + 1))
+            {
+                while (position < index)
+                {
+                    data[length] = sourceData[position];
+                    length++;
+                    position++;
+                }
+
+                if (index > sourceData.Length - 3)
+                    throw new ArgumentException("text contains a % character which is not part of a percent-encoded triplet");
+
+                string hex = ((char)sourceData[index + 1]).ToString() + (char)sourceData[index + 2];
+                byte value;
+                if (!byte.TryParse(hex, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out value))
+                    throw new ArgumentException("text contains a % character which is not part of a percent-encoded triplet");
+
+                data[length] = value;
+                length++;
+                position = index + 3;
+            }
+
+            while (position < sourceData.Length)
+            {
+                data[length] = sourceData[position];
+                length++;
+                position++;
+            }
+
+            return Encoding.UTF8.GetString(data, 0, length);
+        }
+
+        /// <summary>
+        /// Implements the assignment of values to variables for the match operation.
+        /// </summary>
+        /// <param name="text">The text which was matched by the regular expression segment created by <see cref="BuildPatternBody"/>.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <returns>
+        /// An array containing the assignment of values to variables for the current part.
+        /// <para>-or-</para>
+        /// <para><see langword="null"/> if the matched <paramref name="text"/> does not provide a valid match for this template part.</para>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="text"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        protected internal abstract KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables);
     }
 }

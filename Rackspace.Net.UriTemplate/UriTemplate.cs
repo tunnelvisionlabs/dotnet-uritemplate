@@ -69,12 +69,12 @@ namespace Rackspace.Net
         /// <summary>
         /// The default <see cref="RegexOptions"/> for non-Portable Class Library builds.
         /// </summary>
-        private const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
+        internal const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #else
         /// <summary>
         /// The default <see cref="RegexOptions"/> for Portable Class Library builds.
         /// </summary>
-        private const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
+        internal const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
 #endif
 
         /// <summary>
@@ -127,6 +127,22 @@ namespace Rackspace.Net
                 throw new ArgumentException("template cannot be empty");
 
             _template = template;
+            _parts = ParseTemplate(template);
+        }
+
+        /// <summary>
+        /// Gets the original template text the <see cref="UriTemplate"/> was constructed from.
+        /// </summary>
+        public string Template
+        {
+            get
+            {
+                return _template;
+            }
+        }
+
+        private static UriTemplatePart[] ParseTemplate(string template)
+        {
             List<UriTemplatePart> parts = new List<UriTemplatePart>();
             int previousEnd = 0;
             foreach (Match match in ExpressionExpression.Matches(template))
@@ -239,18 +255,7 @@ namespace Rackspace.Net
             if (previousEnd < template.Length)
                 parts.Add(new UriTemplatePartLiteral(template.Substring(previousEnd)));
 
-            _parts = parts.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the original template text the <see cref="UriTemplate"/> was constructed from.
-        /// </summary>
-        public string Template
-        {
-            get
-            {
-                return _template;
-            }
+            return parts.ToArray();
         }
 
         /// <summary>
@@ -341,6 +346,138 @@ namespace Rackspace.Net
                 throw new ArgumentException("baseAddress must be an absolute URI", "baseAddress");
 
             return new Uri(baseAddress, BindByName(parameters));
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="candidate"/> is <see langword="null"/>.
+        /// </exception>
+        public UriTemplateMatch Match(Uri candidate)
+        {
+            return Match(candidate, new string[0], new string[0]);
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>. A successful
+        /// match operation results in an assignment of values to variables in the URI Template
+        /// which is capable of producing the <paramref name="candidate"/> URI through the
+        /// <see cref="O:Rackspace.Net.UriTemplate.BindByName"/> operation.
+        /// </summary>
+        /// <remarks>
+        /// There are several limitations in the current implementation of this operation.
+        ///
+        /// <list type="bullet">
+        ///   <item>
+        ///     If more than one assignment of values to variables exists which is capable of
+        ///     producing the <paramref name="candidate"/> URI through the <see cref="O:Rackspace.Net.UriTemplate.BindByName"/>
+        ///     operation, it is unspecified which assignment of values is chosen.
+        ///   </item>
+        ///   <item>
+        ///     Simple string values will always be returned as a <see cref="String"/>.
+        ///     Associative array values will always be returned as a <see cref="IList{T}"/> whose
+        ///     values are of type <see cref="String"/>. Associative map values will always be
+        ///     returned as a <see cref="IDictionary{TKey, TValue}"/> whose keys and values are
+        ///     of type <see cref="String"/>. No other deserialization or coercion of values is
+        ///     performed by this library.
+        ///   </item>
+        /// </list>
+        ///
+        /// <para>
+        /// The matching algorithm prefers to use simple string values for all variables not
+        /// explicitly listed in <paramref name="listVariables"/> or <paramref name="mapVariables"/>.
+        /// If no assignment of values to variables is possible using this choice, one or more
+        /// variables may be treated as lists and/or maps in order to produce a successful
+        /// assignment. The exception to this rule is compound template variables (which use the
+        /// explode modifier); these variables prefer to match as lists instead of simple strings,
+        /// even if the result produces a list containing exactly one string.
+        /// </para>
+        /// </remarks>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template. Lists are returned as instances of <see cref="IList{String}"/>.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{String, String}"/>.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="candidate"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="listVariables"/> contains a <see langword="null"/> or empty value.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
+        /// </exception>
+        public UriTemplateMatch Match(Uri candidate, ICollection<string> listVariables, ICollection<string> mapVariables)
+        {
+            if (candidate == null)
+                throw new ArgumentNullException("candidate");
+            if (listVariables == null)
+                throw new ArgumentNullException("listVariables");
+            if (mapVariables == null)
+                throw new ArgumentNullException("mapVariables");
+
+            StringBuilder pattern = new StringBuilder();
+            pattern.Append('^');
+            for (int i = 0; i < _parts.Length; i++)
+            {
+                string group = "part" + i;
+                _parts[i].BuildPattern(pattern, group, listVariables, mapVariables);
+            }
+
+            pattern.Append('$');
+
+            Regex expression = new Regex(pattern.ToString());
+            Match match = expression.Match(candidate.ToString());
+            if (match == null || !match.Success)
+                return null;
+
+            List<KeyValuePair<VariableReference, object>> bindings = new List<KeyValuePair<VariableReference, object>>();
+            for (int i = 0; i < _parts.Length; i++)
+            {
+                Group group = match.Groups["part" + i];
+                if (!group.Success)
+                    return null;
+
+                KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, listVariables, mapVariables);
+                if (binding == null)
+                    return null;
+
+                bindings.AddRange(binding);
+            }
+
+            return new UriTemplateMatch(this, bindings);
+        }
+
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <param name="baseAddress">The base address.</param>
+        /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// If <paramref name="baseAddress"/> is a relative URI.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="candidate"/> is a relative URI.</para>
+        /// </exception>
+        public UriTemplateMatch Match(Uri baseAddress, Uri candidate)
+        {
+            if (baseAddress == null)
+                throw new ArgumentNullException("baseAddress");
+            if (candidate == null)
+                throw new ArgumentNullException("candidate");
+
+            Uri relative = baseAddress.MakeRelativeUri(candidate);
+            return Match(relative);
         }
 
         /// <summary>

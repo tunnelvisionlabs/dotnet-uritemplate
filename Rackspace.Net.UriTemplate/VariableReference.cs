@@ -10,13 +10,13 @@ namespace Rackspace.Net
     /// </summary>
     /// <threadsafety static="true" instance="true"/>
     /// <preliminary/>
-    internal class VariableReference
+    public class VariableReference
     {
         /// <summary>
         /// This regular expression is used to validate the <see cref="Name"/> property when
         /// a <see cref="VariableReference"/> is initialized.
         /// </summary>
-        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$");
+        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$", UriTemplate.DefaultRegexOptions);
 
         /// <summary>
         /// This is the backing field for the <see cref="Name"/> property.
@@ -40,7 +40,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
-        public VariableReference(string name)
+        internal VariableReference(string name)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -61,7 +61,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="ArgumentOutOfRangeException">If <paramref name="prefix"/> is less than or equal to 0, or greater than 9999.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
-        public VariableReference(string name, int prefix)
+        internal VariableReference(string name, int prefix)
             : this(name)
         {
             if (prefix <= 0)
@@ -80,7 +80,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="name"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="name"/> is not a valid <c>varname</c> according to RFC 6570.</exception>
-        public VariableReference(string name, bool composite)
+        internal VariableReference(string name, bool composite)
             : this(name)
         {
             _composite = composite;
@@ -141,7 +141,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">If <paramref name="variable"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="variable"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="variable"/> is not a valid <c>varspec</c> according to RFC 6570.</exception>
-        public static VariableReference Parse(string variable)
+        internal static VariableReference Parse(string variable)
         {
             if (variable == null)
                 throw new ArgumentNullException("reference");
