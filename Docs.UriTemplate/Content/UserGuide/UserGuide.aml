@@ -73,7 +73,53 @@
           for expanding a URI Template into a URI reference, along with
           guidelines for the use of URI Templates on the Internet.
         </quote>
+        <para>
+          In this library, URI Templates are represented by instances of the
+          <codeEntityReference>T:Rackspace.Net.UriTemplate</codeEntityReference> class.
+        </para>
       </content>
+      <sections>
+        <section>
+          <title>Example</title>
+          <content>
+            <para>
+              The following example shows a URI template describing the path to information
+              about a package hosted at NuGet.
+            </para>
+            <code language="none">
+              /packages/{id}{/version}
+            </code>
+            <para>
+              This URI Template contains two expansion variables. The <codeInline>id</codeInline>
+              variable represents the package ID, and the <codeInline>version</codeInline>
+              variable represents the specific version of the package. By providing specific values
+              for these variables, a URI instance can be obtained which references a specific
+              desired NuGet package. The following list shows two specific ways these values could
+              be assigned:
+            </para>
+            <list class="bullet">
+              <listItem>
+                <para>
+                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>,
+                  but the <codeInline>version</codeInline> is left unspecified, the template expansion
+                  operation produces the relative URI <fictitiousUri>/packages/Rackspace.Net.UriTemplate</fictitiousUri>.
+                  Since this URI does not specify a specific version, NuGet will display the information
+                  for the latest version of the package.
+                </para>
+              </listItem>
+              <listItem>
+                <para>
+                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>
+                  and the <codeInline>version</codeInline> is specified as <literal>1.0.0</literal>,
+                  the template expansion operation produces the relative URI
+                  <fictitiousUri>/packages/Rackspace.Net.UriTemplate/1.0.0</fictitiousUri>. This is the
+                  path to information about version 1.0.0 of the package.
+                </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+      </sections>
     </section>
 
     <section address="Operations">
