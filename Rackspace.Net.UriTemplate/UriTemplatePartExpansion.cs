@@ -141,7 +141,7 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.</para>
         /// </exception>
-        protected override sealed void BuildPatternBody(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override sealed void BuildPatternBody(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             foreach (VariableReference variable in Variables)
             {
@@ -154,7 +154,7 @@ namespace Rackspace.Net
                 }
             }
 
-            BuildPatternBodyImpl(pattern, arrayVariables, mapVariables);
+            BuildPatternBodyImpl(pattern, requiredVariables, arrayVariables, mapVariables);
         }
 
         /// <summary>
@@ -162,16 +162,80 @@ namespace Rackspace.Net
         /// checked against <paramref name="arrayVariables"/> and <paramref name="mapVariables"/>.
         /// </summary>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the regular expression pattern to.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <param name="arrayVariables">The names of variables which should be treated as associative arrays during the match operation.</param>
         /// <param name="mapVariables">The names of variables which should be treated as associative maps during the match operation.</param>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="pattern"/> is <see langword="null"/>.
         /// <para>-or-</para>
+        /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
-        protected abstract void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables);
+        protected abstract void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables);
+
+        /// <inheritdoc/>
+        /// <remarks>
+        /// This method calls <see cref="MatchImpl"/> to perform the actual matching operation, and then
+        /// checks that all variables present in both <see cref="Variables"/> and <paramref name="requiredVariables"/>
+        /// have values assigned as part of the result.
+        /// </remarks>
+        protected internal override sealed KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        {
+            var result = MatchImpl(text, requiredVariables, arrayVariables, mapVariables);
+            if (result == null)
+                return null;
+
+            if (requiredVariables.Any())
+            {
+                foreach (var variable in Variables)
+                {
+                    if (!requiredVariables.Contains(variable.Name))
+                        continue;
+
+                    KeyValuePair<VariableReference, object> pair = result.FirstOrDefault(i => i.Key == variable);
+                    if (pair.Key == null)
+                        return null;
+
+                    if (pair.Value == null)
+                        return null;
+
+                    // String implements IEnumerable, but empty strings count as a value
+                    if (pair.Value is string)
+                        continue;
+
+                    if (pair.Value is IEnumerable && !((IEnumerable)pair.Value).GetEnumerator().MoveNext())
+                        return null;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Provides the implementation of <see cref="Match"/>.
+        /// </summary>
+        /// <param name="text">The text which was matched by the regular expression segment created by <see cref="BuildPatternBody"/>.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
+        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
+        /// <returns>
+        /// An array containing the assignment of values to variables for the current part.
+        /// <para>-or-</para>
+        /// <para><see langword="null"/> if the matched <paramref name="text"/> does not provide a valid match for this template part.</para>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="text"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
+        /// </exception>
+        protected abstract KeyValuePair<VariableReference, object>[] MatchImpl(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables);
 
         /// <summary>
         /// This helper method writes a string value to the <see cref="StringBuilder"/> output,

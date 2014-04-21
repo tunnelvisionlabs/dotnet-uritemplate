@@ -15,6 +15,13 @@
                 { "hello", "Hello World!" },
                 { "path", "/foo/bar" },
             };
+        private static readonly HashSet<string> requiredVariables =
+            new HashSet<string>
+            {
+                "var",
+                "hello",
+                "path",
+            };
 
         [TestMethod]
         [TestCategory(TestCategories.Level2)]
@@ -27,6 +34,10 @@
             Assert.AreEqual("value", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
@@ -44,6 +55,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
         }
 
         [TestMethod]
@@ -59,6 +74,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
         }
 
         [TestMethod]
@@ -72,6 +91,10 @@
             Assert.AreEqual("here?ref=/foo/bar", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
         }

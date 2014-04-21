@@ -18,6 +18,15 @@
                 { "list", new[] { "red", "green", "blue" } },
                 { "keys", new Dictionary<string, string> { { "semi", ";" }, { "dot", "." }, { "comma", ","} } }
             };
+        private static readonly HashSet<string> requiredVariables =
+            new HashSet<string>
+            {
+                "var",
+                "hello",
+                "path",
+                "list",
+                "keys",
+            };
 
         [TestMethod]
         [TestCategory(TestCategories.Level4)]
@@ -30,6 +39,10 @@
             Assert.AreEqual("val", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("val", match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -47,6 +60,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -62,6 +79,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -75,6 +96,10 @@
             Assert.AreEqual("red,green,blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -102,6 +127,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -127,6 +156,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -140,6 +173,10 @@
             Assert.AreEqual("/foo/b/here", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("/foo/b", match.Bindings["path"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("/foo/b", match.Bindings["path"].Value);
         }
@@ -157,6 +194,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -170,6 +211,10 @@
             Assert.AreEqual("red,green,blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -197,6 +242,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -222,6 +271,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -235,6 +288,10 @@
             Assert.AreEqual("#/foo/b/here", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual(((string)variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual(((string)variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
         }
@@ -252,6 +309,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -265,6 +326,10 @@
             Assert.AreEqual("#red,green,blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -292,6 +357,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -317,6 +386,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -330,6 +403,10 @@
             Assert.AreEqual("X.val", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("val", match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -347,6 +424,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -360,6 +441,10 @@
             Assert.AreEqual("X.red.green.blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -387,6 +472,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -400,6 +489,10 @@
             Assert.AreEqual("/v/value", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
@@ -417,6 +510,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -432,6 +529,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -445,6 +546,11 @@
             Assert.AreEqual("/red/green/blue/%2Ffoo", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            Assert.AreEqual(((string)variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
             Assert.AreEqual(((string)variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
@@ -473,6 +579,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -498,6 +608,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -511,6 +625,10 @@
             Assert.AreEqual(";hello=Hello", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("Hello", match.Bindings["hello"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("Hello", match.Bindings["hello"].Value);
         }
@@ -528,6 +646,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -541,6 +663,10 @@
             Assert.AreEqual(";list=red;list=green;list=blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -568,6 +694,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -593,6 +723,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -606,6 +740,10 @@
             Assert.AreEqual("?var=val", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("val", match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -623,6 +761,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -636,6 +778,10 @@
             Assert.AreEqual("?list=red&list=green&list=blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -663,6 +809,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -688,6 +838,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -701,6 +855,10 @@
             Assert.AreEqual("&var=val", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            Assert.AreEqual("val", match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -718,6 +876,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -731,6 +893,10 @@
             Assert.AreEqual("&list=red&list=green&list=blue", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
         }
@@ -758,6 +924,10 @@
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -781,6 +951,10 @@
             CollectionAssert.Contains(allowed, uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
+            Assert.IsNotNull(match);
+            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }

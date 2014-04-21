@@ -43,12 +43,15 @@ namespace Rackspace.Net
         /// </remarks>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
         /// <param name="groupName">The name to use for the named capture in the regular expression matching this template part.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <exception cref="ArgumentException">
         /// If <paramref name="pattern"/> is <see langword="null"/>.
         /// <para>-or-</para>
         /// <para>If <paramref name="groupName"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
+        /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -57,12 +60,14 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentException">
         /// If <paramref name="groupName"/> is empty.
         /// </exception>
-        public void BuildPattern(StringBuilder pattern, string groupName, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        public void BuildPattern(StringBuilder pattern, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
             if (groupName == null)
                 throw new ArgumentNullException("groupName");
+            if (requiredVariables == null)
+                throw new ArgumentNullException("requiredVariables");
             if (arrayVariables == null)
                 throw new ArgumentNullException("arrayVariables");
             if (mapVariables == null)
@@ -71,7 +76,7 @@ namespace Rackspace.Net
                 throw new ArgumentException("groupName cannot be empty");
 
             pattern.Append("(?<").Append(groupName).Append('>');
-            BuildPatternBody(pattern, arrayVariables, mapVariables);
+            BuildPatternBody(pattern, requiredVariables, arrayVariables, mapVariables);
             pattern.Append(')');
         }
 
@@ -85,16 +90,19 @@ namespace Rackspace.Net
         /// method for associating the results with specific variables.
         /// </remarks>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <exception cref="ArgumentException">
         /// If <paramref name="pattern"/> is <see langword="null"/>.
         /// <para>-or-</para>
+        /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
-        protected abstract void BuildPatternBody(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables);
+        protected abstract void BuildPatternBody(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables);
 
         /// <summary>
         /// Determines if an ASCII character matches the <c>unreserved</c> pattern defined
@@ -257,6 +265,7 @@ namespace Rackspace.Net
         /// Implements the assignment of values to variables for the match operation.
         /// </summary>
         /// <param name="text">The text which was matched by the regular expression segment created by <see cref="BuildPatternBody"/>.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <returns>
@@ -267,10 +276,12 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="text"/> is <see langword="null"/>.
         /// <para>-or-</para>
+        /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
+        /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
-        protected internal abstract KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> arrayVariables, ICollection<string> mapVariables);
+        protected internal abstract KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables);
     }
 }

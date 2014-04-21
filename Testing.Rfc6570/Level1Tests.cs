@@ -14,6 +14,12 @@
                 { "var", "value" },
                 { "hello", "Hello World!" },
             };
+        private static readonly HashSet<string> requiredVariables =
+            new HashSet<string>
+            {
+                "var",
+                "hello",
+            };
 
         [TestMethod]
         [TestCategory(TestCategories.Level1)]
@@ -26,6 +32,10 @@
             Assert.AreEqual("value", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
         }
@@ -41,6 +51,10 @@
             Assert.AreEqual("Hello%20World%21", uri.ToString());
 
             UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
+
+            match = uriTemplate.Match(uri, requiredVariables);
             Assert.IsNotNull(match);
             Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
         }

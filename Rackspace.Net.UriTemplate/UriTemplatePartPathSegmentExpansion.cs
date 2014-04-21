@@ -8,6 +8,7 @@ namespace Rackspace.Net
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
+    using BitArray = System.Collections.BitArray;
     using DictionaryEntry = System.Collections.DictionaryEntry;
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
@@ -32,7 +33,7 @@ namespace Rackspace.Net
             }
         }
 
-        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
@@ -41,19 +42,24 @@ namespace Rackspace.Net
             if (mapVariables == null)
                 throw new ArgumentNullException("mapVariables");
 
+            BitArray requiredPatterns = new BitArray(Variables.Count);
             List<string> variablePatterns = new List<string>();
-            foreach (var variable in Variables)
+            for (int i = 0; i < Variables.Count; i++)
             {
+                VariableReference variable = Variables[i];
+                if (requiredVariables.Contains(variable.Name))
+                    requiredPatterns.Set(i, true);
+
                 bool allowReservedSet = false;
-                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, arrayVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, requiredVariables, arrayVariables, mapVariables));
             }
 
             pattern.Append("(?:");
-            AppendZeroOrMoreToEnd(pattern, variablePatterns, 0);
+            AppendZeroOrMoreToEnd(pattern, requiredPatterns, variablePatterns, 0);
             pattern.Append(")");
         }
 
-        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             string characterPattern;
             if (allowReservedSet)
@@ -160,27 +166,36 @@ namespace Rackspace.Net
             return variablePattern.ToString();
         }
 
-        private static void AppendZeroOrMoreToEnd(StringBuilder pattern, List<string> patterns, int startIndex)
+        private static void AppendZeroOrMoreToEnd(StringBuilder pattern, BitArray requiredPatterns, List<string> patterns, int startIndex)
         {
             if (startIndex >= patterns.Count)
                 throw new ArgumentException();
 
             for (int i = startIndex; i < patterns.Count; i++)
+            {
                 pattern.Append("(?:/").Append(patterns[i]).Append(")?");
+                if (!requiredPatterns.Get(i))
+                    pattern.Append('?');
+            }
         }
 
-        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> arrayVariables, ICollection<string> mapVariables)
+        protected override KeyValuePair<VariableReference, object>[] MatchImpl(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
+            BitArray requiredPatterns = new BitArray(Variables.Count);
             List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
+                VariableReference variable = Variables[i];
+                if (requiredVariables.Contains(variable.Name))
+                    requiredPatterns.Set(i, true);
+
                 bool allowReservedSet = false;
-                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, arrayVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, requiredVariables, arrayVariables, mapVariables));
             }
 
             StringBuilder matchPattern = new StringBuilder();
             matchPattern.Append("^");
-            AppendZeroOrMoreToEnd(matchPattern, variablePatterns, 0);
+            AppendZeroOrMoreToEnd(matchPattern, requiredPatterns, variablePatterns, 0);
             matchPattern.Append("$");
 
             Regex matchExpression = new Regex(matchPattern.ToString());
