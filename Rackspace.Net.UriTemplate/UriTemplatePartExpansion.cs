@@ -133,45 +133,45 @@ namespace Rackspace.Net
         /// <inheritdoc/>
         /// <remarks>
         /// This method checks that the definitions in <see cref="Variables"/> do not conflict with
-        /// <paramref name="listVariables"/> and <paramref name="mapVariables"/>. It then calls
+        /// <paramref name="arrayVariables"/> and <paramref name="mapVariables"/>. It then calls
         /// <see cref="BuildPatternBodyImpl"/> to construct the actual pattern.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
-        /// If <paramref name="listVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.
+        /// If <paramref name="arrayVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.</para>
         /// </exception>
-        protected override sealed void BuildPatternBody(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
+        protected override sealed void BuildPatternBody(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             foreach (VariableReference variable in Variables)
             {
                 if (variable.Prefix != null)
                 {
-                    if (listVariables.Contains(variable.Name))
-                        throw new InvalidOperationException("Cannot treat a variable with a prefix modifier as a list.");
+                    if (arrayVariables.Contains(variable.Name))
+                        throw new InvalidOperationException("Cannot treat a variable with a prefix modifier as an associative array.");
                     if (mapVariables.Contains(variable.Name))
                         throw new InvalidOperationException("Cannot treat a variable with a prefix modifier as an associative map.");
                 }
             }
 
-            BuildPatternBodyImpl(pattern, listVariables, mapVariables);
+            BuildPatternBodyImpl(pattern, arrayVariables, mapVariables);
         }
 
         /// <summary>
         /// Provides the implementation of <see cref="BuildPatternBody"/> after variable constraints are
-        /// checked against <paramref name="listVariables"/> and <paramref name="mapVariables"/>.
+        /// checked against <paramref name="arrayVariables"/> and <paramref name="mapVariables"/>.
         /// </summary>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the regular expression pattern to.</param>
-        /// <param name="listVariables">The names of variables which should be treated as lists during the match operation.</param>
+        /// <param name="arrayVariables">The names of variables which should be treated as associative arrays during the match operation.</param>
         /// <param name="mapVariables">The names of variables which should be treated as associative maps during the match operation.</param>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="pattern"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
-        protected abstract void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables);
+        protected abstract void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables);
 
         /// <summary>
         /// This helper method writes a string value to the <see cref="StringBuilder"/> output,

@@ -54,12 +54,12 @@ namespace Rackspace.Net
         }
 
         /// <inheritdoc/>
-        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> listVariables, ICollection<string> mapVariables)
+        protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
-            if (listVariables == null)
-                throw new ArgumentNullException("listVariables");
+            if (arrayVariables == null)
+                throw new ArgumentNullException("arrayVariables");
             if (mapVariables == null)
                 throw new ArgumentNullException("mapVariables");
 
@@ -67,7 +67,7 @@ namespace Rackspace.Net
             foreach (var variable in Variables)
             {
                 bool allowReservedSet = Type == UriTemplatePartType.ReservedStringExpansion;
-                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, listVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, arrayVariables, mapVariables));
             }
 
             pattern.Append("(?:");
@@ -75,7 +75,7 @@ namespace Rackspace.Net
             pattern.Append(")?");
         }
 
-        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> listVariables, ICollection<string> mapVariables)
+        private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             string characterPattern;
             if (allowReservedSet)
@@ -125,12 +125,12 @@ namespace Rackspace.Net
                 return variablePattern.ToString();
             }
 
-            bool treatAsList = listVariables.Contains(variable.Name);
+            bool treatAsArray = arrayVariables.Contains(variable.Name);
             bool treatAsMap = mapVariables.Contains(variable.Name);
 
-            bool considerString = !variable.Composite && !treatAsList && !treatAsMap;
-            bool considerList = treatAsList || !treatAsMap;
-            bool considerMap = treatAsMap || !treatAsList;
+            bool considerString = !variable.Composite && !treatAsArray && !treatAsMap;
+            bool considerArray = treatAsArray || !treatAsMap;
+            bool considerMap = treatAsMap || !treatAsArray;
 
             variablePattern.Append("(?:");
 
@@ -142,7 +142,7 @@ namespace Rackspace.Net
                 variablePattern.Append(valueEndPattern);
             }
 
-            if (considerList)
+            if (considerArray)
             {
                 if (considerString)
                     variablePattern.Append('|');
@@ -156,7 +156,7 @@ namespace Rackspace.Net
 
             if (considerMap)
             {
-                if (considerString || considerList)
+                if (considerString || considerArray)
                     variablePattern.Append('|');
 
                 // could be an associative map
@@ -210,13 +210,13 @@ namespace Rackspace.Net
             pattern.Append(")");
         }
 
-        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> listVariables, ICollection<string> mapVariables)
+        protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
                 bool allowReservedSet = Type == UriTemplatePartType.ReservedStringExpansion;
-                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, listVariables, mapVariables));
+                variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, arrayVariables, mapVariables));
             }
 
             StringBuilder matchPattern = new StringBuilder();
@@ -244,12 +244,12 @@ namespace Rackspace.Net
                     continue;
                 }
 
-                bool treatAsList = listVariables.Contains(Variables[i].Name);
+                bool treatAsArray = arrayVariables.Contains(Variables[i].Name);
                 bool treatAsMap = mapVariables.Contains(Variables[i].Name);
 
-                bool considerString = !Variables[i].Composite && !treatAsList && !treatAsMap;
-                bool considerList = treatAsList || !treatAsMap;
-                bool considerMap = treatAsMap || !treatAsList;
+                bool considerString = !Variables[i].Composite && !treatAsArray && !treatAsMap;
+                bool considerArray = treatAsArray || !treatAsMap;
+                bool considerMap = treatAsMap || !treatAsArray;
 
                 // first check for a map
                 Group mapKeys = match.Groups["var" + i + "key"];
@@ -265,10 +265,10 @@ namespace Rackspace.Net
                     continue;
                 }
 
-                // next try a list
+                // next try an array
                 if (!considerString || group.Captures.Count > 1)
                 {
-                    Debug.Assert(considerList);
+                    Debug.Assert(considerArray);
                     List<string> list = new List<string>(group.Captures.Cast<Capture>().Select(capture => DecodeCharacters(capture.Value)));
                     results.Add(new KeyValuePair<VariableReference, object>(Variables[i], list));
                     continue;

@@ -388,36 +388,36 @@ namespace Rackspace.Net
         ///
         /// <para>
         /// The matching algorithm prefers to use simple string values for all variables not
-        /// explicitly listed in <paramref name="listVariables"/> or <paramref name="mapVariables"/>.
+        /// explicitly listed in <paramref name="arrayVariables"/> or <paramref name="mapVariables"/>.
         /// If no assignment of values to variables is possible using this choice, one or more
-        /// variables may be treated as lists and/or maps in order to produce a successful
+        /// variables may be treated as associative arrays and/or maps in order to produce a successful
         /// assignment. The exception to this rule is compound template variables (which use the
-        /// explode modifier); these variables prefer to match as lists instead of simple strings,
-        /// even if the result produces a list containing exactly one string.
+        /// explode modifier); these variables prefer to match as arrays instead of simple strings,
+        /// even if the result produces an array containing exactly one string.
         /// </para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
-        /// <param name="listVariables">A collection of variables to treat as lists when matching a candidate URI to the template. Lists are returned as instances of <see cref="IList{String}"/>.</param>
-        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{String, String}"/>.</param>
+        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// <para>-or-</para>
-        /// <para>If <paramref name="listVariables"/> is <see langword="null"/>.</para>
+        /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="listVariables"/> contains a <see langword="null"/> or empty value.
+        /// If <paramref name="arrayVariables"/> contains a <see langword="null"/> or empty value.
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
-        public UriTemplateMatch Match(Uri candidate, ICollection<string> listVariables, ICollection<string> mapVariables)
+        public UriTemplateMatch Match(Uri candidate, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (candidate == null)
                 throw new ArgumentNullException("candidate");
-            if (listVariables == null)
-                throw new ArgumentNullException("listVariables");
+            if (arrayVariables == null)
+                throw new ArgumentNullException("arrayVariables");
             if (mapVariables == null)
                 throw new ArgumentNullException("mapVariables");
 
@@ -426,7 +426,7 @@ namespace Rackspace.Net
             for (int i = 0; i < _parts.Length; i++)
             {
                 string group = "part" + i;
-                _parts[i].BuildPattern(pattern, group, listVariables, mapVariables);
+                _parts[i].BuildPattern(pattern, group, arrayVariables, mapVariables);
             }
 
             pattern.Append('$');
@@ -443,7 +443,7 @@ namespace Rackspace.Net
                 if (!group.Success)
                     return null;
 
-                KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, listVariables, mapVariables);
+                KeyValuePair<VariableReference, object>[] binding = _parts[i].Match(group.Value, arrayVariables, mapVariables);
                 if (binding == null)
                     return null;
 
