@@ -112,6 +112,10 @@
     <None Include="Content\License.aml" />
     <None Include="Content\MSHelpViewerRoot.aml" />
     <None Include="Content\PreliminaryFeatures.aml" />
+    <None Include="Content\UserGuide\Installation.aml" />
+    <None Include="Content\UserGuide\TemplateExpansion.aml" />
+    <None Include="Content\UserGuide\TemplateMatching.aml" />
+    <None Include="Content\UserGuide\UserGuide.aml" />
     <None Include="Content\Welcome.aml" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content" />
+    <Folder Include="Content\UserGuide" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40-client.csproj">
