@@ -44,7 +44,7 @@ namespace Rackspace.Net
         /// <exception cref="FormatException">
         /// If <paramref name="bindings"/> contains two variable bindings for the same variable which do not have the same value, after considering the prefix modifier(s).
         /// </exception>
-        public UriTemplateMatch(UriTemplate template, IEnumerable<KeyValuePair<VariableReference, object>> bindings)
+        internal UriTemplateMatch(UriTemplate template, IEnumerable<KeyValuePair<VariableReference, object>> bindings)
         {
             if (template == null)
                 throw new ArgumentNullException("template");
