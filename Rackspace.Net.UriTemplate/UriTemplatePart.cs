@@ -30,8 +30,7 @@ namespace Rackspace.Net
         /// <param name="builder">The <see cref="StringBuilder"/> to render this part to.</param>
         /// <param name="parameters">A collection of parameters for replacing variable references in the template.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="builder"/> is <see langword="null"/>.</exception>
-        public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
-            where T : class;
+        public abstract void Render<T>(StringBuilder builder, IDictionary<string, T> parameters);
 
         /// <summary>
         /// Build a regular expression pattern which matches this template part in a URI.

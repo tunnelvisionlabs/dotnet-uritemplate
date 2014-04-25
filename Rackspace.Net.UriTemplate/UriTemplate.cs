@@ -266,14 +266,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         public Uri BindByName(IDictionary<string, string> parameters)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-
-            StringBuilder builder = new StringBuilder();
-            foreach (UriTemplatePart part in _parts)
-                part.Render(builder, parameters);
-
-            return new Uri(builder.ToString(), UriKind.RelativeOrAbsolute);
+            return BindByName<string>(parameters);
         }
 
         /// <summary>
@@ -284,6 +277,19 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(IDictionary<string, object> parameters)
+        {
+            return BindByName<object>(parameters);
+        }
+
+        /// <summary>
+        /// Creates a new URI from the template and the collection of parameters.
+        /// </summary>
+        /// <typeparam name="T">The type of parameter value provided in <paramref name="parameters"/>.</typeparam>
+        /// <param name="parameters">The parameter values.</param>
+        /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="parameters"/> is <see langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
+        public Uri BindByName<T>(IDictionary<string, T> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
@@ -311,14 +317,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, string> parameters)
         {
-            if (baseAddress == null)
-                throw new ArgumentNullException("baseAddress");
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-            if (!baseAddress.IsAbsoluteUri)
-                throw new ArgumentException("baseAddress must be an absolute URI", "baseAddress");
-
-            return new Uri(baseAddress, BindByName(parameters));
+            return BindByName<string>(baseAddress, parameters);
         }
 
         /// <summary>
@@ -337,6 +336,27 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
         /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, object> parameters)
+        {
+            return BindByName<object>(baseAddress, parameters);
+        }
+
+        /// <summary>
+        /// Creates a new URI from the template and the collection of parameters. The URI formed
+        /// by the expanded template is resolved against <paramref name="baseAddress"/> to produce
+        /// an absolute URI.
+        /// </summary>
+        /// <typeparam name="T">The type of parameter value provided in <paramref name="parameters"/>.</typeparam>
+        /// <param name="baseAddress">The base address of the URI.</param>
+        /// <param name="parameters">The parameter values.</param>
+        /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
+        /// </exception>
+        /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
+        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
+        public Uri BindByName<T>(Uri baseAddress, IDictionary<string, T> parameters)
         {
             if (baseAddress == null)
                 throw new ArgumentNullException("baseAddress");
