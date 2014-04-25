@@ -23,8 +23,8 @@
       <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40+sl4+wp7+win8.csproj" subFolders="True" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
-    <HelpFileFormat>HtmlHelp1, MSHelpViewer, Website</HelpFileFormat>
-    <IndentHtml>True</IndentHtml>
+    <HelpFileFormat>Website</HelpFileFormat>
+    <IndentHtml>False</IndentHtml>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CppCommentsFixup>False</CppCommentsFixup>
@@ -32,7 +32,7 @@
     <SyntaxFilters>CSharp, VisualBasic, CPlusPlus, FSharp</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>True</RootNamespaceContainer>
-    <PresentationStyle>VS2010</PresentationStyle>
+    <PresentationStyle>VS2013Alt</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>URI Template API Reference</HelpTitle>
@@ -76,7 +76,20 @@
     <ApiFilter />
     <HelpAttributes />
     <NamespaceSummaries />
-    <PlugInConfigurations />
+    <PlugInConfigurations>
+      <PlugInConfig id="Lightweight TOC" enabled="True">
+        <configuration />
+      </PlugInConfig>
+      <PlugInConfig id="Version Builder" enabled="True">
+        <configuration>
+          <currentProject label="Portable Class Library" version="Portable Class Library (Legacy)" ripOldApis="False" />
+          <versions>
+            <version label=".NET Framework Client Profile" version="4.0" helpFileProject="Docs.UriTemplate.net40-client.shfbproj" />
+            <version label=".NET Framework Client Profile" version="3.5" helpFileProject="Docs.UriTemplate.net35-client.shfbproj" />
+          </versions>
+        </configuration>
+      </PlugInConfig>
+    </PlugInConfigurations>
     <BuildLogFile />
     <HtmlHelp1xCompilerPath />
     <HtmlHelp2xCompilerPath />

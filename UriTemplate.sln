@@ -19,6 +19,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.portable-net40+sl4+wp7+win8", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40+sl4+wp7+win8.csproj", "{9ED13C7D-7082-4306-9E2D-E1919C436848}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.portable-net40+sl4+wp7+win8", "Docs.UriTemplate\Docs.UriTemplate.portable-net40+sl4+wp7+win8.shfbproj", "{BBE164AD-5FE2-4E95-BA24-82784844F349}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5} = {D5F52104-C34D-4877-9BF8-3EC57ABD99B5}
+		{81C7E452-56D0-46B6-8F65-247B7F18C2BD} = {81C7E452-56D0-46B6-8F65-247B7F18C2BD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
