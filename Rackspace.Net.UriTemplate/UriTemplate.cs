@@ -117,14 +117,11 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="template">The URI template.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="template"/> is empty.</exception>
         /// <exception cref="FormatException">If <paramref name="template"/> is not a valid <c>URI-Template</c> according to RFC 6570.</exception>
         public UriTemplate(string template)
         {
             if (template == null)
                 throw new ArgumentNullException("template");
-            if (string.IsNullOrEmpty(template))
-                throw new ArgumentException("template cannot be empty");
 
             _template = template;
             _parts = ParseTemplate(template);
