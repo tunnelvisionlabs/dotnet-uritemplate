@@ -24,6 +24,21 @@
         [TestMethod]
         [TestCategory(TestCategories.Level1)]
         [TestCategory(TestCategories.SimpleExpansion)]
+        public void TestEmptyTemplate()
+        {
+            string template = string.Empty;
+            UriTemplate uriTemplate = new UriTemplate(template);
+            Uri uri = uriTemplate.BindByName(variables);
+            Assert.AreEqual(string.Empty, uri.ToString());
+
+            UriTemplateMatch match = uriTemplate.Match(uri);
+            Assert.IsNotNull(match);
+            Assert.AreEqual(0, match.Bindings.Count);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Level1)]
+        [TestCategory(TestCategories.SimpleExpansion)]
         public void TestSimpleExpansion()
         {
             string template = "{var}";
