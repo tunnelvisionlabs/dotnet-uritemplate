@@ -4,23 +4,25 @@
   <HelpTOCNode Title="Welcome" Url="html/6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" />
   <HelpTOCNode Title="License Agreement" Url="html/80f90212-4ffe-4164-aff3-0272ea42814a.htm" />
   <HelpTOCNode Title="Preliminary Features" Url="html/14557a8c-df73-468e-9b75-56e038b79f36.htm" />
-  <HelpTOCNode Id="30aa49c5-dd11-48d4-aeae-7f69c154e912" Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm">
+  <HelpTOCNode Id="18e95002-48a5-43d2-a0d6-352ad14f4162" Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm">
     <HelpTOCNode Title="Installation" Url="html/56dfe688-42d6-46f0-9cb7-a9d7176ef249.htm" />
     <HelpTOCNode Title="Template Expansion" Url="html/c41f4654-8fdb-4bf8-9b29-9d9a6f270496.htm" />
     <HelpTOCNode Title="Template Matching" Url="html/7e56a038-ad98-4922-9342-7f68a5b89283.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="8323d2cc-66fa-42ed-90b2-dff3ab5f95ae" Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm">
-    <HelpTOCNode Id="df5909ae-ba1c-4222-8428-5e43ed18c9d8" Title="Rackspace.Net" Url="html/N_Rackspace_Net.htm">
-      <HelpTOCNode Id="bc784edb-4cc8-41a6-a5aa-d614acfd29a8" Title="UriTemplate Class" Url="html/T_Rackspace_Net_UriTemplate.htm">
+  <HelpTOCNode Id="4cc8f9dc-91e3-4c6d-b1fc-99e81731b2e9" Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm">
+    <HelpTOCNode Id="abde4335-0754-4e0c-aae0-c91f5062107e" Title="Rackspace.Net" Url="html/N_Rackspace_Net.htm">
+      <HelpTOCNode Id="ecec60b9-36e4-4e8a-a1d0-6e638c77998e" Title="UriTemplate Class" Url="html/T_Rackspace_Net_UriTemplate.htm">
         <HelpTOCNode Title="UriTemplate Constructor " Url="html/M_Rackspace_Net_UriTemplate__ctor.htm" />
-        <HelpTOCNode Id="6373fa8e-09f6-4c98-8f28-4ff8e26d16ec" Title="UriTemplate Methods" Url="html/Methods_T_Rackspace_Net_UriTemplate.htm">
-          <HelpTOCNode Id="f6b4c88f-fcf9-4f99-af95-21b96f47e105" Title="BindByName Method " Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm">
+        <HelpTOCNode Id="c286c866-fc9a-4911-a157-d06b61cf92f9" Title="UriTemplate Methods" Url="html/Methods_T_Rackspace_Net_UriTemplate.htm">
+          <HelpTOCNode Id="6ee75934-5057-4006-b718-8f2b8c520354" Title="BindByName Method " Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm">
             <HelpTOCNode Title="BindByName Method (IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName.htm" />
             <HelpTOCNode Title="BindByName Method (IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_1.htm" />
+            <HelpTOCNode Title="BindByName(T) Method (IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1.htm" />
             <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_2.htm" />
             <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_3.htm" />
+            <HelpTOCNode Title="BindByName(T) Method (Uri, IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1_1.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="9351ffc3-59bb-4c49-a5ff-4fd2c79f4563" Title="Match Method " Url="html/Overload_Rackspace_Net_UriTemplate_Match.htm">
+          <HelpTOCNode Id="9729dbf2-ce63-4a5a-a0db-4931793d2620" Title="Match Method " Url="html/Overload_Rackspace_Net_UriTemplate_Match.htm">
             <HelpTOCNode Title="Match Method (Uri)" Url="html/M_Rackspace_Net_UriTemplate_Match.htm" />
             <HelpTOCNode Title="Match Method (Uri, ICollection(String))" Url="html/M_Rackspace_Net_UriTemplate_Match_1.htm" />
             <HelpTOCNode Title="Match Method (Uri, Uri)" Url="html/M_Rackspace_Net_UriTemplate_Match_4.htm" />
@@ -29,22 +31,22 @@
           </HelpTOCNode>
           <HelpTOCNode Title="ToString Method " Url="html/M_Rackspace_Net_UriTemplate_ToString.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="c8b8a1d3-294c-4b1c-a4e1-4433e8b5c30d" Title="UriTemplate Properties" Url="html/Properties_T_Rackspace_Net_UriTemplate.htm">
+        <HelpTOCNode Id="16c832d2-565e-42ec-a02e-c6fbd45e3195" Title="UriTemplate Properties" Url="html/Properties_T_Rackspace_Net_UriTemplate.htm">
           <HelpTOCNode Title="Template Property " Url="html/P_Rackspace_Net_UriTemplate_Template.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="db9317b6-eb5f-4a2b-a938-cbd29cd96e21" Title="UriTemplateMatch Class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm">
+      <HelpTOCNode Id="9c3751d8-7375-447b-8b9c-8bf45b1ae002" Title="UriTemplateMatch Class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm">
         <HelpTOCNode Title="UriTemplateMatch Methods" Url="html/Methods_T_Rackspace_Net_UriTemplateMatch.htm" />
-        <HelpTOCNode Id="258baedd-b3fc-4eb3-88b7-718620307b48" Title="UriTemplateMatch Properties" Url="html/Properties_T_Rackspace_Net_UriTemplateMatch.htm">
+        <HelpTOCNode Id="3943bb5d-cb4c-4726-a1d9-9fee09a36876" Title="UriTemplateMatch Properties" Url="html/Properties_T_Rackspace_Net_UriTemplateMatch.htm">
           <HelpTOCNode Title="Bindings Property " Url="html/P_Rackspace_Net_UriTemplateMatch_Bindings.htm" />
           <HelpTOCNode Title="Template Property " Url="html/P_Rackspace_Net_UriTemplateMatch_Template.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="a6312d50-1bb5-4136-9fee-8f5109c36c0f" Title="VariableReference Class" Url="html/T_Rackspace_Net_VariableReference.htm">
-        <HelpTOCNode Id="38ce9b42-abd9-4085-8f5a-9c18b42d4231" Title="VariableReference Methods" Url="html/Methods_T_Rackspace_Net_VariableReference.htm">
+      <HelpTOCNode Id="ca073fea-1198-4a76-a709-6fe6e530efcc" Title="VariableReference Class" Url="html/T_Rackspace_Net_VariableReference.htm">
+        <HelpTOCNode Id="aae60cc2-b347-4420-9f54-7b1280998087" Title="VariableReference Methods" Url="html/Methods_T_Rackspace_Net_VariableReference.htm">
           <HelpTOCNode Title="ToString Method " Url="html/M_Rackspace_Net_VariableReference_ToString.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="de152d99-9911-4f04-8de2-86f604cfcb8d" Title="VariableReference Properties" Url="html/Properties_T_Rackspace_Net_VariableReference.htm">
+        <HelpTOCNode Id="d393b4b2-c09e-4ffc-b20f-0c2ca8fea50f" Title="VariableReference Properties" Url="html/Properties_T_Rackspace_Net_VariableReference.htm">
           <HelpTOCNode Title="Composite Property " Url="html/P_Rackspace_Net_VariableReference_Composite.htm" />
           <HelpTOCNode Title="Name Property " Url="html/P_Rackspace_Net_VariableReference_Name.htm" />
           <HelpTOCNode Title="Prefix Property " Url="html/P_Rackspace_Net_VariableReference_Prefix.htm" />

@@ -2,6 +2,8 @@
 <HelpTOCNode Title="BindByName Method " Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm">
   <HelpTOCNode Title="BindByName Method (IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName.htm" />
   <HelpTOCNode Title="BindByName Method (IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_1.htm" />
+  <HelpTOCNode Title="BindByName(T) Method (IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1.htm" />
   <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_2.htm" />
   <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_3.htm" />
+  <HelpTOCNode Title="BindByName(T) Method (Uri, IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1_1.htm" />
 </HelpTOCNode>
