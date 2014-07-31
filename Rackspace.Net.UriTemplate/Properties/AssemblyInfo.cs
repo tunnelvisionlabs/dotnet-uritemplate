@@ -3,9 +3,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
+// This project currently uses the same assembly name for all target framework
+// versions. The only differences between the releases are the referenced versions
+// of mscorlib and a few non-public (and thus non-breaking) implementation details.
+// In other words, while the builds are not identical, they are interchangeable at
+// runtime.
 [assembly: AssemblyTitle("Rackspace.Net.UriTemplate")]
 [assembly: AssemblyDescription("An implementation of RFC 6570 URI templates for .NET")]
 [assembly: AssemblyConfiguration("")]
