@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="8e5cf0b3-d565-44f8-a763-6586cf5e56db" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+
+    <introduction>
+      <para>
+        The .NET Framework includes its own implementation of URI templates through its own
+        <codeEntityReference>T:System.UriTemplate</codeEntityReference> class. The reference
+        implementation of this class does not use the same syntax as RFC 6570, and also does
+        not provide many of the advanced features described in the RFC. The URI Template
+        Library is intended to reduce the effort required to migrate existing code that uses
+        the .NET Framework, but syntax and functionality differences may require code changes.
+        This page includes a partial list of migration issues developers may face when
+        switching to this library.
+      </para>
+    </introduction>
+
+    <section address="SyntaxChanges">
+      <title>Template Syntax</title>
+      <content>
+        <para>
+          For the <legacyItalic>path</legacyItalic> components of a URI, the syntax used by
+          the .NET Framework is directly compatible with the RFC 6570 syntax. Templates which
+          do not include a query string should not require changes during migration of the
+          libraries.
+        </para>
+        <para>
+          The .NET Framework uses a different syntax for query parameters. The basic syntax
+          of its templates resembles the following:
+        </para>
+        <code>
+          <![CDATA[
+          path/to/foo?param1={param1}&param2={param2}
+          ]]>
+        </code>
+        <para>
+          In RFC 6570, the equivalent syntax is the following. Templates which include
+          template query parameters will require conversion to the new syntax when migrating
+          existing code to use this library.
+        </para>
+        <code>
+          <![CDATA[
+          path/to/foo{?param1,param2}
+          ]]>
+        </code>
+        <para>
+          Finally, the .NET Framework supports the use of an asterisk
+          (<codeInline>*</codeInline>) to indicate "the rest of the path". RFC 6570 provides
+          a special syntax called a <legacyItalic>reserved expansion</legacyItalic> which
+          provides a similar feature. The following specific example appears in the
+          documentation for the .NET Framework
+          <codeEntityReference>T:System.UriTemplate</codeEntityReference> class.
+        </para>
+        <code>
+          <![CDATA[
+          weather/*
+          ]]>
+        </code>
+        <para>
+          In this library, the equivalent to this template would be the following, where
+          <codeInline>var</codeInline> can be any variable name.
+        </para>
+        <code>
+          <![CDATA[
+          weather/{+var}
+          ]]>
+        </code>
+      </content>
+    </section>
+
+    <section address="TemplateBinding">
+      <title>Template Binding</title>
+      <content>
+        <para>
+          This library contains additional differences regarding the way parameters are
+          inserted into templates to produce a bound URI.
+        </para>
+      </content>
+
+      <sections>
+        <section address="BindByPosition">
+          <title>Bind By Position</title>
+          <content>
+            <para>
+              This library does not contain an equivalent to the
+              <codeEntityReference>M:System.UriTemplate.BindByPosition(System.Uri,System.String[])</codeEntityReference>
+              method. Any calls which use this method must be converted to use
+              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              when migrating existing code to this library.
+            </para>
+          </content>
+        </section>
+
+        <section address="RelativeResolution">
+          <title>Relative Resolution</title>
+          <content>
+            <para>
+              For the various
+              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              methods which take a base address as a parameter, this library uses the
+              <codeEntityReference>M:System.Uri.#ctor(System.Uri,System.Uri)</codeEntityReference>
+              constructor to implement the resolution of relative addresses against a base
+              address. While the .NET Framework's URI Template implementation behaves in a
+              manner "similar" to
+              <codeEntityReference>Overload:System.IO.Path.Combine</codeEntityReference>, the
+              behavior of this library is consistent with <externalLink>
+                <linkText>RFC 3986 §5.2</linkText>
+                <linkAlternateText>RFC 3986 §5.2 (Relative Resolution - URI Generic Syntax)</linkAlternateText>
+                <linkUri>http://tools.ietf.org/html/rfc3986#section-5.2</linkUri>
+              </externalLink>. As a result, this library differs from the .NET Framework's
+              implementation in two key instances.
+            </para>
+            <alert class="note">
+              <para>
+                In the following description, the
+                <codeEntityReference>P:System.Uri.IsAbsoluteUri</codeEntityReference> property
+                of the base address is assumed to be true, and the
+                <codeEntityReference>P:System.Uri.Query</codeEntityReference> property of the
+                base address is assumed to be empty.
+              </para>
+            </alert>
+            <list class="bullet">
+              <listItem>
+                <para>
+                  When the URI Template starts with a leading <codeInline>/</codeInline>
+                  character. In this case, the
+                  <codeEntityReference>P:System.Uri.AbsolutePath</codeEntityReference> property
+                  of the base address is removed from the base address during the resolution
+                  process.
+                </para>
+              </listItem>
+              <listItem>
+                <para>
+                  When the <codeEntityReference>P:System.Uri.AbsolutePath</codeEntityReference>
+                  property of the base address is not empty, and does not end with a
+                  <codeInline>/</codeInline> character. In this case, the last path segment is
+                  removed from the base address during the resolution process. In other words,
+                  everything after the last <codeInline>/</codeInline> character is ignored.
+                </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+      </sections>
+    </section>
+
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
