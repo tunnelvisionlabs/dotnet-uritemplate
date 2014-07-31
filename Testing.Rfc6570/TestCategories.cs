@@ -68,7 +68,7 @@
         public const string QueryExpansion = "Expansions: Query";
 
         /// <summary>
-        /// The test contains a form-style query continuation expansion: <c>{&var}</c>.
+        /// The test contains a form-style query continuation expansion: <c>{&amp;var}</c>.
         /// </summary>
         public const string QueryContinuationExpansion = "Expansions: Query Continuation";
     }
