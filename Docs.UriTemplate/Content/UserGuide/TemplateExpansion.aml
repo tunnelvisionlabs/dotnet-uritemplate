@@ -8,14 +8,236 @@
       <para>
         Template expansion is the process of expanding a URI Template according
         to specific values for its variables. This is the core operation defined
-        by RFC 6570 and the primary feature provided by this library.
+        by RFC 6570 and the primary feature provided by this library. The binding
+        operation itself is implemented by the
+        <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+        methods; this page describes a high-level overview of the behavior of
+        these methods with respect to RFC 6570.
       </para>
     </introduction>
 
-    <section address="Section1">
-      <title>Optional section title</title>
+    <section address="Templates">
+      <title>Creating Templates</title>
       <content>
-        <para>Add one or more sections with content</para>
+        <para>
+          URI Template instances are created by calling
+          <codeEntityReference>M:Rackspace.Net.UriTemplate.#ctor(System.String)</codeEntityReference>
+          with the template in the form described RFC 6570 (Level 4). URI Templates
+          are parsed at the time they are constructed to ensure they meet the
+          syntax requirements described in RFC 6570 and identify expression
+          expansions for efficient binding. The following examples show the
+          templates described in the Remarks section of the .NET Framework
+          <codeEntityReference>T:System.UriTemplate</codeEntityReference>
+          documentation, converted to RFC 6570 syntax.
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              "weather/WA/Seattle"
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              "weather/{state}/{city}"
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              "weather/{+rest}"
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              "weather/{state}/{city}?forecast=today"
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              "weather/{state}/{city}{?forecast}"
+            </para>
+          </listItem>
+        </list>
+        <para>
+          The following example demonstrates the basic construction and binding of
+          a template instance.
+        </para>
+        <code language="csharp">
+          <![CDATA[
+          UriTemplate template = new UriTemplate("weather/{state}/{city}{?forecast}");
+
+          Dictionary<string, string> parameters = new Dictionary<string, string>
+          {
+              { "state", "WA" },
+              { "city", "Seattle" },
+              { "forecast", "today" }
+          };
+
+          Uri boundAddress = template.BindByName(parameters);
+          Console.WriteLine(boundAddress);
+          // Output:
+          // weather/WA/Seattle?forecast=today
+          ]]>
+        </code>
+        <para>
+          By specifying a base address in addition to the parameters, an absolute
+          URI is produced by the expansion operation.
+        </para>
+        <code language="csharp">
+          <![CDATA[
+          UriTemplate template = new UriTemplate("weather/{state}/{city}{?forecast}");
+
+          Dictionary<string, string> parameters = new Dictionary<string, string>
+          {
+              { "state", "WA" },
+              { "city", "Seattle" },
+              { "forecast", "today" }
+          };
+
+          Uri baseAddress = new Uri("http://www.example.com");
+          Uri boundAddress = template.BindByName(baseAddress, parameters);
+          Console.WriteLine(boundAddress);
+          // Output:
+          // http://www.example.com/weather/WA/Seattle?forecast=today
+          ]]>
+        </code>
+      </content>
+      <sections>
+        <section>
+          <title>Best Practices</title>
+          <content>
+            <para>
+              Due to the heavy use of regular expressions within this library,
+              several "best practices" should be followed to maximize the overall
+              performance.
+            </para>
+          </content>
+          <sections>
+            <section>
+              <title>Use shared template instances</title>
+              <content>
+                <para>
+                  Instances of the
+                  <codeEntityReference>T:Rackspace.Net.UriTemplate</codeEntityReference>
+                  class are safe for use in multi-threaded applications. If a
+                  single template string will be used multiple times for expansion
+                  or matching, a <codeInline>static</codeInline> variable should be
+                  initialized with the template and reused each time it is needed.
+                </para>
+              </content>
+            </section>
+            <section>
+              <title>Use the "portable" library only when necessary</title>
+              <content>
+                <para>
+                  The Portable Class Library for the .NET Framework does not support
+                  the creation of compiled regular expressions. In particular, the
+                  <codeEntityReference>F:System.Text.RegularExpressions.RegexOptions.Compiled</codeEntityReference>
+                  flag is not available. To maximize performance, use the
+                  <codeInline>net40-client</codeInline> build instead.
+                </para>
+                <alert class="note">
+                  <para>
+                    When installing this library using the NuGet Package Manager within
+                    Visual Studio, this best practice rule is followed by default.
+                  </para>
+                </alert>
+              </content>
+            </section>
+          </sections>
+        </section>
+      </sections>
+    </section>
+
+    <section address="Parameters">
+      <title>Template Parameters</title>
+      <content>
+        <para>
+          Template parameters fall into three categories; using the terminology
+          of RFC 6570, these are strings, lists, and associative arrays. The
+          following table shows the relation between these values and their
+          corresponding .NET types.
+        </para>
+        <table>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>RFC 6570</para>
+              </entry>
+              <entry>
+                <para>.NET Framework</para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>String</para>
+            </entry>
+            <entry>
+              <para>
+                Any object which is not considered a list or associative array.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>List</para>
+            </entry>
+            <entry>
+              <para>
+                Any
+                <codeEntityReference>T:System.Collections.IEnumerable</codeEntityReference>
+                which is not considered an associative array, with the exception of
+                <codeEntityReference>T:System.String</codeEntityReference>.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Associative array</para>
+            </entry>
+            <entry>
+              <para>
+                Any
+                <codeEntityReference>T:System.Collections.Generic.IDictionary`2</codeEntityReference>
+                or
+                <codeEntityReference>T:System.Collections.IDictionary</codeEntityReference>.
+              </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+          The rules for binding variables within a template are fully described in
+          RFC 6570. For this library, the following behavior is provided which is
+          only relevant to a .NET implementation.
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              "Undefined" string values, described in RFC 6570 §2.3, are specified
+              as a <codeInline>null</codeInline> reference.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              If a value is provided which is treated as a "String" value according
+              to the table above, but is not of type
+              <codeEntityReference>T:System.String</codeEntityReference>, the value
+              is first converted to a string using the
+              <codeEntityReference>M:System.Object.ToString</codeEntityReference> method.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              If the template expansion process is performed using one of the
+              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              methods which includes a <codeInline>baseAddress</codeInline> argument,
+              the result of the template expansion is evaluated as a relative URI
+              against the base address using the
+              <codeEntityReference>M:System.Uri.#ctor(System.Uri,System.Uri)</codeEntityReference>
+              constructor.
+            </para>
+          </listItem>
+        </list>
       </content>
     </section>
 
