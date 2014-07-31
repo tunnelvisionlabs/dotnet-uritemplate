@@ -20,5 +20,6 @@
     <Topic id="56dfe688-42d6-46f0-9cb7-a9d7176ef249" visible="True" title="Installation" />
     <Topic id="c41f4654-8fdb-4bf8-9b29-9d9a6f270496" visible="True" title="Template Expansion" />
     <Topic id="7e56a038-ad98-4922-9342-7f68a5b89283" visible="True" title="Template Matching" />
+    <Topic id="8e5cf0b3-d565-44f8-a763-6586cf5e56db" visible="True" title="Migration Guide" />
   </Topic>
 </Topics>
