@@ -6,7 +6,11 @@
 
     <introduction>
       <para>
-        This library provides support for URI Templates (Level 4) as defined by RFC 6570.
+        This library provides support for URI Templates (Level 4) as defined by <externalLink>
+          <linkText>RFC 6570</linkText>
+          <linkAlternateText>RFC 6570 (URI Template)</linkAlternateText>
+          <linkUri>http://tools.ietf.org/html/rfc6570</linkUri>
+        </externalLink>.
       </para>
     </introduction>
 
