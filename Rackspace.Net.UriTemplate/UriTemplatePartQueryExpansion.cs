@@ -204,8 +204,10 @@ namespace Rackspace.Net
 
         private static void AppendOneOrMoreUnorderedToEnd(StringBuilder pattern, List<string> patterns, int startIndex)
         {
+            if (startIndex < 0)
+                throw new ArgumentOutOfRangeException("startIndex cannot be negative", "startIndex");
             if (startIndex >= patterns.Count)
-                throw new ArgumentException();
+                throw new ArgumentException("startIndex cannot be greater than the number of patterns.", "startIndex");
 
             StringBuilder anySinglePattern = new StringBuilder();
             anySinglePattern.Append("(?:");

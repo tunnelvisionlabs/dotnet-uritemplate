@@ -171,8 +171,10 @@ namespace Rackspace.Net
 
         private static void AppendOneOrMoreToEnd(StringBuilder pattern, BitArray requiredPatterns, List<string> patterns, int startIndex)
         {
+            if (startIndex < 0)
+                throw new ArgumentOutOfRangeException("startIndex cannot be negative", "startIndex");
             if (startIndex >= patterns.Count)
-                throw new ArgumentException();
+                throw new ArgumentException("startIndex cannot be greater than the number of patterns.", "startIndex");
 
             pattern.Append("(?:");
 

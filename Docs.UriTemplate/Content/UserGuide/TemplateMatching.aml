@@ -12,10 +12,15 @@
       </para>
     </introduction>
 
-    <section address="Section1">
-      <title>Optional section title</title>
+    <section address="Basics">
+      <title>Template Matching Basics</title>
       <content>
-        <para>Add one or more sections with content</para>
+        <para>
+          Template matching is performed by the
+          <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+          methods. At this time, the most up-to-date information about the matching operation
+          is provided on that page.
+        </para>
       </content>
     </section>
 

@@ -11,7 +11,7 @@ namespace Rackspace.Net
     /// <summary>
     /// A class that represents an RFC 6570 URI Template.
     /// </summary>
-    /// <threadsafety static="true" instance="false"/>
+    /// <threadsafety static="true" instance="true"/>
     /// <preliminary/>
     public class UriTemplate
     {
@@ -117,6 +117,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="template">The URI template.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="template"/> is <see langword="null"/>.</exception>
+        /// <exception cref="NotSupportedException">If <paramref name="template"/> contains a variable expansion which uses an operator which is reserved for future extensions, but not defined for Level 4 URI Templates.</exception>
         /// <exception cref="FormatException">If <paramref name="template"/> is not a valid <c>URI-Template</c> according to RFC 6570.</exception>
         public UriTemplate(string template)
         {
@@ -189,7 +190,7 @@ namespace Rackspace.Net
                         throw new NotSupportedException(string.Format("Operator is reserved for future expansion: {0}", op.Value));
 
                     default:
-                        throw new NotSupportedException(string.Format("Unrecognized operator: {0}", op.Value));
+                        throw new InvalidOperationException("Unreachable");
                     }
                 }
 
@@ -242,7 +243,7 @@ namespace Rackspace.Net
 
                 case UriTemplatePartType.Literal:
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException("Unreachable");
                 }
 
                 parts.Add(part);
@@ -368,11 +369,16 @@ namespace Rackspace.Net
         /// <summary>
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
+        /// <remarks>
+        /// For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// </exception>
+        /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
         public UriTemplateMatch Match(Uri candidate)
         {
             return Match(candidate, new string[0], new string[0], new string[0]);
@@ -381,9 +387,13 @@ namespace Rackspace.Net
         /// <summary>
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
+        /// <remarks>
+        /// For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
-        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
+        /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed. The default value is an empty collection.</returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
         /// <para>-or-</para>
@@ -392,6 +402,7 @@ namespace Rackspace.Net
         /// <exception cref="ArgumentException">
         /// If <paramref name="requiredVariables"/> contains a <see langword="null"/> or empty value.
         /// </exception>
+        /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> requiredVariables)
         {
             return Match(candidate, requiredVariables, new string[0], new string[0]);
@@ -400,9 +411,13 @@ namespace Rackspace.Net
         /// <summary>
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
+        /// <remarks>
+        /// For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
-        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>.</param>
-        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>.</param>
+        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>. The default value is an empty collection.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>. The default value is an empty collection.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
@@ -416,15 +431,17 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
+        /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             return Match(candidate, new string[0], arrayVariables, mapVariables);
         }
 
+        /// <overloads>
         /// <summary>
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>. A successful
         /// match operation results in an assignment of values to variables in the URI Template
-        /// which is capable of producing the <paramref name="candidate"/> URI through the
+        /// which is capable of producing a <c>candidate</c> URI through the
         /// <see cref="O:Rackspace.Net.UriTemplate.BindByName"/> operation.
         /// </summary>
         /// <remarks>
@@ -433,14 +450,14 @@ namespace Rackspace.Net
         /// <list type="bullet">
         ///   <item>
         ///     If more than one assignment of values to variables exists which is capable of
-        ///     producing the <paramref name="candidate"/> URI through the <see cref="O:Rackspace.Net.UriTemplate.BindByName"/>
+        ///     producing the <c>candidate</c> URI through the <see cref="O:Rackspace.Net.UriTemplate.BindByName"/>
         ///     operation, it is unspecified which assignment of values is chosen.
         ///   </item>
         ///   <item>
         ///     Simple string values will always be returned as a <see cref="String"/>.
-        ///     Associative array values will always be returned as a <see cref="IList{T}"/> whose
+        ///     Associative array values will always be returned as an <see cref="IList{T}"/> whose
         ///     values are of type <see cref="String"/>. Associative map values will always be
-        ///     returned as a <see cref="IDictionary{TKey, TValue}"/> whose keys and values are
+        ///     returned as an <see cref="IDictionary{TKey, TValue}"/> whose keys and values are
         ///     of type <see cref="String"/>. No other deserialization or coercion of values is
         ///     performed by this library.
         ///   </item>
@@ -448,18 +465,31 @@ namespace Rackspace.Net
         ///
         /// <para>
         /// The matching algorithm prefers to use simple string values for all variables not
-        /// explicitly listed in <paramref name="arrayVariables"/> or <paramref name="mapVariables"/>.
-        /// If no assignment of values to variables is possible using this choice, one or more
-        /// variables may be treated as associative arrays and/or maps in order to produce a successful
-        /// assignment. The exception to this rule is compound template variables (which use the
-        /// explode modifier); these variables prefer to match as arrays instead of simple strings,
-        /// even if the result produces an array containing exactly one string.
+        /// explicitly listed in <c>arrayVariables</c> and/or <c>mapVariables</c>. Any variable
+        /// listed in either of these parameters will not be considered for matching as a simple
+        /// string. If no assignment of values to variables is possible using this choice, one or
+        /// more variables may be treated as associative arrays and/or maps in order to produce a
+        /// successful assignment. The exception to this rule is compound template variables
+        /// (which use the explode modifier); these variables prefer to match as arrays instead
+        /// of simple strings, even if the result produces an array containing exactly one
+        /// string. If a variable appears in both <c>arrayVariables</c> and <c>mapVariables</c>
+        /// and the result successfully matches using both options, it is unspecified which one
+        /// will be returned.
         /// </para>
         /// </remarks>
+        /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
+        /// </overloads>
+        /// <summary>
+        /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
+        /// </summary>
+        /// <remarks>
+        /// For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
-        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
-        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>.</param>
-        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>.</param>
+        /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid. The default value is an empty collection.</param>
+        /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>. The default value is an empty collection.</param>
+        /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>. The default value is an empty collection.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="candidate"/> is <see langword="null"/>.
@@ -477,6 +507,7 @@ namespace Rackspace.Net
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
+        /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (candidate == null)
