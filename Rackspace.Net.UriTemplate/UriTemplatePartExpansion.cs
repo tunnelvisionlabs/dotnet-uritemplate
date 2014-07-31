@@ -42,7 +42,7 @@ namespace Rackspace.Net
         /// <param name="variables">A collection of <see cref="VariableReference"/> instances which describe the expansion variables referenced by this URI Template part.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="variables"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">If <paramref name="variables"/> contains any <see langword="null"/> values.</exception>
-        public UriTemplatePartExpansion(IEnumerable<VariableReference> variables)
+        protected UriTemplatePartExpansion(IEnumerable<VariableReference> variables)
         {
             if (variables == null)
                 throw new ArgumentNullException("variables");
