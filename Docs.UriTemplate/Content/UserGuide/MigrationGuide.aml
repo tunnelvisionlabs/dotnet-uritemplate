@@ -21,59 +21,190 @@
         This page includes a partial list of migration issues developers may face when
         switching to this library.
       </para>
+      <autoOutline/>
     </introduction>
 
     <section address="SyntaxChanges">
       <title>Template Syntax</title>
       <content>
         <para>
-          For the <legacyItalic>path</legacyItalic> components of a URI, the syntax used by
-          the .NET Framework is directly compatible with the RFC 6570 syntax. Templates which
-          do not include a query string should not require changes during migration of the
-          libraries.
+          Several aspects of URI Templates are affected by syntax differences between the
+          .NET Framework implementation and RFC 6570. The needed changes are grouped into
+          path segments syntax and query parameters. In addition to the syntax changes,
+          there are differences in the behavior of the template matching operation. This
+          will require additional consideration for code making use of the
+          <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+          operation.
         </para>
-        <para>
-          The .NET Framework uses a different syntax for query parameters. The basic syntax
-          of its templates resembles the following:
-        </para>
-        <code>
-          <![CDATA[
-          path/to/foo?param1={param1}&param2={param2}
-          ]]>
-        </code>
-        <para>
-          In RFC 6570, the equivalent syntax is the following. Templates which include
-          template query parameters will require conversion to the new syntax when migrating
-          existing code to use this library.
-        </para>
-        <code>
-          <![CDATA[
-          path/to/foo{?param1,param2}
-          ]]>
-        </code>
-        <para>
-          Finally, the .NET Framework supports the use of an asterisk
-          (<codeInline>*</codeInline>) to indicate "the rest of the path". RFC 6570 provides
-          a special syntax called a <legacyItalic>reserved expansion</legacyItalic> which
-          provides a similar feature. The following specific example appears in the
-          documentation for the .NET Framework
-          <codeEntityReference>T:System.UriTemplate</codeEntityReference> class.
-        </para>
-        <code>
-          <![CDATA[
-          weather/*
-          ]]>
-        </code>
-        <para>
-          In this library, the equivalent to this template would be the following, where
-          <codeInline>var</codeInline> can be any variable name.
-        </para>
-        <code>
-          <![CDATA[
-          weather/{+var}
-          ]]>
-        </code>
       </content>
+      <sections>
+        <section>
+          <title>Path Variables</title>
+          <content>
+            <para>
+              In most cases, expansion variables which appear in the path portion of a .NET
+              Framework URI template are directly compatible with RFC 6570. The exception
+              to this rule is templates which use an asterisk (<codeInline>*</codeInline>)
+              to indicate the "rest of the path". RFC 6570 provides a special syntax called
+              a <legacyItalic>reserved expansion</legacyItalic> which provides a similar
+              feature. The following specific example appears in the documentation for the
+              .NET Framework <codeEntityReference>T:System.UriTemplate</codeEntityReference>
+              class.
+            </para>
+            <!-- A bug somewhere prevents /* from appearing in the output without the zero-width space -->
+            <code language="none">
+              <![CDATA[
+              weather/*
+              ]]>
+            </code>
+            <para>
+              In this library, the equivalent to this template would be the following, where
+              <codeInline>var</codeInline> can be any variable name.
+            </para>
+            <code language="none">
+              <![CDATA[
+              weather/{+var}
+              ]]>
+            </code>
+            <para>
+              If code requires access to individual path segments, such as existing code
+              making use of the
+              <codeEntityReference>P:System.UriTemplateMatch.WildcardPathSegments</codeEntityReference>
+              property, an alternative syntax called a <legacyItalic>path segment expansion</legacyItalic>
+              may be used in combination with a <legacyItalic>composite value modifier </legacyItalic>
+              instead of the reserved expansion. The following example shows the use of the
+              path segment expansion to match the rest of the path.
+            </para>
+            <code language="none">
+              <![CDATA[
+              weather{/segments*}
+              ]]>
+            </code>
+            <alert class="important">
+              <para>
+                While the reserved expansion is capable of matching both the path component
+                of the URI and the query string, a path segment expansion will only match
+                the path component. To include the ability to match query parameters when
+                using the path segment expansion, see the
+                <link xlink:href="#AdditionalParameters">Additional Query Parameters</link>
+                section below.
+              </para>
+            </alert>
+          </content>
+        </section>
+        <section>
+          <title>Query Parameters</title>
+          <content>
+            <para>
+              In the .NET Framework, the syntax for declaring query parameters for the template
+              expansion operation differs from RFC 6570. In addition, during the matching
+              operation the .NET Framework has implicit support for arbitrary query parameters
+              which are not declared in the template itself. Each of these issues needs to be
+              addressed when migrating to this library.
+            </para>
+          </content>
+          <sections>
+            <section address="AdditionalParameters">
+              <title>Additional Query Parameters</title>
+              <content>
+                <para>
+                  Support for additional query parameters during template matching is
+                  accomplished by adding including a query expansion with a composite value
+                  modifier. For templates which do not already contain a query expansion,
+                  this is as simple as adding <codeInline>{?params*}</codeInline> to the
+                  end of the template. For templates which do include a query expansion,
+                  the new variable must be added at the end of the list. A template ending
+                  with <codeInline>{?foo,bar}</codeInline> would thus become
+                  <codeInline>{?foo,bar,params*}</codeInline>.
+                </para>
+              </content>
+            </section>
+          </sections>
+        </section>
+        <section>
+          <title>Summary</title>
+          <content>
+            <para>
+              The following table summarizes the changes required to make .NET URI Templates
+              compatible with RFC 6570, using the examples provided in the documentation for
+              the .NET Framework <codeEntityReference>T:System.UriTemplate</codeEntityReference>
+              class.
+            </para>
+            <table>
+              <tableHeader>
+                <row>
+                  <entry>
+                    <para>.NET Framework</para>
+                  </entry>
+                  <entry>
+                    <para>RFC 6570 (Binding)</para>
+                  </entry>
+                  <entry>
+                    <para>RFC 6570 (Matching)</para>
+                  </entry>
+                </row>
+              </tableHeader>
+              <row>
+                <entry>
+                  <para>"weather/WA/Seattle"</para>
+                </entry>
+                <entry>
+                  <para>"weather/WA/Seattle"</para>
+                </entry>
+                <entry>
+                  <para>"weather/WA/Seattle{?params*}"</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <para>"weather/{state}/{city}"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}{?params*}"</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <para>"weather/*"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{+rest}"</para>
+                </entry>
+                <entry>
+                  <para>"weather{/rest*}{?params*}", if "weather" matches</para>
+                  <para>-or-</para>
+                  <para>"weather/{rest0}{/rest1*}{?params*}", if "weather/" matches but "weather" does not</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <para>"weather/{state}/{city}?forecast=today"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}?forecast=today"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}{?forecast,params*}"</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <para>"weather/{state}/{city}?forecast={day}"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}{?forecast}"</para>
+                </entry>
+                <entry>
+                  <para>"weather/{state}/{city}{?forecast,params*}"</para>
+                </entry>
+              </row>
+            </table>
+          </content>
+        </section>
+      </sections>
     </section>
 
     <section address="TemplateBinding">
@@ -121,8 +252,6 @@
             <alert class="note">
               <para>
                 In the following description, the
-                <codeEntityReference>P:System.Uri.IsAbsoluteUri</codeEntityReference> property
-                of the base address is assumed to be true, and the
                 <codeEntityReference>P:System.Uri.Query</codeEntityReference> property of the
                 base address is assumed to be empty.
               </para>
