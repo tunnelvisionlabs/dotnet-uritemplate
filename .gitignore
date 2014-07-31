@@ -2,6 +2,9 @@
 *.suo
 *.user
 
+# Roslyn IntelliSense Cache
+*.sln.ide/
+
 # Build output
 */bin/
 */obj/
