@@ -9,5 +9,8 @@
 */bin/
 */obj/
 
+# Test Results
+TestResults/
+
 # NuGet build output
 Build/nuget/
