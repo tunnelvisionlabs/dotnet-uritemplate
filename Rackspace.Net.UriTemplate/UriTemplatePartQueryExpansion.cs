@@ -241,8 +241,7 @@ namespace Rackspace.Net
             AppendOneOrMoreUnorderedToEnd(matchPattern, variablePatterns, 0);
             matchPattern.Append("$");
 
-            Regex matchExpression = new Regex(matchPattern.ToString());
-            Match match = matchExpression.Match(text);
+            Match match = Regex.Match(text, matchPattern.ToString());
 
             List<KeyValuePair<VariableReference, object>> results = new List<KeyValuePair<VariableReference, object>>();
             for (int i = 0; i < Variables.Count; i++)
