@@ -26,6 +26,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.net40-clien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.portable-net40", "Testing.Rfc6570\Testing.Rfc6570.portable-net40.csproj", "{A7607867-5464-4ED6-8063-79DE8D83DEC0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2A61245F-738C-4F4A-9D62-FFAA026297CA}"
+	ProjectSection(SolutionItems) = preProject
+		Build\build.ps1 = Build\build.ps1
+		Build\push.ps1 = Build\push.ps1
+		Build\version.ps1 = Build\version.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7404E366-5516-416A-A8C3-A6AD26249F6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6AD50F32-E954-4414-BE81-686C01B33084}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,5 +95,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
+		{CC7F0F12-4736-43C3-A0C0-722875504053} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
+		{BBE164AD-5FE2-4E95-BA24-82784844F349} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
+		{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB} = {6AD50F32-E954-4414-BE81-686C01B33084}
+		{DED3C364-37C4-4A9F-95E8-24ED7098BD78} = {6AD50F32-E954-4414-BE81-686C01B33084}
+		{A7607867-5464-4ED6-8063-79DE8D83DEC0} = {6AD50F32-E954-4414-BE81-686C01B33084}
 	EndGlobalSection
 EndGlobal
