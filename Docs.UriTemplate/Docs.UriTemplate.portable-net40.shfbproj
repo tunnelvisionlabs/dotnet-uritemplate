@@ -32,7 +32,7 @@
     <SyntaxFilters>CSharp, VisualBasic, CPlusPlus, FSharp</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>True</RootNamespaceContainer>
-    <PresentationStyle>VS2013Alt</PresentationStyle>
+    <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>URI Template API Reference</HelpTitle>
@@ -77,9 +77,6 @@
     <HelpAttributes />
     <NamespaceSummaries />
     <PlugInConfigurations>
-      <PlugInConfig id="Lightweight TOC" enabled="True">
-        <configuration />
-      </PlugInConfig>
       <PlugInConfig id="Version Builder" enabled="True">
         <configuration>
           <currentProject label="Portable Class Library" version="Portable Class Library (Legacy)" ripOldApis="False" />
@@ -116,9 +113,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Content\BreakingChangesPolicy.aml" />
     <None Include="Content\License.aml" />
     <None Include="Content\MSHelpViewerRoot.aml" />
-    <None Include="Content\PreliminaryFeatures.aml" />
     <None Include="Content\UserGuide\Installation.aml" />
     <None Include="Content\UserGuide\MigrationGuide.aml" />
     <None Include="Content\UserGuide\TemplateExpansion.aml" />
