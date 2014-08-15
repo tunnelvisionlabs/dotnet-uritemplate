@@ -4,7 +4,6 @@ namespace Rackspace.Net
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// A class that represents the results of a match operation on a <see cref="UriTemplate"/> instance.
@@ -52,7 +51,7 @@ namespace Rackspace.Net
                 throw new ArgumentNullException("bindings");
 
             this._template = template;
-            this._bindings = bindings.ToArray();
+            this._bindings = new List<KeyValuePair<VariableReference, object>>(bindings).ToArray();
 
             Dictionary<string, KeyValuePair<VariableReference, object>> dictionary = new Dictionary<string, KeyValuePair<VariableReference, object>>();
             foreach (var pair in _bindings)

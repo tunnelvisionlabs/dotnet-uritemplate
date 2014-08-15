@@ -9,45 +9,39 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Rackspace.Net</RootNamespace>
     <AssemblyName>Rackspace.Net.UriTemplate</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <BaseIntermediateOutputPath>obj\net35-client\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>obj\net20\</BaseIntermediateOutputPath>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\net35-client\Debug\</OutputPath>
+    <OutputPath>bin\net20\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\net35-client\Debug\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\net20\Debug\Rackspace.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\net35-client\Release\</OutputPath>
+    <OutputPath>bin\net20\Release\</OutputPath>
     <DefineConstants>TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\net35-client\Release\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\net20\Release\Rackspace.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.net35.snk</AssemblyOriginatorKeyFile>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.net35.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.net20.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.net20.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InternalRegexOptions.cs" />
@@ -68,11 +62,11 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.net35.snk">
-      <Link>Rackspace.Net.UriTemplate.dev.net35.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.net20.snk">
+      <Link>Rackspace.Net.UriTemplate.dev.net20.snk</Link>
     </None>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.net35.snk">
-      <Link>Rackspace.Net.UriTemplate.net35.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.net20.snk">
+      <Link>Rackspace.Net.UriTemplate.net20.snk</Link>
     </None>
     <None Include="Rackspace.Net.UriTemplate.nuspec" />
   </ItemGroup>

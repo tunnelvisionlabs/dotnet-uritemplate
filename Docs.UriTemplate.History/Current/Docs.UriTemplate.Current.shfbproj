@@ -20,7 +20,7 @@
     <HtmlHelpName>URI Template API Reference</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj" />
+      <DocumentationSource sourceFile="..\..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
