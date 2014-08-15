@@ -113,9 +113,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Content\BreakingChangesPolicy.aml" />
     <None Include="Content\License.aml" />
     <None Include="Content\MSHelpViewerRoot.aml" />
-    <None Include="Content\PreliminaryFeatures.aml" />
     <None Include="Content\UserGuide\Installation.aml" />
     <None Include="Content\UserGuide\MigrationGuide.aml" />
     <None Include="Content\UserGuide\TemplateExpansion.aml" />
