@@ -14,6 +14,7 @@
     <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <BaseIntermediateOutputPath>obj\portable-net40\</BaseIntermediateOutputPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +39,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\..\keys\uritemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\keys\uritemplate.portable-net40.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="NamespaceDoc.cs" />
@@ -58,12 +59,13 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\keys\uritemplate.snk">
-      <Link>uritemplate.snk</Link>
+    <None Include="..\..\keys\uritemplate.portable-net40.snk">
+      <Link>uritemplate.portable-net40.snk</Link>
     </None>
     <None Include="Rackspace.Net.UriTemplate.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\Build\KeyReporting.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -116,13 +116,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40.csproj">
-      <Name>Rackspace.Net.UriTemplate.portable-net40</Name>
-      <Project>{9ed13c7d-7082-4306-9e2d-e1919c436848}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Content\License.aml" />
     <None Include="Content\MSHelpViewerRoot.aml" />
     <None Include="Content\PreliminaryFeatures.aml" />
