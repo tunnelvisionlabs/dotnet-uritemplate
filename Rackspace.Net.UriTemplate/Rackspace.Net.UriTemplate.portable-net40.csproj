@@ -43,6 +43,7 @@
     <AssemblyOriginatorKeyFile>..\..\keys\uritemplate.portable-net40.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="InternalRegexOptions.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UriTemplate.cs" />
