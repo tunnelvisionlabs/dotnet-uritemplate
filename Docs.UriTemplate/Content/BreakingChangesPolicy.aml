@@ -24,6 +24,19 @@
           such within the documentation.
         </para>
       </content>
+
+      <sections>
+        <section>
+          <title>Dependencies</title>
+          <content>
+            <para>
+              This library does not depend on any libraries other than the .NET Framework itself. The .NET Framework's
+              breaking changes policy is more strict than this library, and is not anticipated to be the source of any
+              breaking binary or source breaking change which affects the use of this library.
+            </para>
+          </content>
+        </section>
+      </sections>
     </section>
 
     <section>
