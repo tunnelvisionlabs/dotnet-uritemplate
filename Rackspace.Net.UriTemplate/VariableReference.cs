@@ -16,7 +16,7 @@ namespace Rackspace.Net
         /// This regular expression is used to validate the <see cref="Name"/> property when
         /// a <see cref="VariableReference"/> is initialized.
         /// </summary>
-        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$", UriTemplate.DefaultRegexOptions);
+        private static readonly Regex NameExpression = new Regex(@"^" + UriTemplate.VarNamePattern + @"$", InternalRegexOptions.Default);
 
         /// <summary>
         /// This is the backing field for the <see cref="Name"/> property.

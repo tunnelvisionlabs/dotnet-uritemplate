@@ -65,18 +65,6 @@ namespace Rackspace.Net
         /// </summary>
         internal const string ExpressionPattern = @"{" + OperatorPattern + @"?" + VariableListPattern + @"}";
 
-#if !PORTABLE
-        /// <summary>
-        /// The default <see cref="RegexOptions"/> for non-Portable Class Library builds.
-        /// </summary>
-        internal const RegexOptions DefaultRegexOptions = RegexOptions.Compiled | RegexOptions.CultureInvariant;
-#else
-        /// <summary>
-        /// The default <see cref="RegexOptions"/> for Portable Class Library builds.
-        /// </summary>
-        internal const RegexOptions DefaultRegexOptions = RegexOptions.CultureInvariant;
-#endif
-
         /// <summary>
         /// A regular expression which matches a single <c>expression</c> within a URI Template.
         /// </summary>
@@ -98,7 +86,7 @@ namespace Rackspace.Net
         /// </list>
         /// </remarks>
         private static readonly Regex ExpressionExpression =
-            new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", DefaultRegexOptions);
+            new Regex(@"{(?<Operator>" + OperatorPattern + @")?(?<VariableList>" + VariableListPattern + @")}", InternalRegexOptions.Default);
 
         /// <summary>
         /// This is the backing field for the <see cref="Template"/> property.

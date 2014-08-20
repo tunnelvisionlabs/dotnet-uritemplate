@@ -18,7 +18,7 @@ namespace Rackspace.Net
         /// <summary>
         /// This anchored regular expression matches a string that conforms to a sequence of <c>literals</c>.
         /// </summary>
-        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", UriTemplate.DefaultRegexOptions);
+        private static readonly Regex _literalSyntax = new Regex(@"^(?:[\x21\x23\x24\x26\x28-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E\xA0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\uE000-\uF8FF]|%[a-fA-F0-9]{2})*$", InternalRegexOptions.Default);
 
         /// <summary>
         /// This singleton is an empty array which is returned by <see cref="Match"/>.
