@@ -36,9 +36,9 @@ namespace Rackspace.Net
         /// Build a regular expression pattern which matches this template part in a URI.
         /// </summary>
         /// <remarks>
-        /// This method delegates the construction of the actual pattern building operation to
+        /// <para>This method delegates the construction of the actual pattern building operation to
         /// <see cref="BuildPatternBody"/>. The results of that call are then wrapped in a regular
-        /// expression named capture group.
+        /// expression named capture group.</para>
         /// </remarks>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
         /// <param name="groupName">The name to use for the named capture in the regular expression matching this template part.</param>
@@ -46,7 +46,7 @@ namespace Rackspace.Net
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>If <paramref name="pattern"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="groupName"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -83,17 +83,17 @@ namespace Rackspace.Net
         /// Provides the implementation of <see cref="BuildPattern"/> for a specific <see cref="UriTemplatePart"/> type.
         /// </summary>
         /// <remarks>
-        /// This method is part of the <see cref="O:Rackspace.Net.UriTemplate.Match"/> algorithm. If the match operation is
-        /// successful, the text of the candidate URI matched by the segment of the regular expression added
-        /// to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
-        /// method for associating the results with specific variables.
+        /// <para>This method is part of the <see cref="O:Rackspace.Net.UriTemplate.Match"/> algorithm. If the match
+        /// operation is successful, the text of the candidate URI matched by the segment of the regular expression
+        /// added to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
+        /// method for associating the results with specific variables.</para>
         /// </remarks>
         /// <param name="pattern">The <see cref="StringBuilder"/> to append the pattern to.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>If <paramref name="pattern"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -205,10 +205,10 @@ namespace Rackspace.Net
         /// Decodes text of a URI.
         /// </summary>
         /// <remarks>
-        /// The URI is assumed to be formed by first using the UTF-8 encoding to obtain
+        /// <para>The URI is assumed to be formed by first using the UTF-8 encoding to obtain
         /// a sequence of bytes, and then percent-encoding octets which are not allowed
         /// in the URI syntax. This method decodes text from a URI which was encoded by
-        /// this process.
+        /// this process.</para>
         /// </remarks>
         /// <param name="text">The URI text.</param>
         /// <returns>The decoded URI text.</returns>
@@ -268,12 +268,12 @@ namespace Rackspace.Net
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <returns>
-        /// An array containing the assignment of values to variables for the current part.
+        /// <para>An array containing the assignment of values to variables for the current part.</para>
         /// <para>-or-</para>
         /// <para><see langword="null"/> if the matched <paramref name="text"/> does not provide a valid match for this template part.</para>
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="text"/> is <see langword="null"/>.
+        /// <para>If <paramref name="text"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>

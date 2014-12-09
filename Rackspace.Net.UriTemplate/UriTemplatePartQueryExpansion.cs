@@ -33,7 +33,7 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <value>
-        /// <see cref="UriTemplatePartType.Query"/> for templates of the form <c>{?x,y}</c>.
+        /// <para><see cref="UriTemplatePartType.Query"/> for templates of the form <c>{?x,y}</c>.</para>
         /// <para>-or-</para>
         /// <para><see cref="UriTemplatePartType.QueryContinuation"/> for templates of the form <c>{&amp;x,y}</c>.</para>
         /// </value>

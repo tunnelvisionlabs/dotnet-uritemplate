@@ -71,7 +71,7 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <remarks>
-        /// This part is rendered by simply appending <see cref="Text"/> to <paramref name="builder"/>.
+        /// <para>This part is rendered by simply appending <see cref="Text"/> to <paramref name="builder"/>.</para>
         /// </remarks>
         public override void Render<T>(StringBuilder builder, IDictionary<string, T> parameters)
         {
@@ -92,7 +92,8 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <remarks>
-        /// Since a literal URI part cannot have variable references, this method simply returns an empty array.
+        /// <para>Since a literal URI part cannot have variable references, this method simply returns an empty
+        /// array.</para>
         /// </remarks>
         protected internal override KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {

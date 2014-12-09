@@ -106,8 +106,8 @@ namespace Rackspace.Net
         /// (i.e. the <c>:</c> operator was used).
         /// </summary>
         /// <value>
-        /// The number of Unicode code points from the referenced variable expansion
-        /// to include in the expanded URI.
+        /// <para>The number of Unicode code points from the referenced variable expansion
+        /// to include in the expanded URI.</para>
         /// <para>-or-</para>
         /// <para><see langword="null"/> if the number of code points for the expansion is not limited.</para>
         /// </value>
