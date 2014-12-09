@@ -81,7 +81,6 @@
         <configuration>
           <currentProject label="Portable Class Library" version="Portable Class Library (Legacy)" ripOldApis="False" />
           <versions>
-            <version label=".NET Framework Client Profile" version="4.0" helpFileProject="Docs.UriTemplate.net40-client.shfbproj" />
             <version label=".NET Framework Client Profile" version="3.5" helpFileProject="Docs.UriTemplate.net35-client.shfbproj" />
             <version label="URI Template Library" version="1.0" helpFileProject="..\Docs.UriTemplate.History\Current\Docs.UriTemplate.Current.shfbproj" />
           </versions>

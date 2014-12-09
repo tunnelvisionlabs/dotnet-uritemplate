@@ -1,8 +1,21 @@
-# Note: these values may only change during minor release
-$Keys = @{
-	'net35-client' = '5d67c22833d5111b'
-	'net40-client' = 'f681c34e4e0427fa'
-	'portable-net40' = 'd56958160335d686'
+# Note: these values may only change during major release
+
+If ($Version.Contains('-')) {
+
+	# Use the development keys
+	$Keys = @{
+		'net35-client' = '75479e71486a8ef5'
+		'portable-net40' = 'e01bb0fde71f8e91'
+	}
+
+} Else {
+
+	# Use the final release keys
+	$Keys = @{
+		'net35-client' = '46b747b8aa2c049d'
+		'portable-net40' = '7ede881141368179'
+	}
+
 }
 
 function Resolve-FullPath() {

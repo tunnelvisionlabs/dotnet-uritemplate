@@ -40,7 +40,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\..\keys\uritemplate.portable-net40.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InternalRegexOptions.cs" />
@@ -61,13 +62,15 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\keys\uritemplate.portable-net40.snk">
-      <Link>uritemplate.portable-net40.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.snk">
+      <Link>Rackspace.Net.UriTemplate.dev.snk</Link>
+    </None>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.snk">
+      <Link>Rackspace.Net.UriTemplate.snk</Link>
     </None>
     <None Include="Rackspace.Net.UriTemplate.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="$(SolutionDir)\Build\KeyReporting.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
