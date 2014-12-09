@@ -77,6 +77,9 @@
     <HelpAttributes />
     <NamespaceSummaries />
     <PlugInConfigurations>
+      <PlugInConfig id="IntelliSense Only" enabled="True">
+        <configuration />
+      </PlugInConfig>
     </PlugInConfigurations>
     <BuildLogFile />
     <HtmlHelp1xCompilerPath />
