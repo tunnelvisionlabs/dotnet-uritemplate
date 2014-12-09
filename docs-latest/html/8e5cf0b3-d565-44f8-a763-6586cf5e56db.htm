@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html ><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><link rel="shortcut icon" href="../icons/favicon.ico"><link rel="stylesheet" type="text/css" href="../styles/branding.css"><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css"><script type="text/javascript" src="../scripts/branding.js"> </script><title>Migration Guide</title><meta name="Language" content="en-us"><meta name="Microsoft.Help.Id" content="8e5cf0b3-d565-44f8-a763-6586cf5e56db"><meta name="Description" content="The .NET Framework includes its own implementation of URI templates through its own T:System.UriTemplate class."><meta name="Microsoft.Help.ContentType" content="Concepts"><meta name="BrandingAware" content="true"><link type="text/css" rel="stylesheet" href="../styles/highlight.css"><script type="text/javascript" src="../scripts/highlight.js"> </script><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css"><script type="text/javascript" src="../scripts/jquery-1.11.0.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle"><div class="pageHeader" id="PageHeader">URI Template API Reference<form id="SearchForm" method="get" action="#" onsubmit="javascript:TransferToSearchPage(); return false;"><input id="SearchTextBox" type="text" maxlength="200" /><button id="SearchButton" type="submit"></button></form></div><div class="pageBody"><div class="leftNav" id="leftNav"><div id="tocNav"><div class="toclevel0" data-toclevel="0"><a class="tocCollapsed" onclick="javascript: Toggle(this);" href="#!"></a><a data-tochassubtree="true" href="6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" title="URI Template API Reference" tocid="roottoc">URI Template API Reference</a></div><div class="toclevel1" data-toclevel="1" data-childrenloaded="true"><a class="tocExpanded" onclick="javascript: Toggle(this);" href="#!"></a><a data-tochassubtree="true" href="6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm" title="User Guide" tocid="6a7fb475-8e7d-4b8e-9f66-c33506fe0115">User Guide</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="56dfe688-42d6-46f0-9cb7-a9d7176ef249.htm" title="Installation" tocid="56dfe688-42d6-46f0-9cb7-a9d7176ef249">Installation</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="c41f4654-8fdb-4bf8-9b29-9d9a6f270496.htm" title="Template Expansion" tocid="c41f4654-8fdb-4bf8-9b29-9d9a6f270496">Template Expansion</a></div><div class="toclevel2" data-toclevel="2"><a data-tochassubtree="false" href="7e56a038-ad98-4922-9342-7f68a5b89283.htm" title="Template Matching" tocid="7e56a038-ad98-4922-9342-7f68a5b89283">Template Matching</a></div><div class="toclevel2 current" data-toclevel="2"><a data-tochassubtree="false" href="8e5cf0b3-d565-44f8-a763-6586cf5e56db.htm" title="Migration Guide" tocid="8e5cf0b3-d565-44f8-a763-6586cf5e56db">Migration Guide</a></div></div><div id="tocResizableEW" onmousedown="OnMouseDown(event);"></div><div id="TocResize" class="tocResize"><img id="ResizeImageIncrease" src="../icons/TocOpen.gif" onclick="OnIncreaseToc()" alt="Click or drag to resize" title="Click or drag to resize"><img id="ResizeImageReset" src="../icons/TocClose.gif" style="display:none" onclick="OnResetToc()" alt="Click or drag to resize" title="Click or drag to resize"></div></div><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="titleColumn">Migration Guide</td></tr></table><span class="introStyle"></span><div class="introduction"><p>
+        The .NET Framework includes its own implementation of URI templates through its own
+        <a href="http://msdn2.microsoft.com/en-us/library/bb515764" target="_blank">UriTemplate</a> class. The reference
+        implementation of this class does not use the same syntax as RFC 6570, and also does
+        not provide many of the advanced features described in the RFC. The URI Template
+        Library is intended to reduce the effort required to migrate existing code that uses
+        the .NET Framework, but syntax and functionality differences may require code changes.
+        This page includes a partial list of migration issues developers may face when
+        switching to this library.
+      </p><p>This topic contains the following sections.</p><ul class="autoOutline"><li class="outlineSectionEntry"><a href="#SyntaxChanges">Template Syntax</a></li><li class="outlineSectionEntry"><a href="#TemplateBinding">Template Binding</a></li></ul></div><div class="collapsibleAreaRegion" id="SyntaxChanges"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">Template Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><p>
+          Several aspects of URI Templates are affected by syntax differences between the
+          .NET Framework implementation and RFC 6570. The needed changes are grouped into
+          path segments syntax and query parameters. In addition to the syntax changes,
+          there are differences in the behavior of the template matching operation. This
+          will require additional consideration for code making use of the
+          <a href="Overload_Rackspace_Net_UriTemplate_Match.htm">Match<span id="LSTAA424284_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+          operation.
+        </p><h4 class="subHeading">Path Variables</h4><div class="subsection"><p>
+              In most cases, expansion variables which appear in the path portion of a .NET
+              Framework URI template are directly compatible with RFC 6570. The exception
+              to this rule is templates which use an asterisk (<span class="code">*</span>)
+              to indicate the "rest of the path". RFC 6570 provides a special syntax called
+              a <em>reserved expansion</em> which provides a similar
+              feature. The following specific example appears in the documentation for the
+              .NET Framework <a href="http://msdn2.microsoft.com/en-us/library/bb515764" target="_blank">UriTemplate</a>
+              class.
+            </p><div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAFACACAAA_copyCode" href="#" onclick="javascript:CopyToClipboard('ID0EAFACACAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAFACACAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">weather/*</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EAFACACAAA");</script><p>
+              In this library, the equivalent to this template would be the following, where
+              <span class="code">var</span> can be any variable name.
+            </p><div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EADACACAAA_copyCode" href="#" onclick="javascript:CopyToClipboard('ID0EADACACAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EADACACAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">weather/{+var}</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EADACACAAA");</script><p>
+              If code requires access to individual path segments, such as existing code
+              making use of the
+              <a href="http://msdn2.microsoft.com/en-us/library/bb515580" target="_blank">WildcardPathSegments</a>
+              property, an alternative syntax called a <em>path segment expansion</em>
+              may be used in combination with a <em>composite value modifier </em>
+              instead of the reserved expansion. The following example shows the use of the
+              path segment expansion to match the rest of the path.
+            </p><div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EABACACAAA_copyCode" href="#" onclick="javascript:CopyToClipboard('ID0EABACACAAA');return false;" title="Copy">Copy</a></div></div><div id="ID0EABACACAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">weather{/segments*}</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EABACACAAA");</script><div class="alert"><table><tr><th><img src="../icons/AlertCaution.png" alt="Important note"> Important</th></tr><tr><td><p>
+                While the reserved expansion is capable of matching both the path component
+                of the URI and the query string, a path segment expansion will only match
+                the path component. To include the ability to match query parameters when
+                using the path segment expansion, see the
+                <a href="#AdditionalParameters">Additional Query Parameters</a>
+                section below.
+              </p></td></tr></table></div></div><h4 class="subHeading">Query Parameters</h4><div class="subsection"><p>
+              In the .NET Framework, the syntax for declaring query parameters for the template
+              expansion operation differs from RFC 6570. In addition, during the matching
+              operation the .NET Framework has implicit support for arbitrary query parameters
+              which are not declared in the template itself. Each of these issues needs to be
+              addressed when migrating to this library.
+            </p><h4 class="subHeading" id="AdditionalParameters">Additional Query Parameters</h4><div class="subsection"><p>
+                  Support for additional query parameters during template matching is
+                  accomplished by adding including a query expansion with a composite value
+                  modifier. For templates which do not already contain a query expansion,
+                  this is as simple as adding <span class="code">{?params*}</span> to the
+                  end of the template. For templates which do include a query expansion,
+                  the new variable must be added at the end of the list. A template ending
+                  with <span class="code">{?foo,bar}</span> would thus become
+                  <span class="code">{?foo,bar,params*}</span>.
+                </p></div></div><h4 class="subHeading">Summary</h4><div class="subsection"><p>
+              The following table summarizes the changes required to make .NET URI Templates
+              compatible with RFC 6570, using the examples provided in the documentation for
+              the .NET Framework <a href="http://msdn2.microsoft.com/en-us/library/bb515764" target="_blank">UriTemplate</a>
+              class.
+            </p><div class="tableSection"><table><tr><th><p>.NET Framework</p></th><th><p>RFC 6570 (Binding)</p></th><th><p>RFC 6570 (Matching)</p></th></tr><tr><td><p>"weather/WA/Seattle"</p></td><td><p>"weather/WA/Seattle"</p></td><td><p>"weather/WA/Seattle{?params*}"</p></td></tr><tr><td><p>"weather/{state}/{city}"</p></td><td><p>"weather/{state}/{city}"</p></td><td><p>"weather/{state}/{city}{?params*}"</p></td></tr><tr><td><p>"weather/*"</p></td><td><p>"weather/{+rest}"</p></td><td><p>"weather{/rest*}{?params*}", if "weather" matches</p><p>-or-</p><p>"weather/{rest0}{/rest1*}{?params*}", if "weather/" matches but "weather" does not</p></td></tr><tr><td><p>"weather/{state}/{city}?forecast=today"</p></td><td><p>"weather/{state}/{city}?forecast=today"</p></td><td><p>"weather/{state}/{city}{?forecast,params*}"</p></td></tr><tr><td><p>"weather/{state}/{city}?forecast={day}"</p></td><td><p>"weather/{state}/{city}{?forecast}"</p></td><td><p>"weather/{state}/{city}{?forecast,params*}"</p></td></tr></table></div></div></div><div class="collapsibleAreaRegion" id="TemplateBinding"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">Template Binding</span></div><div id="ID2RBSection" class="collapsibleSection"><p>
+          This library contains additional differences regarding the way parameters are
+          inserted into templates to produce a bound URI.
+        </p><h4 class="subHeading" id="BindByPosition">Bind By Position</h4><div class="subsection"><p>
+              This library does not contain an equivalent to the
+              <a href="http://msdn2.microsoft.com/en-us/library/bb550237" target="_blank">BindByPosition(Uri, <span id="LSTAA424284_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_1?cpp=array<");</script>String<span id="LSTAA424284_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_2?cpp=>|cs=[]|vb=()|nu=[]|fs=[]");</script>)</a>
+              method. Any calls which use this method must be converted to use
+              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTAA424284_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_3?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              when migrating existing code to this library.
+            </p></div><h4 class="subHeading" id="RelativeResolution">Relative Resolution</h4><div class="subsection"><p>
+              For the various
+              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTAA424284_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_4?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              methods which take a base address as a parameter, this library uses the
+              <a href="http://msdn2.microsoft.com/en-us/library/ceyeze4f" target="_blank">Uri(Uri, Uri)</a>
+              constructor to implement the resolution of relative addresses against a base
+              address. While the .NET Framework's URI Template implementation behaves in a
+              manner "similar" to
+              <a href="http://msdn2.microsoft.com/en-us/library/dd781134" target="_blank">Combine<span id="LSTAA424284_5"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_5?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>, the
+              behavior of this library is consistent with <a href="http://tools.ietf.org/html/rfc3986#section-5.2" title="RFC 3986 §5.2 (Relative Resolution - URI Generic Syntax)" target="_blank">RFC 3986 §5.2</a>. As a result, this library differs from the .NET Framework's
+              implementation in two key instances.
+            </p><div class="alert"><table><tr><th><img src="../icons/AlertNote.png" alt="Note"> Note</th></tr><tr><td><p>
+                In the following description, the
+                <a href="http://msdn2.microsoft.com/en-us/library/9c26kcs8" target="_blank">Query</a> property of the
+                base address is assumed to be empty.
+              </p></td></tr></table></div><ul><li><p>
+                  When the URI Template starts with a leading <span class="code">/</span>
+                  character. In this case, the
+                  <a href="http://msdn2.microsoft.com/en-us/library/d0hx7e12" target="_blank">AbsolutePath</a> property
+                  of the base address is removed from the base address during the resolution
+                  process.
+                </p></li><li><p>
+                  When the <a href="http://msdn2.microsoft.com/en-us/library/d0hx7e12" target="_blank">AbsolutePath</a>
+                  property of the base address is not empty, and does not end with a
+                  <span class="code">/</span> character. In this case, the last path segment is
+                  removed from the base address during the resolution process. In other words,
+                  everything after the last <span class="code">/</span> character is ignored.
+                </p></li></ul></div></div></div></div><div id="pageFooter" class="pageFooter"><div class="feedbackLink">Send comments on this topic to
+        <a id="HT_MailLink" href="mailto:sam.harwell%40rackspace.com?Subject=URI Template API Reference">sam.harwell@rackspace.com</a></div><script type="text/javascript">
+        var HT_mailLink = document.getElementById("HT_MailLink");
+        var HT_mailLinkText = HT_mailLink.innerHTML;
+        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
+        HT_mailLink.innerHTML = HT_mailLinkText;
+        </script></div></body></html>

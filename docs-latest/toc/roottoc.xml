@@ -1,8 +1,1 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<HelpTOC>
-  <HelpTOCNode Title="Welcome" Url="html/6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" />
-  <HelpTOCNode Title="License Agreement" Url="html/80f90212-4ffe-4164-aff3-0272ea42814a.htm" />
-  <HelpTOCNode Title="Preliminary Features" Url="html/14557a8c-df73-468e-9b75-56e038b79f36.htm" />
-  <HelpTOCNode Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm" HasChildren="true" />
-  <HelpTOCNode Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm" HasChildren="true" />
-</HelpTOC>
+﻿<?xml version="1.0" encoding="utf-8"?><HelpTOC><HelpTOCNode Title="Welcome" Url="html/6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" /><HelpTOCNode Title="License Agreement" Url="html/80f90212-4ffe-4164-aff3-0272ea42814a.htm" /><HelpTOCNode Title="Breaking Changes Policy" Url="html/14557a8c-df73-468e-9b75-56e038b79f36.htm" /><HelpTOCNode Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm" HasChildren="true" /><HelpTOCNode Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm" HasChildren="true" /></HelpTOC>
