@@ -30,7 +30,7 @@ namespace Rackspace.Net
         /// <param name="escapeReserved"><see langword="true"/> to escape reserved characters during rendering; otherwise, <see langword="false"/>.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="variables"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="variables"/> is empty.
+        /// <para>If <paramref name="variables"/> is empty.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="variables"/> contains any <see langword="null"/> values.</para>
         /// </exception>
@@ -42,7 +42,7 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <value>
-        /// <see cref="UriTemplatePartType.SimpleStringExpansion"/> for templates of the form <c>{x,y}</c>.
+        /// <para><see cref="UriTemplatePartType.SimpleStringExpansion"/> for templates of the form <c>{x,y}</c>.</para>
         /// <para>-or-</para>
         /// <para><see cref="UriTemplatePartType.ReservedStringExpansion"/> for templates of the form <c>{+x,y}</c>.</para>
         /// </value>

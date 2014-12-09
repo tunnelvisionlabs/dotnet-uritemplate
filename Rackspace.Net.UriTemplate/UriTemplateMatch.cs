@@ -37,7 +37,7 @@ namespace Rackspace.Net
         /// <param name="template">The <see cref="UriTemplate"/> associated with this <see cref="UriTemplateMatch"/> instance.</param>
         /// <param name="bindings">A collection of variable bindings identified by the match operation.</param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="template"/> is <see langword="null"/>.
+        /// <para>If <paramref name="template"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="bindings"/> is <see langword="null"/>.</para>
         /// </exception>

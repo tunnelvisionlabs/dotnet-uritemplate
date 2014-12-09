@@ -66,9 +66,9 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <remarks>
-        /// The <see cref="Variables"/> are rendered in order. This method divides the rendering
+        /// <para>The <see cref="Variables"/> are rendered in order. This method divides the rendering
         /// process into separate methods according to the type of parameter provided in
-        /// <paramref name="parameters"/> for each of the variables in <see cref="Variables"/>.
+        /// <paramref name="parameters"/> for each of the variables in <see cref="Variables"/>.</para>
         ///
         /// <list type="table">
         /// <listheader>
@@ -132,12 +132,12 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <remarks>
-        /// This method checks that the definitions in <see cref="Variables"/> do not conflict with
+        /// <para>This method checks that the definitions in <see cref="Variables"/> do not conflict with
         /// <paramref name="arrayVariables"/> and <paramref name="mapVariables"/>. It then calls
-        /// <see cref="BuildPatternBodyImpl"/> to construct the actual pattern.
+        /// <see cref="BuildPatternBodyImpl"/> to construct the actual pattern.</para>
         /// </remarks>
         /// <exception cref="InvalidOperationException">
-        /// If <paramref name="arrayVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.
+        /// <para>If <paramref name="arrayVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> includes the name of a variable which specifies a <see cref="VariableReference.Prefix"/> in the template.</para>
         /// </exception>
@@ -166,7 +166,7 @@ namespace Rackspace.Net
         /// <param name="arrayVariables">The names of variables which should be treated as associative arrays during the match operation.</param>
         /// <param name="mapVariables">The names of variables which should be treated as associative maps during the match operation.</param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="pattern"/> is <see langword="null"/>.
+        /// <para>If <paramref name="pattern"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -178,9 +178,9 @@ namespace Rackspace.Net
 
         /// <inheritdoc/>
         /// <remarks>
-        /// This method calls <see cref="MatchImpl"/> to perform the actual matching operation, and then
+        /// <para>This method calls <see cref="MatchImpl"/> to perform the actual matching operation, and then
         /// checks that all variables present in both <see cref="Variables"/> and <paramref name="requiredVariables"/>
-        /// have values assigned as part of the result.
+        /// have values assigned as part of the result.</para>
         /// </remarks>
         protected internal override sealed KeyValuePair<VariableReference, object>[] Match(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
@@ -222,12 +222,12 @@ namespace Rackspace.Net
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template.</param>
         /// <returns>
-        /// An array containing the assignment of values to variables for the current part.
+        /// <para>An array containing the assignment of values to variables for the current part.</para>
         /// <para>-or-</para>
         /// <para><see langword="null"/> if the matched <paramref name="text"/> does not provide a valid match for this template part.</para>
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="text"/> is <see langword="null"/>.
+        /// <para>If <paramref name="text"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -243,15 +243,15 @@ namespace Rackspace.Net
         /// <see cref="VariableReference.Prefix"/> as necessary.
         /// </summary>
         /// <remarks>
-        /// Characters which are not <c>unreserved</c> or <c>reserved</c> characters according
-        /// to RFC 6570 are always percent-encoded when they are appended.
+        /// <para>Characters which are not <c>unreserved</c> or <c>reserved</c> characters according
+        /// to RFC 6570 are always percent-encoded when they are appended.</para>
         /// </remarks>
         /// <param name="builder">The <see cref="StringBuilder"/> to append text to.</param>
         /// <param name="variable">The variable being rendered.</param>
         /// <param name="value">The string value of the variable being rendered.</param>
         /// <param name="escapeReserved"><see langword="true"/> to percent-encode <c>reserved</c> characters defined by RFC 6570; otherwise, <see langword="false"/>.</param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>If <paramref name="builder"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -287,7 +287,7 @@ namespace Rackspace.Net
         /// determining the first variable.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>If <paramref name="builder"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -308,7 +308,7 @@ namespace Rackspace.Net
         /// determining the first variable.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>If <paramref name="builder"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -330,7 +330,7 @@ namespace Rackspace.Net
         /// determining the first variable.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="builder"/> is <see langword="null"/>.
+        /// <para>If <paramref name="builder"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="variable"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
