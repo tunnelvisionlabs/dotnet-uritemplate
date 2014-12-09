@@ -8,16 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net40-client", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net40-client.csproj", "{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net35-client", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.portable-net40", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40.csproj", "{9ED13C7D-7082-4306-9E2D-E1919C436848}"
-EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net40-client", "Docs.UriTemplate\Docs.UriTemplate.net40-client.shfbproj", "{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5} = {D5F52104-C34D-4877-9BF8-3EC57ABD99B5}
-	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net35-client", "Docs.UriTemplate\Docs.UriTemplate.net35-client.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -26,14 +19,11 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net35-clie
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.portable-net40", "Docs.UriTemplate\Docs.UriTemplate.portable-net40.shfbproj", "{BBE164AD-5FE2-4E95-BA24-82784844F349}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5} = {D5F52104-C34D-4877-9BF8-3EC57ABD99B5}
 		{81C7E452-56D0-46B6-8F65-247B7F18C2BD} = {81C7E452-56D0-46B6-8F65-247B7F18C2BD}
 		{9ED13C7D-7082-4306-9E2D-E1919C436848} = {9ED13C7D-7082-4306-9E2D-E1919C436848}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.net35-client", "Testing.Rfc6570\Testing.Rfc6570.net35-client.csproj", "{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.net40-client", "Testing.Rfc6570\Testing.Rfc6570.net40-client.csproj", "{DED3C364-37C4-4A9F-95E8-24ED7098BD78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.portable-net40", "Testing.Rfc6570\Testing.Rfc6570.portable-net40.csproj", "{A7607867-5464-4ED6-8063-79DE8D83DEC0}"
 EndProject
@@ -65,12 +55,6 @@ Global
 		ReleaseNoDocs|Any CPU = ReleaseNoDocs|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.ReleaseNoDocs|Any CPU.ActiveCfg = Release|Any CPU
-		{D5F52104-C34D-4877-9BF8-3EC57ABD99B5}.ReleaseNoDocs|Any CPU.Build.0 = Release|Any CPU
 		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81C7E452-56D0-46B6-8F65-247B7F18C2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,10 +67,6 @@ Global
 		{9ED13C7D-7082-4306-9E2D-E1919C436848}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9ED13C7D-7082-4306-9E2D-E1919C436848}.ReleaseNoDocs|Any CPU.ActiveCfg = Release|Any CPU
 		{9ED13C7D-7082-4306-9E2D-E1919C436848}.ReleaseNoDocs|Any CPU.Build.0 = Release|Any CPU
-		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD}.ReleaseNoDocs|Any CPU.ActiveCfg = Release|Any CPU
 		{CC7F0F12-4736-43C3-A0C0-722875504053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC7F0F12-4736-43C3-A0C0-722875504053}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -101,12 +81,6 @@ Global
 		{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}.ReleaseNoDocs|Any CPU.ActiveCfg = Release|Any CPU
 		{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}.ReleaseNoDocs|Any CPU.Build.0 = Release|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.ReleaseNoDocs|Any CPU.ActiveCfg = Release|Any CPU
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78}.ReleaseNoDocs|Any CPU.Build.0 = Release|Any CPU
 		{A7607867-5464-4ED6-8063-79DE8D83DEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7607867-5464-4ED6-8063-79DE8D83DEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7607867-5464-4ED6-8063-79DE8D83DEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,11 +95,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A8BBFA32-324B-4DA0-BF0D-1CBFF6DA03DD} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
 		{CC7F0F12-4736-43C3-A0C0-722875504053} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
 		{BBE164AD-5FE2-4E95-BA24-82784844F349} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
 		{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB} = {6AD50F32-E954-4414-BE81-686C01B33084}
-		{DED3C364-37C4-4A9F-95E8-24ED7098BD78} = {6AD50F32-E954-4414-BE81-686C01B33084}
 		{A7607867-5464-4ED6-8063-79DE8D83DEC0} = {6AD50F32-E954-4414-BE81-686C01B33084}
 		{D9483137-45F7-4196-9AAF-7AFC681FD32F} = {7404E366-5516-416A-A8C3-A6AD26249F6A}
 		{8C136311-BBEC-4F6C-BEC2-419A29D5B607} = {D9483137-45F7-4196-9AAF-7AFC681FD32F}
