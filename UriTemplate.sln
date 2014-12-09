@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net35-client", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net20", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.portable-net40", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40.csproj", "{9ED13C7D-7082-4306-9E2D-E1919C436848}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net35-client", "Docs.UriTemplate\Docs.UriTemplate.net35-client.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net20", "Docs.UriTemplate\Docs.UriTemplate.net20.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
 	ProjectSection(ProjectDependencies) = postProject
 		{81C7E452-56D0-46B6-8F65-247B7F18C2BD} = {81C7E452-56D0-46B6-8F65-247B7F18C2BD}
 	EndProjectSection
@@ -23,7 +23,7 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.portable-n
 		{9ED13C7D-7082-4306-9E2D-E1919C436848} = {9ED13C7D-7082-4306-9E2D-E1919C436848}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.net35-client", "Testing.Rfc6570\Testing.Rfc6570.net35-client.csproj", "{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.net20", "Testing.Rfc6570\Testing.Rfc6570.net20.csproj", "{3A85CCB8-5F1A-4C4A-92D6-56095E3C0DDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.portable-net40", "Testing.Rfc6570\Testing.Rfc6570.portable-net40.csproj", "{A7607867-5464-4ED6-8063-79DE8D83DEC0}"
 EndProject

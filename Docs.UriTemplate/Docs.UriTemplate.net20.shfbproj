@@ -13,14 +13,14 @@
          Studio adds them anyway -->
     <AssemblyName>Docs.UriTemplate</AssemblyName>
     <RootNamespace>Docs.UriTemplate</RootNamespace>
-    <Name>Docs.UriTemplate.net35-client</Name>
+    <Name>Docs.UriTemplate.net20</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 3.5</FrameworkVersion>
-    <OutputPath>.\bin\Help\net35-client\</OutputPath>
+    <FrameworkVersion>.NET Framework 2.0</FrameworkVersion>
+    <OutputPath>.\bin\Help\net20\</OutputPath>
     <HtmlHelpName>URI Template API Reference</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net35-client.csproj" subFolders="True" />
+      <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj" subFolders="True" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -59,7 +59,7 @@
     <ComponentConfigurations>
       <ComponentConfig id="IntelliSense Component" enabled="True">
         <component id="IntelliSense Component">
-          <output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}\..\..\Api\net35-client" />
+          <output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}\..\..\Api\net20" />
         </component>
       </ComponentConfig>
     </ComponentConfigurations>

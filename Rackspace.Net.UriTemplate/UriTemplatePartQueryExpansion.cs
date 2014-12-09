@@ -5,7 +5,6 @@ namespace Rackspace.Net
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
     using DictionaryEntry = System.Collections.DictionaryEntry;
@@ -301,7 +300,10 @@ namespace Rackspace.Net
                 if (!considerString || group.Captures.Count > 1)
                 {
                     Debug.Assert(considerArray);
-                    List<string> list = new List<string>(group.Captures.Cast<Capture>().Select(capture => DecodeCharacters(capture.Value)));
+                    List<string> list = new List<string>(group.Captures.Count);
+                    foreach (Capture capture in group.Captures)
+                        list.Add(DecodeCharacters(capture.Value));
+
                     results.Add(new KeyValuePair<VariableReference, object>(Variables[i], list));
                     continue;
                 }
@@ -370,7 +372,11 @@ namespace Rackspace.Net
 
         public override string ToString()
         {
-            return string.Format("{{{0}{1}}}", Type == UriTemplatePartType.Query ? '?' : '&', string.Join(",", Variables.Select(i => i.Name).ToArray()));
+            List<string> names = new List<string>(Variables.Count);
+            foreach (VariableReference variable in Variables)
+                names.Add(variable.Name);
+
+            return string.Format("{{{0}{1}}}", Type == UriTemplatePartType.Query ? '?' : '&', string.Join(",", names.ToArray()));
         }
     }
 }

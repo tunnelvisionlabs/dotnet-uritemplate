@@ -5,7 +5,6 @@ namespace Rackspace.Net
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Text;
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
@@ -47,9 +46,12 @@ namespace Rackspace.Net
             if (variables == null)
                 throw new ArgumentNullException("variables");
 
-            _variables = variables.ToArray();
-            if (_variables.Contains(null))
-                throw new ArgumentException("variables cannot contain any null values", "variables");
+            _variables = new List<VariableReference>(variables).ToArray();
+            foreach (VariableReference variable in _variables)
+            {
+                if (variable == null)
+                    throw new ArgumentException("variables cannot contain any null values", "variables");
+            }
         }
 
         /// <summary>
@@ -188,14 +190,23 @@ namespace Rackspace.Net
             if (result == null)
                 return null;
 
-            if (requiredVariables.Any())
+            if (requiredVariables.Count > 0)
             {
                 foreach (var variable in Variables)
                 {
                     if (!requiredVariables.Contains(variable.Name))
                         continue;
 
-                    KeyValuePair<VariableReference, object> pair = result.FirstOrDefault(i => i.Key == variable);
+                    KeyValuePair<VariableReference, object> pair = default(KeyValuePair<VariableReference, object>);
+                    foreach (var i in result)
+                    {
+                        if (i.Key == variable)
+                        {
+                            pair = i;
+                            break;
+                        }
+                    }
+
                     if (pair.Key == null)
                         return null;
 

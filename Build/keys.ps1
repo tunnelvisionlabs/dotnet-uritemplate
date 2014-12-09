@@ -4,7 +4,7 @@ If ($Version.Contains('-')) {
 
 	# Use the development keys
 	$Keys = @{
-		'net35-client' = '75479e71486a8ef5'
+		'net20' = '75479e71486a8ef5'
 		'portable-net40' = 'e01bb0fde71f8e91'
 	}
 
@@ -12,7 +12,7 @@ If ($Version.Contains('-')) {
 
 	# Use the final release keys
 	$Keys = @{
-		'net35-client' = '46b747b8aa2c049d'
+		'net20' = '46b747b8aa2c049d'
 		'portable-net40' = '7ede881141368179'
 	}
 

@@ -17,13 +17,13 @@
   <files>
 
     <!-- Runtime libraries -->
-    <file src="bin\net35-client\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net35-client"/>
-    <file src="bin\net35-client\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net35-client"/>
-    <file src="..\Docs.UriTemplate\bin\Api\net35-client\Rackspace.Net.UriTemplate.xml" target="lib\net35-client"/>
+    <file src="bin\net20\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net20"/>
+    <file src="bin\net20\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net20"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net20\Rackspace.Net.UriTemplate.xml" target="lib\net20"/>
 
-    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
-    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
-    <file src="..\Docs.UriTemplate\bin\Api\portable-net40\Rackspace.Net.UriTemplate.xml" target="lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="..\Docs.UriTemplate\bin\Api\portable-net40\Rackspace.Net.UriTemplate.xml" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
 
     <!-- Source code -->
     <file src="**\*.cs" target="src" />

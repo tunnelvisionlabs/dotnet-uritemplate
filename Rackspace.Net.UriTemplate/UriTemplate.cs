@@ -4,7 +4,6 @@ namespace Rackspace.Net
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
 
@@ -183,15 +182,17 @@ namespace Rackspace.Net
                 }
 
                 Group variableList = match.Groups["VariableList"];
-                IEnumerable<VariableReference> variables;
+                VariableReference[] variables;
                 if (variableList.Success)
                 {
                     string[] specs = variableList.Value.Split(',');
-                    variables = specs.Select(VariableReference.Parse);
+                    variables = new VariableReference[specs.Length];
+                    for (int i = 0; i < specs.Length; i++)
+                        variables[i] = VariableReference.Parse(specs[i]);
                 }
                 else
                 {
-                    variables = Enumerable.Empty<VariableReference>();
+                    variables = new VariableReference[0];
                 }
 
                 UriTemplatePart part;
