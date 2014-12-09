@@ -38,7 +38,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\..\keys\uritemplate.net35-client.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.net35.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.net35.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,13 +68,15 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\keys\uritemplate.net35-client.snk">
-      <Link>uritemplate.net35-client.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.net35.snk">
+      <Link>Rackspace.Net.UriTemplate.dev.net35.snk</Link>
+    </None>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.net35.snk">
+      <Link>Rackspace.Net.UriTemplate.net35.snk</Link>
     </None>
     <None Include="Rackspace.Net.UriTemplate.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\Build\KeyReporting.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
