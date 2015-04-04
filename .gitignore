@@ -3,7 +3,7 @@
 *.user
 
 # Roslyn IntelliSense Cache
-*.sln.ide/
+.vs/
 
 # Build output
 */bin/
