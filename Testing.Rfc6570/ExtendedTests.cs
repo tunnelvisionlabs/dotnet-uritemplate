@@ -19,9 +19,9 @@
                 { "q"            , "URI Templates" },
                 { "page"         , "5" },
                 { "lang"         , "en" },
-                { "geocode"      , new[] { "37.76","-122.427" } },
+                { "geocode"      , new[] { "37.76", "-122.427" } },
                 { "first_name"   , "John" },
-                { "last.name"    , "Doe" }, 
+                { "last.name"    , "Doe" },
                 { "Some%20Thing" , "foo" },
                 { "number"       , 6 },
                 { "long"         , 37.76 },
@@ -34,6 +34,7 @@
                 { "random"       , "šöäŸœñê€£¥‡ÑÒÓÔÕÖ×ØÙÚàáâãäåæçÿ" },
                 { "assoc_special_chars", new Dictionary<string, string> { { "šöäŸœñê€£¥‡ÑÒÓÔÕ", "Ö×ØÙÚàáâãäåæçÿ" } } }
             };
+
         public static readonly HashSet<string> requiredVariables1 =
             new HashSet<string>
             {
@@ -63,16 +64,17 @@
         public static readonly Dictionary<string, object> variables2 =
             new Dictionary<string, object>
             {
-                { "id" , new[] { "person","albums" } },
+                { "id" , new[] { "person", "albums" } },
                 { "token" , "12345" },
-                { "fields" , new[] { "id", "name", "picture"} },
+                { "fields" , new[] { "id", "name", "picture" } },
                 { "format" , "atom" },
                 { "q" , "URI Templates" },
                 { "page" , "10" },
                 { "start" , "5" },
                 { "lang" , "en" },
-                { "geocode" , new[] { "37.76","-122.427" } }
+                { "geocode" , new[] { "37.76", "-122.427" } }
             };
+
         public static readonly HashSet<string> requiredVariables2 =
             new HashSet<string>
             {
@@ -93,18 +95,20 @@
                 { "empty_list", new string[0] },
                 { "empty_assoc", new Dictionary<string, string>() }
             };
+
         public static readonly ICollection<string> requiredVariables3 = new string[0];
 
         public static readonly Dictionary<string, object> variables4 =
             new Dictionary<string, object>
             {
                 { "42", "The Answer to the Ultimate Question of Life, the Universe, and Everything" },
-                { "1337", new[] { "leet", "as","it", "can","be" } },
+                { "1337", new[] { "leet", "as", "it", "can", "be" } },
                 { "german", new Dictionary<string, string> {
                     { "11", "elf" },
                     { "12", "zwölf" } }
                 }
             };
+
         public static readonly HashSet<string> requiredVariables4 =
             new HashSet<string>
             {

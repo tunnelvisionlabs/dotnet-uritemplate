@@ -20,6 +20,7 @@
                 { "x", "1024" },
                 { "y", "768" },
             };
+
         private static readonly HashSet<string> requiredVariables =
             new HashSet<string>
             {

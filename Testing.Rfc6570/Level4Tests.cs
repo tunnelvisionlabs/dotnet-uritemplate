@@ -16,8 +16,9 @@
                 { "hello", "Hello World!" },
                 { "path", "/foo/bar" },
                 { "list", new[] { "red", "green", "blue" } },
-                { "keys", new Dictionary<string, string> { { "semi", ";" }, { "dot", "." }, { "comma", ","} } }
+                { "keys", new Dictionary<string, string> { { "semi", ";" }, { "dot", "." }, { "comma", "," } } }
             };
+
         private static readonly HashSet<string> requiredVariables =
             new HashSet<string>
             {

@@ -14,6 +14,7 @@
                 { "var", "value" },
                 { "hello", "Hello World!" },
             };
+
         private static readonly HashSet<string> requiredVariables =
             new HashSet<string>
             {
