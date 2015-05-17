@@ -17,6 +17,9 @@ namespace Rackspace.Net
         /// <summary>
         /// Gets the type of this part.
         /// </summary>
+        /// <value>
+        /// A <see cref="UriTemplatePartType"/> indicating the type of this part.
+        /// </value>
         public abstract UriTemplatePartType Type
         {
             get;

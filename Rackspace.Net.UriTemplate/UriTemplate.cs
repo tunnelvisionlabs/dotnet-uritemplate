@@ -118,6 +118,9 @@ namespace Rackspace.Net
         /// <summary>
         /// Gets the original template text the <see cref="UriTemplate"/> was constructed from.
         /// </summary>
+        /// <value>
+        /// The original template text the <see cref="UriTemplate"/> was constructed from.
+        /// </value>
         public string Template
         {
             get
