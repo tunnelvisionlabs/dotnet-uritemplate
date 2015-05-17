@@ -82,11 +82,11 @@ namespace Rackspace.Net
         /// <description>The variable is rendered by calling <see cref="RenderDictionary"/>.</description>
         /// </item>
         /// <item>
-        /// <description><see cref="IEnumerable"/> (except <see cref="String"/>)</description>
+        /// <description><see cref="IEnumerable"/> (except <see cref="string"/>)</description>
         /// <description>The variable is rendered by calling <see cref="RenderEnumerable"/>.</description>
         /// </item>
         /// <item>
-        /// <description><see cref="String"/>, or any other <see cref="Object"/></description>
+        /// <description><see cref="string"/>, or any other <see cref="object"/></description>
         /// <description>The variable is rendered by calling <see cref="RenderElement"/>.</description>
         /// </item>
         /// <item>
@@ -328,7 +328,7 @@ namespace Rackspace.Net
         protected abstract void RenderEnumerable(StringBuilder builder, VariableReference variable, IEnumerable variableValue, bool first);
 
         /// <summary>
-        /// Render a single variable, where the variable value is a <see cref="String"/> or other single-valued
+        /// Render a single variable, where the variable value is a <see cref="string"/> or other single-valued
         /// element.
         /// </summary>
         /// <param name="builder">The <see cref="StringBuilder"/> to render to.</param>
