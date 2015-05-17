@@ -57,7 +57,7 @@ namespace Rackspace.Net
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="groupName"/> is empty.
+        /// <para>If <paramref name="groupName"/> is empty.</para>
         /// </exception>
         public void BuildPattern(StringBuilder pattern, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {

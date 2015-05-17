@@ -27,7 +27,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <param name="variables">A collection of variables to expand for this expression.</param>
         /// <param name="escapeReserved"><see langword="true"/> to escape reserved characters during rendering; otherwise, <see langword="false"/>.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="variables"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><para>If <paramref name="variables"/> is <see langword="null"/>.</para></exception>
         /// <exception cref="ArgumentException">
         /// <para>If <paramref name="variables"/> is empty.</para>
         /// <para>-or-</para>

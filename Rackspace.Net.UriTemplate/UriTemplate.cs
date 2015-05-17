@@ -68,7 +68,7 @@ namespace Rackspace.Net
         /// A regular expression which matches a single <c>expression</c> within a URI Template.
         /// </summary>
         /// <remarks>
-        /// This regular expression has the following named captures.
+        /// <para>This regular expression has the following named captures.</para>
         /// <list type="table">
         /// <listheader>
         /// <term>Name</term>
@@ -297,11 +297,11 @@ namespace Rackspace.Net
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>If <paramref name="baseAddress"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
-        /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
+        /// <exception cref="ArgumentException"><para>If <paramref name="baseAddress"/> is not an absolute URI.</para></exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, string> parameters)
         {
             return BindByName<string>(baseAddress, parameters);
@@ -316,12 +316,12 @@ namespace Rackspace.Net
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>If <paramref name="baseAddress"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
-        /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
-        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
+        /// <exception cref="ArgumentException"><para>If <paramref name="baseAddress"/> is not an absolute URI.</para></exception>
+        /// <exception cref="InvalidOperationException"><para>If a variable reference with a prefix modifier expands to a collection or dictionary.</para></exception>
         public Uri BindByName(Uri baseAddress, IDictionary<string, object> parameters)
         {
             return BindByName<object>(baseAddress, parameters);
@@ -337,12 +337,12 @@ namespace Rackspace.Net
         /// <param name="parameters">The parameter values.</param>
         /// <returns>A <see cref="Uri"/> object representing the expanded template.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>If <paramref name="baseAddress"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
-        /// <exception cref="ArgumentException">If <paramref name="baseAddress"/> is not an absolute URI.</exception>
-        /// <exception cref="InvalidOperationException">If a variable reference with a prefix modifier expands to a collection or dictionary.</exception>
+        /// <exception cref="ArgumentException"><para>If <paramref name="baseAddress"/> is not an absolute URI.</para></exception>
+        /// <exception cref="InvalidOperationException"><para>If a variable reference with a prefix modifier expands to a collection or dictionary.</para></exception>
         public Uri BindByName<T>(Uri baseAddress, IDictionary<string, T> parameters)
         {
             if (baseAddress == null)
@@ -359,8 +359,8 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
         /// <remarks>
-        /// For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// <para>For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
@@ -377,19 +377,19 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
         /// <remarks>
-        /// For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// <para>For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed. The default value is an empty collection.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="candidate"/> is <see langword="null"/>.
+        /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="requiredVariables"/> contains a <see langword="null"/> or empty value.
+        /// <para>If <paramref name="requiredVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
         /// <conceptualLink target="7e56a038-ad98-4922-9342-7f68a5b89283"/>
         public UriTemplateMatch Match(Uri candidate, ICollection<string> requiredVariables)
@@ -401,22 +401,22 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
         /// <remarks>
-        /// For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// <para>For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="String"/>. The default value is an empty collection.</param>
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>. The default value is an empty collection.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="candidate"/> is <see langword="null"/>.
+        /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="arrayVariables"/> contains a <see langword="null"/> or empty value.
+        /// <para>If <paramref name="arrayVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="mapVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// </exception>
@@ -434,7 +434,7 @@ namespace Rackspace.Net
         /// <see cref="O:Rackspace.Net.UriTemplate.BindByName"/> operation.
         /// </summary>
         /// <remarks>
-        /// There are several limitations in the current implementation of this operation.
+        /// <para>There are several limitations in the current implementation of this operation.</para>
         ///
         /// <list type="bullet">
         ///   <item>
@@ -472,8 +472,8 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>.
         /// </summary>
         /// <remarks>
-        /// For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.
+        /// <para>For detailed information about the behavior of this method, see the remarks in the
+        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid. The default value is an empty collection.</param>
@@ -481,7 +481,7 @@ namespace Rackspace.Net
         /// <param name="mapVariables">A collection of variables to treat as associative maps when matching a candidate URI to the template. Associative maps are returned as instances of <see cref="IDictionary{TKey, TValue}"/> whose keys and values are of type <see cref="String"/>. The default value is an empty collection.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="candidate"/> is <see langword="null"/>.
+        /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="requiredVariables"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
@@ -490,7 +490,7 @@ namespace Rackspace.Net
         /// <para>If <paramref name="mapVariables"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// If <paramref name="requiredVariables"/> contains a <see langword="null"/> or empty value.
+        /// <para>If <paramref name="requiredVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="arrayVariables"/> contains a <see langword="null"/> or empty value.</para>
         /// <para>-or-</para>
@@ -546,12 +546,12 @@ namespace Rackspace.Net
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="baseAddress"/> is <see langword="null"/>.
+        /// <para>If <paramref name="baseAddress"/> is <see langword="null"/>.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="candidate"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// If <paramref name="baseAddress"/> is a relative URI.
+        /// <para>If <paramref name="baseAddress"/> is a relative URI.</para>
         /// <para>-or-</para>
         /// <para>If <paramref name="candidate"/> is a relative URI.</para>
         /// </exception>
