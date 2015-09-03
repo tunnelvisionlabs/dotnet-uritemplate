@@ -37,7 +37,7 @@
             string template = "{var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("val", uri.ToString());
+            Assert.AreEqual("val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -56,7 +56,7 @@
             string template = "{var:30}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("value", uri.ToString());
+            Assert.AreEqual("value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -75,7 +75,7 @@
             string template = "{list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("red,green,blue", uri.ToString());
+            Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -94,7 +94,7 @@
             string template = "{list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("red,green,blue", uri.ToString());
+            Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -123,7 +123,7 @@
                     "semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -152,7 +152,7 @@
                     "semi=%3B,dot=.,comma=%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -171,7 +171,7 @@
             string template = "{+path:6}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/foo/b/here", uri.ToString());
+            Assert.AreEqual("/foo/b/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -190,7 +190,7 @@
             string template = "{+list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("red,green,blue", uri.ToString());
+            Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -209,7 +209,7 @@
             string template = "{+list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("red,green,blue", uri.ToString());
+            Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -238,7 +238,7 @@
                     "semi,;,dot,.,comma,,"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -267,7 +267,7 @@
                     "semi=;,dot=.,comma=,"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -286,7 +286,7 @@
             string template = "{#path:6}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("#/foo/b/here", uri.ToString());
+            Assert.AreEqual("#/foo/b/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -305,7 +305,7 @@
             string template = "{#list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("#red,green,blue", uri.ToString());
+            Assert.AreEqual("#red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -324,7 +324,7 @@
             string template = "{#list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("#red,green,blue", uri.ToString());
+            Assert.AreEqual("#red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -353,7 +353,7 @@
                     "#semi,;,dot,.,comma,,"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -382,7 +382,7 @@
                     "#semi=;,dot=.,comma=,"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -401,7 +401,7 @@
             string template = "X{.var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("X.val", uri.ToString());
+            Assert.AreEqual("X.val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -420,7 +420,7 @@
             string template = "X{.list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("X.red,green,blue", uri.ToString());
+            Assert.AreEqual("X.red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -439,7 +439,7 @@
             string template = "X{.list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("X.red.green.blue", uri.ToString());
+            Assert.AreEqual("X.red.green.blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -468,7 +468,7 @@
                     "X.semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -487,7 +487,7 @@
             string template = "{/var:1,var}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/v/value", uri.ToString());
+            Assert.AreEqual("/v/value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -506,7 +506,7 @@
             string template = "{/list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/red,green,blue", uri.ToString());
+            Assert.AreEqual("/red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -525,7 +525,7 @@
             string template = "{/list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/red/green/blue", uri.ToString());
+            Assert.AreEqual("/red/green/blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -544,7 +544,7 @@
             string template = "{/list*,path:4}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/red/green/blue/%2Ffoo", uri.ToString());
+            Assert.AreEqual("/red/green/blue/%2Ffoo", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -575,7 +575,7 @@
                     "/semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -604,7 +604,7 @@
                     "/semi=%3B/dot=./comma=%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -623,7 +623,7 @@
             string template = "{;hello:5}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(";hello=Hello", uri.ToString());
+            Assert.AreEqual(";hello=Hello", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -642,7 +642,7 @@
             string template = "{;list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(";list=red,green,blue", uri.ToString());
+            Assert.AreEqual(";list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -661,7 +661,7 @@
             string template = "{;list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(";list=red;list=green;list=blue", uri.ToString());
+            Assert.AreEqual(";list=red;list=green;list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -690,7 +690,7 @@
                     ";keys=semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -719,7 +719,7 @@
                     ";semi=%3B;dot=.;comma=%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -738,7 +738,7 @@
             string template = "{?var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?var=val", uri.ToString());
+            Assert.AreEqual("?var=val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -757,7 +757,7 @@
             string template = "{?list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?list=red,green,blue", uri.ToString());
+            Assert.AreEqual("?list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -776,7 +776,7 @@
             string template = "{?list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?list=red&list=green&list=blue", uri.ToString());
+            Assert.AreEqual("?list=red&list=green&list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -805,7 +805,7 @@
                     "?keys=semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -834,7 +834,7 @@
                     "?semi=%3B&dot=.&comma=%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -853,7 +853,7 @@
             string template = "{&var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("&var=val", uri.ToString());
+            Assert.AreEqual("&var=val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -872,7 +872,7 @@
             string template = "{&list}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("&list=red,green,blue", uri.ToString());
+            Assert.AreEqual("&list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -891,7 +891,7 @@
             string template = "{&list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("&list=red&list=green&list=blue", uri.ToString());
+            Assert.AreEqual("&list=red&list=green&list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -920,7 +920,7 @@
                     "&keys=semi,%3B,dot,.,comma,%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
@@ -949,7 +949,7 @@
                     "&semi=%3B&dot=.&comma=%2C"
                 };
 
-            CollectionAssert.Contains(allowed, uri.ToString());
+            CollectionAssert.Contains(allowed, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);

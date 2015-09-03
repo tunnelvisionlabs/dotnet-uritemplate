@@ -1,0 +1,21 @@
+version: 1.0.{build}
+os: Visual Studio 2015
+configuration: Release
+init:
+- git config --global core.autocrlf true
+build_script:
+- cd build
+- powershell -Command .\build.ps1 -VisualStudioVersion "14.0" -InstallSHFB -Verbosity minimal -Logger "${env:ProgramFiles}\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cd ..
+after_build:
+- cd build
+- powershell -Command .\appveyor-deploy-docs.ps1
+- cd ..
+test_script:
+- vstest.console /Framework:Framework45 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\portable-net40\%CONFIGURATION%\Testing.Rfc6570.portable_net40.dll"
+- vstest.console /Framework:Framework40 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\portable-net40\%CONFIGURATION%\Testing.Rfc6570.portable_net40.dll"
+- vstest.console /Framework:Framework35 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\net20\%CONFIGURATION%\Testing.Rfc6570.net20.dll"
+# preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+cache:
+  - packages -> **\packages.config
+  - .shfb -> build\build.ps1

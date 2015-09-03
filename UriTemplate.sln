@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E11CC5F0-815F-436C-9A98-82E8C341404B}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Rfc6570.portable-ne
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2A61245F-738C-4F4A-9D62-FFAA026297CA}"
 	ProjectSection(SolutionItems) = preProject
+		Build\appveyor-deploy-docs.ps1 = Build\appveyor-deploy-docs.ps1
+		appveyor.yml = appveyor.yml
 		Build\build.ps1 = Build\build.ps1
 		Build\check-key.ps1 = Build\check-key.ps1
 		Build\keys.ps1 = Build\keys.ps1

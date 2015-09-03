@@ -40,7 +40,7 @@
             string template = "map?{x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("map?1024,768", uri.ToString());
+            Assert.AreEqual("map?1024,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -61,7 +61,7 @@
             string template = "{x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("1024,Hello%20World%21,768", uri.ToString());
+            Assert.AreEqual("1024,Hello%20World%21,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -84,7 +84,7 @@
             string template = "{+x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("1024,Hello%20World!,768", uri.ToString());
+            Assert.AreEqual("1024,Hello%20World!,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -107,7 +107,7 @@
             string template = "{+path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/foo/bar,1024/here", uri.ToString());
+            Assert.AreEqual("/foo/bar,1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -128,7 +128,7 @@
             string template = "{#x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("#1024,Hello%20World!,768", uri.ToString());
+            Assert.AreEqual("#1024,Hello%20World!,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -151,7 +151,7 @@
             string template = "{#path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("#/foo/bar,1024/here", uri.ToString());
+            Assert.AreEqual("#/foo/bar,1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -172,7 +172,7 @@
             string template = "X{.x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("X.1024.768", uri.ToString());
+            Assert.AreEqual("X.1024.768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -193,7 +193,7 @@
             string template = "{/var}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/value", uri.ToString());
+            Assert.AreEqual("/value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -212,7 +212,7 @@
             string template = "{/var,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/value/1024/here", uri.ToString());
+            Assert.AreEqual("/value/1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -233,7 +233,7 @@
             string template = "{;x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(";x=1024;y=768", uri.ToString());
+            Assert.AreEqual(";x=1024;y=768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -254,7 +254,7 @@
             string template = "{;x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(";x=1024;y=768;empty", uri.ToString());
+            Assert.AreEqual(";x=1024;y=768;empty", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -277,7 +277,7 @@
             string template = "{?x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?x=1024&y=768", uri.ToString());
+            Assert.AreEqual("?x=1024&y=768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -298,7 +298,7 @@
             string template = "{?x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?x=1024&y=768&empty=", uri.ToString());
+            Assert.AreEqual("?x=1024&y=768&empty=", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -321,7 +321,7 @@
             string template = "?fixed=yes{&x}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("?fixed=yes&x=1024", uri.ToString());
+            Assert.AreEqual("?fixed=yes&x=1024", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -340,7 +340,7 @@
             string template = "{&x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("&x=1024&y=768&empty=", uri.ToString());
+            Assert.AreEqual("&x=1024&y=768&empty=", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
