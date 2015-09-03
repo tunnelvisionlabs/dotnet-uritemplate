@@ -13,6 +13,7 @@ after_build:
 - cd ..
 test_script:
 - vstest.console /Framework:Framework45 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\portable-net40\%CONFIGURATION%\Testing.Rfc6570.portable_net40.dll"
+- vstest.console /Framework:Framework40 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\portable-net40\%CONFIGURATION%\Testing.Rfc6570.portable_net40.dll"
 - vstest.console /Framework:Framework35 /logger:Appveyor "C:\projects\dotnet-uritemplate\Testing.Rfc6570\bin\net20\%CONFIGURATION%\Testing.Rfc6570.net20.dll"
 # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
 cache:
