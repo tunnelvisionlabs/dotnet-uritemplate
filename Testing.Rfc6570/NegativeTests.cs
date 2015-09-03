@@ -19,7 +19,7 @@
                 { "with space"        , "fail" },
                 { " leading_space"    , "Hi!" },
                 { "trailing_space "   , "Bye!" },
-                { "empty"             , "" },
+                { "empty"             , string.Empty },
                 { "path"              , "/foo/bar" },
                 { "x"                 , "1024" },
                 { "y"                 , "768" },

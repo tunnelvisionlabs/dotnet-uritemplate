@@ -15,11 +15,12 @@
             {
                 { "var", "value" },
                 { "hello", "Hello World!" },
-                { "empty", "" },
+                { "empty", string.Empty },
                 { "path", "/foo/bar" },
                 { "x", "1024" },
                 { "y", "768" },
             };
+
         private static readonly HashSet<string> requiredVariables =
             new HashSet<string>
             {

@@ -15,6 +15,7 @@
                 { "hello", "Hello World!" },
                 { "path", "/foo/bar" },
             };
+
         private static readonly HashSet<string> requiredVariables =
             new HashSet<string>
             {

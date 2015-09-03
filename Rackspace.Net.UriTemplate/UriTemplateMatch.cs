@@ -41,7 +41,7 @@ namespace Rackspace.Net
         /// <para>If <paramref name="bindings"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <exception cref="FormatException">
-        /// If <paramref name="bindings"/> contains two variable bindings for the same variable which do not have the same value, after considering the prefix modifier(s).
+        /// <para>If <paramref name="bindings"/> contains two variable bindings for the same variable which do not have the same value, after considering the prefix modifier(s).</para>
         /// </exception>
         internal UriTemplateMatch(UriTemplate template, IEnumerable<KeyValuePair<VariableReference, object>> bindings)
         {
@@ -91,6 +91,9 @@ namespace Rackspace.Net
         /// <summary>
         /// Gets the <see cref="UriTemplate"/> associated with this <see cref="UriTemplateMatch"/> instance.
         /// </summary>
+        /// <value>
+        /// The <see cref="UriTemplate"/> associated with this <see cref="UriTemplateMatch"/> instance.
+        /// </value>
         public UriTemplate Template
         {
             get
@@ -102,6 +105,9 @@ namespace Rackspace.Net
         /// <summary>
         /// Gets a collection of bindings from variable name to the actual URI Template variable reference and bound value.
         /// </summary>
+        /// <value>
+        /// A collection of bindings from variable name to the actual URI Template variable reference and bound value.
+        /// </value>
         public IDictionary<string, KeyValuePair<VariableReference, object>> Bindings
         {
             get

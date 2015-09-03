@@ -35,6 +35,9 @@
         /// include <see cref="RegexOptions.CultureInvariant"/> and, when supported,
         /// <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled"/>.</para>
         /// </remarks>
+        /// <value>
+        /// The default <see cref="RegexOptions"/> to use when creating new <see cref="Regex"/> instances.
+        /// </value>
         public static RegexOptions Default
         {
             get
