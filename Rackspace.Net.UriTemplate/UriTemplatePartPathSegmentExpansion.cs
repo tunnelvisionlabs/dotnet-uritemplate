@@ -174,7 +174,7 @@ namespace Rackspace.Net
 
             for (int i = startIndex; i < patterns.Count; i++)
             {
-                pattern.Append("(?:/").Append(patterns[i]).Append(")?");
+                pattern.Append("(?:/").Append(patterns[i]).Append(")");
                 if (!requiredPatterns.Get(i))
                     pattern.Append('?');
             }
