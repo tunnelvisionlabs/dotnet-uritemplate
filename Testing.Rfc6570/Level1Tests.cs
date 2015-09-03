@@ -30,7 +30,7 @@
             string template = string.Empty;
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual(string.Empty, uri.ToString());
+            Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -45,7 +45,7 @@
             string template = "{var}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("value", uri.ToString());
+            Assert.AreEqual("value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -64,7 +64,7 @@
             string template = "{hello}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("Hello%20World%21", uri.ToString());
+            Assert.AreEqual("Hello%20World%21", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);

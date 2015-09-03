@@ -521,7 +521,7 @@ namespace Rackspace.Net
 
             pattern.Append('$');
 
-            Match match = Regex.Match(candidate.ToString(), pattern.ToString());
+            Match match = Regex.Match(candidate.OriginalString, pattern.ToString());
             if (match == null || !match.Success)
                 return null;
 

@@ -32,7 +32,7 @@
             string template = "{+var}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("value", uri.ToString());
+            Assert.AreEqual("value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -51,7 +51,7 @@
             string template = "{+hello}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("Hello%20World!", uri.ToString());
+            Assert.AreEqual("Hello%20World!", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -70,7 +70,7 @@
             string template = "{+path}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("/foo/bar/here", uri.ToString());
+            Assert.AreEqual("/foo/bar/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
@@ -89,7 +89,7 @@
             string template = "here?ref={+path}";
             UriTemplate uriTemplate = new UriTemplate(template);
             Uri uri = uriTemplate.BindByName(variables);
-            Assert.AreEqual("here?ref=/foo/bar", uri.ToString());
+            Assert.AreEqual("here?ref=/foo/bar", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
