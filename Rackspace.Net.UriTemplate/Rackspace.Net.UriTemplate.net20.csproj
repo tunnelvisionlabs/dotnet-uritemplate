@@ -37,8 +37,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.net20.snk</AssemblyOriginatorKeyFile>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.net20.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -62,11 +62,11 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.net20.snk">
-      <Link>Rackspace.Net.UriTemplate.dev.net20.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.snk">
+      <Link>Rackspace.Net.UriTemplate.dev.snk</Link>
     </None>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.net20.snk">
-      <Link>Rackspace.Net.UriTemplate.net20.snk</Link>
+    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.snk">
+      <Link>Rackspace.Net.UriTemplate.snk</Link>
     </None>
     <None Include="Rackspace.Net.UriTemplate.nuspec" />
   </ItemGroup>
