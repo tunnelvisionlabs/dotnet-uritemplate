@@ -1,6 +1,7 @@
-﻿// Copyright (c) Rackspace, US Inc. All Rights Reserved. Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace Rackspace.Net
+namespace TunnelVisionLabs.Net
 {
     using System;
     using System.Collections.Generic;
@@ -363,7 +364,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <remarks>
         /// <para>For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
+        /// documentation for the <see cref="O:TunnelVisionLabs.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <returns>A <see cref="UriTemplateMatch"/> object containing the results of the match operation, or <see langword="null"/> if the match failed.</returns>
@@ -381,7 +382,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <remarks>
         /// <para>For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
+        /// documentation for the <see cref="O:TunnelVisionLabs.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid.</param>
@@ -405,7 +406,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <remarks>
         /// <para>For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
+        /// documentation for the <see cref="O:TunnelVisionLabs.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="arrayVariables">A collection of variables to treat as associative arrays when matching a candidate URI to the template. Associative arrays are returned as instances of <see cref="IList{T}"/> whose values are of type <see cref="string"/>. The default value is an empty collection.</param>
@@ -434,7 +435,7 @@ namespace Rackspace.Net
         /// Attempts to match a <see cref="Uri"/> to a <see cref="UriTemplate"/>. A successful
         /// match operation results in an assignment of values to variables in the URI Template
         /// which is capable of producing a <c>candidate</c> URI through the
-        /// <see cref="O:Rackspace.Net.UriTemplate.BindByName"/> operation.
+        /// <see cref="O:TunnelVisionLabs.Net.UriTemplate.BindByName"/> operation.
         /// </summary>
         /// <remarks>
         /// <para>There are several limitations in the current implementation of this operation.</para>
@@ -442,7 +443,7 @@ namespace Rackspace.Net
         /// <list type="bullet">
         ///   <item>
         ///     If more than one assignment of values to variables exists which is capable of
-        ///     producing the <c>candidate</c> URI through the <see cref="O:Rackspace.Net.UriTemplate.BindByName"/>
+        ///     producing the <c>candidate</c> URI through the <see cref="O:TunnelVisionLabs.Net.UriTemplate.BindByName"/>
         ///     operation, it is unspecified which assignment of values is chosen.
         ///   </item>
         ///   <item>
@@ -476,7 +477,7 @@ namespace Rackspace.Net
         /// </summary>
         /// <remarks>
         /// <para>For detailed information about the behavior of this method, see the remarks in the
-        /// documentation for the <see cref="O:Rackspace.Net.UriTemplate.Match"/> methods.</para>
+        /// documentation for the <see cref="O:TunnelVisionLabs.Net.UriTemplate.Match"/> methods.</para>
         /// </remarks>
         /// <param name="candidate">The <see cref="Uri"/> to match against the template.</param>
         /// <param name="requiredVariables">A collection of variables which must be provided during the expansion process for the resulting URI to be valid. The default value is an empty collection.</param>

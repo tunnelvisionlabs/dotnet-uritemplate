@@ -1,37 +1,38 @@
-﻿// Copyright (c) Rackspace, US Inc. All Rights Reserved. Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace Rackspace.Net
+namespace TunnelVisionLabs.Net
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
     using System.Text.RegularExpressions;
-    using BitArray = System.Collections.BitArray;
     using DictionaryEntry = System.Collections.DictionaryEntry;
     using IDictionary = System.Collections.IDictionary;
     using IEnumerable = System.Collections.IEnumerable;
 
     /// <summary>
-    /// Represents a URI Template expression of the form <c>{/x,y}</c>.
+    /// Represents a URI Template expression of the form <c>{;x,y}</c>.
     /// </summary>
-    internal sealed class UriTemplatePartPathSegmentExpansion : UriTemplatePartExpansion
+    internal sealed class UriTemplatePartPathParametersExpansion : UriTemplatePartExpansion
     {
-        public UriTemplatePartPathSegmentExpansion(IEnumerable<VariableReference> variables)
+        public UriTemplatePartPathParametersExpansion(IEnumerable<VariableReference> variables)
             : base(variables)
         {
         }
 
         /// <inheritdoc/>
-        /// <value>This method always returns <see cref="UriTemplatePartType.PathSegments"/>.</value>
+        /// <value>This method always returns <see cref="UriTemplatePartType.PathParameters"/>.</value>
         public override UriTemplatePartType Type
         {
             get
             {
-                return UriTemplatePartType.PathSegments;
+                return UriTemplatePartType.PathParameters;
             }
         }
 
+        /// <inheritdoc/>
         protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
@@ -41,21 +42,16 @@ namespace Rackspace.Net
             if (mapVariables == null)
                 throw new ArgumentNullException("mapVariables");
 
-            BitArray requiredPatterns = new BitArray(Variables.Count);
             List<string> variablePatterns = new List<string>();
-            for (int i = 0; i < Variables.Count; i++)
+            foreach (var variable in Variables)
             {
-                VariableReference variable = Variables[i];
-                if (requiredVariables.Contains(variable.Name))
-                    requiredPatterns.Set(i, true);
-
                 bool allowReservedSet = false;
                 variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, requiredVariables, arrayVariables, mapVariables));
             }
 
-            pattern.Append("(?:");
-            AppendZeroOrMoreToEnd(pattern, requiredPatterns, variablePatterns, 0);
-            pattern.Append(")");
+            pattern.Append("(?:;");
+            AppendOneOrMoreUnorderedToEnd(pattern, variablePatterns, 0);
+            pattern.Append(")?");
         }
 
         private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
@@ -73,6 +69,14 @@ namespace Rackspace.Net
                 valueStartPattern = "(?:";
 
             string valueEndPattern = ")";
+
+            string nameStartPattern;
+            if (!string.IsNullOrEmpty(groupName))
+                nameStartPattern = "(?<" + groupName + "name>";
+            else
+                nameStartPattern = "(?:";
+
+            string nameEndPattern = ")";
 
             string keyStartPattern;
             if (!string.IsNullOrEmpty(groupName))
@@ -96,15 +100,30 @@ namespace Rackspace.Net
             else
                 countPattern = "*";
 
+            string positiveCountPattern;
+            if (allowReservedSet)
+                positiveCountPattern = "+?";
+            else
+                positiveCountPattern = "+";
+
             StringBuilder variablePattern = new StringBuilder();
 
             if (variable.Prefix != null)
             {
                 // by this point we know to match the variable as a simple string
+                variablePattern.Append("(?:");
+                variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
+
+                // the '=' is only included for non-empty values
+                variablePattern.Append("(?:=");
                 variablePattern.Append(valueStartPattern);
                 variablePattern.Append(characterPattern);
-                variablePattern.Append("{0,").Append(variable.Prefix).Append("}");
+                variablePattern.Append("{1,").Append(variable.Prefix).Append("}");
                 variablePattern.Append(valueEndPattern);
+                variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
+                variablePattern.Append(")");
+
+                variablePattern.Append(")");
                 return variablePattern.ToString();
             }
 
@@ -120,9 +139,15 @@ namespace Rackspace.Net
             if (considerString)
             {
                 // could be a simple string
+                variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
+
+                // the '=' is only included for non-empty values
+                variablePattern.Append("(?:=");
                 variablePattern.Append(valueStartPattern);
-                variablePattern.Append(characterPattern).Append(countPattern);
+                variablePattern.Append(characterPattern).Append(positiveCountPattern);
                 variablePattern.Append(valueEndPattern);
+                variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
+                variablePattern.Append(")");
             }
 
             if (considerArray)
@@ -131,10 +156,36 @@ namespace Rackspace.Net
                     variablePattern.Append('|');
 
                 // could be an associative array
-                variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
-                variablePattern.Append("(?:").Append(variable.Composite ? '/' : ',');
-                variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
-                variablePattern.Append(")*?");
+                variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
+
+                if (variable.Composite)
+                {
+                    // the '=' is only included for non-empty values
+                    variablePattern.Append("(?:=");
+                    variablePattern.Append(valueStartPattern).Append(characterPattern).Append(positiveCountPattern).Append(valueEndPattern);
+                    variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
+                    variablePattern.Append(")");
+                }
+                else
+                {
+                    // the '=' is only included for non-empty values
+                    variablePattern.Append("(?:");
+
+                    // positiveCountPattern if only one item
+                    variablePattern.Append('=');
+                    variablePattern.Append(valueStartPattern).Append(characterPattern).Append(positiveCountPattern).Append(valueEndPattern);
+
+                    // countPattern for multiple items (the ',' will make the value non-empty)
+                    variablePattern.Append("|=");
+                    variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
+                    variablePattern.Append("(?:,");
+                    variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
+                    variablePattern.Append(")+?");
+
+                    // zero items
+                    variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
+                    variablePattern.Append(")");
+                }
             }
 
             if (considerMap)
@@ -143,21 +194,51 @@ namespace Rackspace.Net
                     variablePattern.Append('|');
 
                 // could be an associative map
-                char separator = variable.Composite ? '=' : ',';
-                variablePattern.Append(valueStartPattern);
-                variablePattern.Append(keyStartPattern);
-                variablePattern.Append(characterPattern).Append(countPattern);
-                variablePattern.Append(keyEndPattern);
-                variablePattern.Append(separator).Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
-                variablePattern.Append(valueEndPattern);
-                variablePattern.Append("(?:").Append(variable.Composite ? '/' : ',');
-                variablePattern.Append(valueStartPattern);
-                variablePattern.Append(keyStartPattern);
-                variablePattern.Append(characterPattern).Append(countPattern);
-                variablePattern.Append(keyEndPattern);
-                variablePattern.Append(separator).Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
-                variablePattern.Append(valueEndPattern);
-                variablePattern.Append(")*?");
+
+                if (variable.Composite)
+                {
+                    variablePattern.Append(valueStartPattern);
+                    variablePattern.Append(keyStartPattern);
+                    variablePattern.Append(characterPattern).Append(countPattern);
+                    variablePattern.Append(keyEndPattern);
+                    // the '=' is only included for non-empty values
+                    variablePattern.Append("(?:=");
+                    variablePattern.Append(mapValueStartPattern).Append(characterPattern).Append(positiveCountPattern).Append(mapValueEndPattern);
+                    variablePattern.Append("|").Append(mapValueStartPattern).Append(mapValueEndPattern);
+                    variablePattern.Append(")");
+                    variablePattern.Append(valueEndPattern);
+                }
+                else
+                {
+                    variablePattern.Append(nameStartPattern).Append(Regex.Escape(variable.Name)).Append(nameEndPattern);
+
+                    // the '=' is only included for non-empty values
+                    variablePattern.Append("(?:=");
+
+                    // the ',' between the key and value allows countPattern and still never empty
+                    variablePattern.Append(valueStartPattern);
+                    variablePattern.Append(keyStartPattern);
+                    variablePattern.Append(characterPattern).Append(countPattern);
+                    variablePattern.Append(keyEndPattern);
+                    variablePattern.Append(',').Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
+                    variablePattern.Append(valueEndPattern);
+
+                    /* Composite variables appear as separate path parameters that are aggregated by the Match method.
+                     * This expression only needs to handle the non-composite case.
+                     */
+                    variablePattern.Append("(?:,");
+                    variablePattern.Append(valueStartPattern);
+                    variablePattern.Append(keyStartPattern);
+                    variablePattern.Append(characterPattern).Append(countPattern);
+                    variablePattern.Append(keyEndPattern);
+                    variablePattern.Append(',').Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
+                    variablePattern.Append(valueEndPattern);
+                    variablePattern.Append(")*?");
+
+                    // zero items
+                    variablePattern.Append("|").Append(valueStartPattern).Append(valueEndPattern);
+                    variablePattern.Append(")");
+                }
             }
 
             variablePattern.Append(")");
@@ -165,38 +246,45 @@ namespace Rackspace.Net
             return variablePattern.ToString();
         }
 
-        private static void AppendZeroOrMoreToEnd(StringBuilder pattern, BitArray requiredPatterns, List<string> patterns, int startIndex)
+        private static void AppendOneOrMoreUnorderedToEnd(StringBuilder pattern, List<string> patterns, int startIndex)
         {
             if (startIndex < 0)
                 throw new ArgumentOutOfRangeException("startIndex cannot be negative", "startIndex");
             if (startIndex >= patterns.Count)
                 throw new ArgumentException("startIndex cannot be greater than the number of patterns.", "startIndex");
 
-            for (int i = startIndex; i < patterns.Count; i++)
+            StringBuilder anySinglePattern = new StringBuilder();
+            anySinglePattern.Append("(?:");
+            for (int i = 0; i < patterns.Count; i++)
             {
-                pattern.Append("(?:/").Append(patterns[i]).Append(")");
-                if (!requiredPatterns.Get(i))
-                    pattern.Append('?');
+                if (i > 0)
+                    anySinglePattern.Append("|");
+
+                anySinglePattern.Append(patterns[i]);
             }
+
+            anySinglePattern.Append(")");
+
+            pattern.Append("(?:");
+            pattern.Append(anySinglePattern);
+            pattern.Append("(?:;");
+            pattern.Append(anySinglePattern);
+            pattern.Append(")*");
+            pattern.Append(")");
         }
 
         protected override KeyValuePair<VariableReference, object>[] MatchImpl(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
-            BitArray requiredPatterns = new BitArray(Variables.Count);
             List<string> variablePatterns = new List<string>();
             for (int i = 0; i < Variables.Count; i++)
             {
-                VariableReference variable = Variables[i];
-                if (requiredVariables.Contains(variable.Name))
-                    requiredPatterns.Set(i, true);
-
                 bool allowReservedSet = false;
                 variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, requiredVariables, arrayVariables, mapVariables));
             }
 
             StringBuilder matchPattern = new StringBuilder();
-            matchPattern.Append("^");
-            AppendZeroOrMoreToEnd(matchPattern, requiredPatterns, variablePatterns, 0);
+            matchPattern.Append("^;");
+            AppendOneOrMoreUnorderedToEnd(matchPattern, variablePatterns, 0);
             matchPattern.Append("$");
 
             Match match = Regex.Match(text, matchPattern.ToString());
@@ -204,9 +292,23 @@ namespace Rackspace.Net
             List<KeyValuePair<VariableReference, object>> results = new List<KeyValuePair<VariableReference, object>>();
             for (int i = 0; i < Variables.Count; i++)
             {
+                VariableReference variable = Variables[i];
+
                 Group group = match.Groups["var" + i];
                 if (!group.Success || group.Captures.Count == 0)
                     continue;
+
+                if (!variable.Composite)
+                {
+                    /* ;id=x;id=y is only valid for {;id*};
+                     * {;id} would produce ;id=x,y instead.
+                     */
+                    Group nameGroup = match.Groups["var" + i + "name"];
+                    if (nameGroup.Success && nameGroup.Captures.Count > 1)
+                        return null;
+
+                    Debug.Assert(nameGroup.Success && nameGroup.Captures.Count == 1);
+                }
 
                 if (Variables[i].Prefix != null)
                 {
@@ -283,7 +385,7 @@ namespace Rackspace.Net
             {
                 if (variable.Composite)
                 {
-                    builder.Append('/');
+                    builder.Append(';');
                     AppendText(builder, variable, entry.Key.ToString(), true);
                     builder.Append('=');
                     AppendText(builder, variable, entry.Value.ToString(), true);
@@ -306,11 +408,15 @@ namespace Rackspace.Net
                 throw new ArgumentNullException("variableValue");
 
             if (firstElement || variable.Composite)
-                builder.Append("/");
+                builder.Append(";").Append(variable.Name);
             else if (!firstElement)
                 builder.Append(',');
 
-            AppendText(builder, variable, variableValue.ToString(), true);
+            string text = variableValue.ToString();
+            if ((firstElement || variable.Composite) && !string.IsNullOrEmpty(text))
+                builder.Append('=');
+
+            AppendText(builder, variable, text, true);
         }
 
         public override string ToString()
@@ -319,7 +425,7 @@ namespace Rackspace.Net
             foreach (VariableReference variable in Variables)
                 names.Add(variable.Name);
 
-            return string.Format("{{/{0}}}", string.Join(",", names.ToArray()));
+            return string.Format("{{;{0}}}", string.Join(",", names.ToArray()));
         }
     }
 }

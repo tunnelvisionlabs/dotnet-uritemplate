@@ -74,9 +74,9 @@
     <Compile Include="TestCategories.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj">
+    <ProjectReference Include="..\TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.net20.csproj">
       <Project>{81c7e452-56d0-46b6-8f65-247b7f18c2bd}</Project>
-      <Name>Rackspace.Net.UriTemplate.net20</Name>
+      <Name>TunnelVisionLabs.Net.UriTemplate.net20</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

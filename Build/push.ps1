@@ -5,4 +5,4 @@ If ($Version.EndsWith('-dev')) {
 	Exit 1
 }
 
-..\.nuget\NuGet.exe 'push' ".\nuget\Rackspace.Net.UriTemplate.$Version.nupkg"
+..\.nuget\NuGet.exe 'push' ".\nuget\TunnelVisionLabs.Net.UriTemplate.$Version.nupkg"

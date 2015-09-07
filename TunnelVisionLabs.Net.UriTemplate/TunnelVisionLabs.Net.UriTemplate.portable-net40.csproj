@@ -8,8 +8,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rackspace.Net</RootNamespace>
-    <AssemblyName>Rackspace.Net.UriTemplate</AssemblyName>
+    <RootNamespace>TunnelVisionLabs.Net</RootNamespace>
+    <AssemblyName>TunnelVisionLabs.Net.UriTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\portable-net40\Debug\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\portable-net40\Debug\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,14 +34,14 @@
     <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\portable-net40\Release\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\portable-net40\Release\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.snk</AssemblyOriginatorKeyFile>
-    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\Rackspace.Net.UriTemplate.dev.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' == 'Final'">..\Build\keys\TunnelVisionLabs.Net.UriTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(KeyConfiguration)' != 'Final'">..\Build\keys\TunnelVisionLabs.Net.UriTemplate.dev.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InternalRegexOptions.cs" />
@@ -62,13 +62,13 @@
     <Compile Include="VariableReference.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.dev.snk">
-      <Link>Rackspace.Net.UriTemplate.dev.snk</Link>
+    <None Include="..\Build\keys\TunnelVisionLabs.Net.UriTemplate.dev.snk">
+      <Link>TunnelVisionLabs.Net.UriTemplate.dev.snk</Link>
     </None>
-    <None Include="..\Build\keys\Rackspace.Net.UriTemplate.snk">
-      <Link>Rackspace.Net.UriTemplate.snk</Link>
+    <None Include="..\Build\keys\TunnelVisionLabs.Net.UriTemplate.snk">
+      <Link>TunnelVisionLabs.Net.UriTemplate.snk</Link>
     </None>
-    <None Include="Rackspace.Net.UriTemplate.nuspec" />
+    <None Include="TunnelVisionLabs.Net.UriTemplate.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Rackspace, US Inc. All Rights Reserved. Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace Rackspace.Net
+namespace TunnelVisionLabs.Net
 {
     using System;
     using System.Collections.Generic;
@@ -13,47 +14,27 @@ namespace Rackspace.Net
     using IEnumerable = System.Collections.IEnumerable;
 
     /// <summary>
-    /// Represents a URI Template expression of the form <c>{x,y}</c> or <c>{+x,y}</c>.
+    /// Represents a URI Template expression of the form <c>{.x,y}</c>.
     /// </summary>
-    internal sealed class UriTemplatePartSimpleExpansion : UriTemplatePartExpansion
+    /// <threadsafety static="true" instance="false"/>
+    /// <preliminary/>
+    internal sealed class UriTemplatePartLabelExpansion : UriTemplatePartExpansion
     {
-        /// <summary>
-        /// <see langword="true"/> to escape reserved characters during rendering; otherwise, <see langword="false"/>.
-        /// </summary>
-        private readonly bool _escapeReserved;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UriTemplatePartSimpleExpansion"/> class.
-        /// </summary>
-        /// <param name="variables">A collection of variables to expand for this expression.</param>
-        /// <param name="escapeReserved"><see langword="true"/> to escape reserved characters during rendering; otherwise, <see langword="false"/>.</param>
-        /// <exception cref="ArgumentNullException"><para>If <paramref name="variables"/> is <see langword="null"/>.</para></exception>
-        /// <exception cref="ArgumentException">
-        /// <para>If <paramref name="variables"/> is empty.</para>
-        /// <para>-or-</para>
-        /// <para>If <paramref name="variables"/> contains any <see langword="null"/> values.</para>
-        /// </exception>
-        public UriTemplatePartSimpleExpansion(IEnumerable<VariableReference> variables, bool escapeReserved)
+        public UriTemplatePartLabelExpansion(IEnumerable<VariableReference> variables)
             : base(variables)
         {
-            _escapeReserved = escapeReserved;
         }
 
         /// <inheritdoc/>
-        /// <value>
-        /// <para><see cref="UriTemplatePartType.SimpleStringExpansion"/> for templates of the form <c>{x,y}</c>.</para>
-        /// <para>-or-</para>
-        /// <para><see cref="UriTemplatePartType.ReservedStringExpansion"/> for templates of the form <c>{+x,y}</c>.</para>
-        /// </value>
+        /// <value>This method always returns <see cref="UriTemplatePartType.LabelExpansion"/>.</value>
         public override UriTemplatePartType Type
         {
             get
             {
-                return _escapeReserved ? UriTemplatePartType.SimpleStringExpansion : UriTemplatePartType.ReservedStringExpansion;
+                return UriTemplatePartType.LabelExpansion;
             }
         }
 
-        /// <inheritdoc/>
         protected override void BuildPatternBodyImpl(StringBuilder pattern, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
         {
             if (pattern == null)
@@ -71,13 +52,13 @@ namespace Rackspace.Net
                 if (requiredVariables.Contains(variable.Name))
                     requiredPatterns.Set(i, true);
 
-                bool allowReservedSet = Type == UriTemplatePartType.ReservedStringExpansion;
+                bool allowReservedSet = false;
                 variablePatterns.Add(BuildVariablePattern(variable, allowReservedSet, null, requiredVariables, arrayVariables, mapVariables));
             }
 
             pattern.Append("(?:");
-            AppendOneOrMoreToEnd(pattern, requiredPatterns, variablePatterns, 0);
-            pattern.Append(")?");
+            AppendZeroOrMoreToEnd(pattern, requiredPatterns, variablePatterns, 0);
+            pattern.Append(")");
         }
 
         private static string BuildVariablePattern(VariableReference variable, bool allowReservedSet, string groupName, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
@@ -116,7 +97,7 @@ namespace Rackspace.Net
             if (allowReservedSet)
                 countPattern = "*?";
             else
-                countPattern = "*";
+                countPattern = "*?";
 
             StringBuilder variablePattern = new StringBuilder();
 
@@ -154,7 +135,7 @@ namespace Rackspace.Net
 
                 // could be an associative array
                 variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
-                variablePattern.Append("(?:,");
+                variablePattern.Append("(?:").Append(variable.Composite ? @"\." : ",");
                 variablePattern.Append(valueStartPattern).Append(characterPattern).Append(countPattern).Append(valueEndPattern);
                 variablePattern.Append(")*?");
             }
@@ -172,7 +153,7 @@ namespace Rackspace.Net
                 variablePattern.Append(keyEndPattern);
                 variablePattern.Append(separator).Append(mapValueStartPattern).Append(characterPattern).Append(countPattern).Append(mapValueEndPattern);
                 variablePattern.Append(valueEndPattern);
-                variablePattern.Append("(?:,");
+                variablePattern.Append("(?:").Append(variable.Composite ? @"\." : ",");
                 variablePattern.Append(valueStartPattern);
                 variablePattern.Append(keyStartPattern);
                 variablePattern.Append(characterPattern).Append(countPattern);
@@ -187,50 +168,19 @@ namespace Rackspace.Net
             return variablePattern.ToString();
         }
 
-        private static void AppendOneOrMoreToEnd(StringBuilder pattern, BitArray requiredPatterns, List<string> patterns, int startIndex)
+        private static void AppendZeroOrMoreToEnd(StringBuilder pattern, BitArray requiredPatterns, List<string> patterns, int startIndex)
         {
             if (startIndex < 0)
                 throw new ArgumentOutOfRangeException("startIndex cannot be negative", "startIndex");
             if (startIndex >= patterns.Count)
                 throw new ArgumentException("startIndex cannot be greater than the number of patterns.", "startIndex");
 
-            pattern.Append("(?:");
-
-            if (requiredPatterns.Get(startIndex))
+            for (int i = startIndex; i < patterns.Count; i++)
             {
-                // include the required first item
-                pattern.Append(patterns[startIndex]);
-
-                if (startIndex < patterns.Count - 1)
-                {
-                    // optionally include at least one more from there to the end
-                    pattern.Append("(?:,");
-                    AppendOneOrMoreToEnd(pattern, requiredPatterns, patterns, startIndex + 1);
-                    pattern.Append(")?");
-                }
+                pattern.Append(@"(?:\.").Append(patterns[i]).Append(")");
+                if (!requiredPatterns.Get(i))
+                    pattern.Append('?');
             }
-            else
-            {
-                if (startIndex < patterns.Count - 1)
-                {
-                    // include the first item and at least one more from there to the end
-                    pattern.Append(patterns[startIndex]).Append(",");
-                    AppendOneOrMoreToEnd(pattern, requiredPatterns, patterns, startIndex + 1);
-                    pattern.Append("|");
-                }
-
-                // include the first item alone
-                pattern.Append(patterns[startIndex]);
-
-                if (startIndex < patterns.Count - 1)
-                {
-                    // don't include the first item, but do include one or more to the end
-                    pattern.Append("|");
-                    AppendOneOrMoreToEnd(pattern, requiredPatterns, patterns, startIndex + 1);
-                }
-            }
-
-            pattern.Append(")");
         }
 
         protected override KeyValuePair<VariableReference, object>[] MatchImpl(string text, ICollection<string> requiredVariables, ICollection<string> arrayVariables, ICollection<string> mapVariables)
@@ -243,13 +193,13 @@ namespace Rackspace.Net
                 if (requiredVariables.Contains(variable.Name))
                     requiredPatterns.Set(i, true);
 
-                bool allowReservedSet = Type == UriTemplatePartType.ReservedStringExpansion;
+                bool allowReservedSet = false;
                 variablePatterns.Add(BuildVariablePattern(Variables[i], allowReservedSet, "var" + i, requiredVariables, arrayVariables, mapVariables));
             }
 
             StringBuilder matchPattern = new StringBuilder();
             matchPattern.Append("^");
-            AppendOneOrMoreToEnd(matchPattern, requiredPatterns, variablePatterns, 0);
+            AppendZeroOrMoreToEnd(matchPattern, requiredPatterns, variablePatterns, 0);
             matchPattern.Append("$");
 
             Match match = Regex.Match(text, matchPattern.ToString());
@@ -313,50 +263,57 @@ namespace Rackspace.Net
 
         protected override void RenderElement(StringBuilder builder, VariableReference variable, object variableValue, bool first)
         {
-            if (builder == null)
-                throw new ArgumentNullException("builder");
-            if (variableValue == null)
-                throw new ArgumentNullException("variableValue");
-
-            if (!first)
-                builder.Append(',');
-
-            AppendText(builder, variable, variableValue.ToString(), _escapeReserved);
+            RenderElement(builder, variable, variableValue, first, true);
         }
 
         protected override void RenderEnumerable(StringBuilder builder, VariableReference variable, IEnumerable variableValue, bool first)
         {
+            bool firstElement = true;
             foreach (object value in variableValue)
             {
                 if (value == null)
                     continue;
 
-                RenderElement(builder, variable, value, first);
-                first = false;
+                RenderElement(builder, variable, value, first, firstElement);
+                firstElement = false;
             }
         }
 
         protected override void RenderDictionary(StringBuilder builder, VariableReference variable, IDictionary variableValue, bool first)
         {
+            bool firstElement = true;
             foreach (DictionaryEntry entry in variableValue)
             {
                 if (variable.Composite)
                 {
-                    if (!first)
-                        builder.Append(',');
-
-                    AppendText(builder, variable, entry.Key.ToString(), _escapeReserved);
+                    builder.Append('.');
+                    AppendText(builder, variable, entry.Key.ToString(), true);
                     builder.Append('=');
-                    AppendText(builder, variable, entry.Value.ToString(), _escapeReserved);
+                    AppendText(builder, variable, entry.Value.ToString(), true);
                 }
                 else
                 {
-                    RenderElement(builder, variable, entry.Key, first);
-                    RenderElement(builder, variable, entry.Value, false);
+                    RenderElement(builder, variable, entry.Key, first, firstElement);
+                    RenderElement(builder, variable, entry.Value, first, false);
                 }
 
-                first = false;
+                firstElement = false;
             }
+        }
+
+        private void RenderElement(StringBuilder builder, VariableReference variable, object variableValue, bool firstVariable, bool firstElement)
+        {
+            if (builder == null)
+                throw new ArgumentNullException("builder");
+            if (variableValue == null)
+                throw new ArgumentNullException("variableValue");
+
+            if (firstElement || variable.Composite)
+                builder.Append('.');
+            else if (!firstElement)
+                builder.Append(',');
+
+            AppendText(builder, variable, variableValue.ToString(), true);
         }
 
         public override string ToString()
@@ -365,7 +322,7 @@ namespace Rackspace.Net
             foreach (VariableReference variable in Variables)
                 names.Add(variable.Name);
 
-            return string.Format("{{{0}{1}}}", Type == UriTemplatePartType.SimpleStringExpansion ? string.Empty : "+", string.Join(",", names.ToArray()));
+            return string.Format("{{.{0}}}", string.Join(",", names.ToArray()));
         }
     }
 }

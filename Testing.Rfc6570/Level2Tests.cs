@@ -1,9 +1,12 @@
-﻿namespace Testing.Rfc6570
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+
+namespace Testing.Rfc6570
 {
     using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rackspace.Net;
+    using TunnelVisionLabs.Net;
 
     [TestClass]
     public class Level2Tests

@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.net20", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TunnelVisionLabs.Net.UriTemplate.net20", "TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.net20.csproj", "{81C7E452-56D0-46B6-8F65-247B7F18C2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rackspace.Net.UriTemplate.portable-net40", "Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.portable-net40.csproj", "{9ED13C7D-7082-4306-9E2D-E1919C436848}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TunnelVisionLabs.Net.UriTemplate.portable-net40", "TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.portable-net40.csproj", "{9ED13C7D-7082-4306-9E2D-E1919C436848}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Docs.UriTemplate.net20", "Docs.UriTemplate\Docs.UriTemplate.net20.shfbproj", "{CC7F0F12-4736-43C3-A0C0-722875504053}"
 	ProjectSection(ProjectDependencies) = postProject

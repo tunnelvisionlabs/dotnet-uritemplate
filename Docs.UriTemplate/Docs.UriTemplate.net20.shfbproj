@@ -20,7 +20,7 @@
     <HtmlHelpName>URI Template API Reference</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Rackspace.Net.UriTemplate\Rackspace.Net.UriTemplate.net20.csproj" subFolders="True" />
+      <DocumentationSource sourceFile="..\TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.net20.csproj" subFolders="True" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -43,7 +43,8 @@
     <IncludeFavorites>True</IncludeFavorites>
     <BinaryTOC>True</BinaryTOC>
     <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, SealedProtected</VisibleItems>
-    <FeedbackEMailAddress>sam.harwell%40rackspace.com</FeedbackEMailAddress>
+    <FeedbackEMailAddress>
+    </FeedbackEMailAddress>
     <CopyrightText>
     </CopyrightText>
     <CopyrightHref>
@@ -69,7 +70,7 @@
     <TopicVersion>100</TopicVersion>
     <TocOrder>-1</TocOrder>
     <ProductTitle>URI Template API</ProductTitle>
-    <VendorName>Rackspace</VendorName>
+    <VendorName>Tunnel Vision Laboratories, LLC</VendorName>
     <MSHelpViewerSdkLinkType>Id</MSHelpViewerSdkLinkType>
     <CatalogVersion>100</CatalogVersion>
     <CatalogProductId>VS</CatalogProductId>
@@ -88,6 +89,7 @@
     <ComponentPath />
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
+    <FooterText>&amp;lt%3ba href=&amp;quot%3bhttps://github.com/tunnelvisionlabs/dotnet-uritemplate&amp;quot%3b&amp;gt%3bURI Template Library Home&amp;lt%3b/a&amp;gt%3b</FooterText>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional

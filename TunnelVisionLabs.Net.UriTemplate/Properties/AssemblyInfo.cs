@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -7,12 +10,12 @@ using System.Runtime.InteropServices;
 // of mscorlib and a few non-public (and thus non-breaking) implementation details.
 // In other words, while the builds are not identical, they are interchangeable at
 // runtime.
-[assembly: AssemblyTitle("Rackspace.Net.UriTemplate")]
+[assembly: AssemblyTitle("TunnelVisionLabs.Net.UriTemplate")]
 [assembly: AssemblyDescription("An implementation of RFC 6570 URI templates for .NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Rackspace Inc.")]
-[assembly: AssemblyProduct("Rackspace.Net.UriTemplate")]
-[assembly: AssemblyCopyright("Copyright © Sam Harwell 2014")]
+[assembly: AssemblyCompany("Tunnel Vision Laboratories, LLC")]
+[assembly: AssemblyProduct("TunnelVisionLabs.Net.UriTemplate")]
+[assembly: AssemblyCopyright("Copyright © Sam Harwell 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
