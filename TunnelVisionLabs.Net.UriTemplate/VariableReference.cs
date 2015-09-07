@@ -177,7 +177,9 @@ namespace TunnelVisionLabs.Net
         /// <summary>
         /// Returns a string representation of the variable reference, in the format described in RFC 6570.
         /// </summary>
-        /// <inheritdoc/>
+        /// <returns>
+        /// A string representation of the variable reference, in the format described in RFC 6570.
+        /// </returns>
         public override string ToString()
         {
             if (_prefix.HasValue)

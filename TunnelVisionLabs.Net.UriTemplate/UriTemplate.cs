@@ -573,7 +573,9 @@ namespace TunnelVisionLabs.Net
         /// <summary>
         /// Returns a string representation of the URI template, in the format described in RFC 6570.
         /// </summary>
-        /// <inheritdoc/>
+        /// <returns>
+        /// A string representation of the URI template, in the format described in RFC 6570.
+        /// </returns>
         public override string ToString()
         {
             return _template;
