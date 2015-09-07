@@ -200,6 +200,7 @@ namespace TunnelVisionLabs.Net
                     variablePattern.Append(keyStartPattern);
                     variablePattern.Append(characterPattern).Append(countPattern);
                     variablePattern.Append(keyEndPattern);
+
                     // the '=' is only included for non-empty values
                     variablePattern.Append("(?:=");
                     variablePattern.Append(mapValueStartPattern).Append(characterPattern).Append(positiveCountPattern).Append(mapValueEndPattern);

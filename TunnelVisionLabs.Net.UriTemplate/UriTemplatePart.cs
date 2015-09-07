@@ -230,6 +230,7 @@ namespace TunnelVisionLabs.Net
 
             // the current position in sourceData
             int position = 0;
+
             // the index of the current % character in sourceData
             int index = -1;
             for (index = Array.IndexOf(sourceData, (byte)'%', index + 1); index >= 0; index = Array.IndexOf(sourceData, (byte)'%', index + 1))
