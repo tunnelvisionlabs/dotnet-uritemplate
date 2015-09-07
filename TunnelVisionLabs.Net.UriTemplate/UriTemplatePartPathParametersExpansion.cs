@@ -194,7 +194,6 @@ namespace TunnelVisionLabs.Net
                     variablePattern.Append('|');
 
                 // could be an associative map
-
                 if (variable.Composite)
                 {
                     variablePattern.Append(valueStartPattern);
