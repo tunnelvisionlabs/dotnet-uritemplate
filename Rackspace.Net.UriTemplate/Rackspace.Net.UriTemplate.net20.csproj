@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TunnelVisionLabs.Net</RootNamespace>
-    <AssemblyName>Rackspace.Net.UriTemplate</AssemblyName>
+    <AssemblyName>TunnelVisionLabs.Net.UriTemplate</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseIntermediateOutputPath>obj\net20\</BaseIntermediateOutputPath>
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\net20\Debug\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\net20\Debug\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <DefineConstants>TRACE;NET35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\net20\Release\Rackspace.Net.UriTemplate.xml</DocumentationFile>
+    <DocumentationFile>bin\net20\Release\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

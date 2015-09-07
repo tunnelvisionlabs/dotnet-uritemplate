@@ -17,13 +17,13 @@
   <files>
 
     <!-- Runtime libraries -->
-    <file src="bin\net20\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\net20"/>
-    <file src="bin\net20\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\net20"/>
-    <file src="..\Docs.UriTemplate\bin\Api\net20\Rackspace.Net.UriTemplate.xml" target="lib\net20"/>
+    <file src="bin\net20\$Configuration$\TunnelVisionLabs.Net.UriTemplate.dll" target="lib\net20"/>
+    <file src="bin\net20\$Configuration$\TunnelVisionLabs.Net.UriTemplate.pdb" target="lib\net20"/>
+    <file src="..\Docs.UriTemplate\bin\Api\net20\TunnelVisionLabs.Net.UriTemplate.xml" target="lib\net20"/>
 
-    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.dll" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
-    <file src="bin\portable-net40\$Configuration$\Rackspace.Net.UriTemplate.pdb" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
-    <file src="..\Docs.UriTemplate\bin\Api\portable-net40\Rackspace.Net.UriTemplate.xml" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="bin\portable-net40\$Configuration$\TunnelVisionLabs.Net.UriTemplate.dll" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="bin\portable-net40\$Configuration$\TunnelVisionLabs.Net.UriTemplate.pdb" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
+    <file src="..\Docs.UriTemplate\bin\Api\portable-net40\TunnelVisionLabs.Net.UriTemplate.xml" target="lib\portable-net4+sl5+win+wpa81+wp8+MonoAndroid1+MonoTouch1"/>
 
     <!-- Source code -->
     <file src="**\*.cs" target="src" />

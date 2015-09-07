@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 // of mscorlib and a few non-public (and thus non-breaking) implementation details.
 // In other words, while the builds are not identical, they are interchangeable at
 // runtime.
-[assembly: AssemblyTitle("Rackspace.Net.UriTemplate")]
+[assembly: AssemblyTitle("TunnelVisionLabs.Net.UriTemplate")]
 [assembly: AssemblyDescription("An implementation of RFC 6570 URI templates for .NET")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tunnel Vision Laboratories, LLC")]
-[assembly: AssemblyProduct("Rackspace.Net.UriTemplate")]
+[assembly: AssemblyProduct("TunnelVisionLabs.Net.UriTemplate")]
 [assembly: AssemblyCopyright("Copyright © Sam Harwell 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

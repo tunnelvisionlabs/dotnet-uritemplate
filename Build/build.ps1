@@ -104,7 +104,7 @@ if (-not $SkipKeyCheck) {
 	. .\keys.ps1
 
 	foreach ($pair in $Keys.GetEnumerator()) {
-		$assembly = Resolve-FullPath -Path "..\Rackspace.Net.UriTemplate\bin\$($pair.Key)\$BuildConfig\Rackspace.Net.UriTemplate.dll"
+		$assembly = Resolve-FullPath -Path "..\Rackspace.Net.UriTemplate\bin\$($pair.Key)\$BuildConfig\TunnelVisionLabs.Net.UriTemplate.dll"
 		# Run the actual check in a separate process or the current process will keep the assembly file locked
 		powershell -Command ".\check-key.ps1 -Assembly '$assembly' -ExpectedKey '$($pair.Value)' -Build '$($pair.Key)'"
 		if (-not $?) {

@@ -181,7 +181,7 @@
                   In your project, add a reference to the following assembly.
                 </para>
                 <para>
-                  <localUri>$(SolutionDir)\lib\Rackspace.Net.UriTemplate-$(Version)\lib\$(Framework)\Rackspace.Net.UriTemplate.dll</localUri>
+                  <localUri>$(SolutionDir)\lib\Rackspace.Net.UriTemplate-$(Version)\lib\$(Framework)\TunnelVisionLabs.Net.UriTemplate.dll</localUri>
                 </para>
               </listItem>
             </list>
