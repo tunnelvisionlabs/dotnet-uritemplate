@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Rackspace.Net.UriTemplate</id>
+    <id>TunnelVisionLabs.Net.UriTemplate</id>
     <version>0.0.0</version>
-    <title>Rackspace URI Template Library</title>
+    <title>TunnelVisionLabs.Net.UriTemplate</title>
     <authors>Sam Harwell</authors>
     <owners>Sam Harwell</owners>
     <licenseUrl>https://raw.github.com/tunnelvisionlabs/dotnet-uritemplate/v$version$/LICENSE</licenseUrl>

@@ -55,19 +55,19 @@
             <list class="bullet">
               <listItem>
                 <para>
-                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>,
+                  If the <codeInline>id</codeInline> is specified as <literal>TunnelVisionLabs.Net.UriTemplate</literal>,
                   but the <codeInline>version</codeInline> is left unspecified, the template expansion
-                  operation produces the relative URI <fictitiousUri>/packages/Rackspace.Net.UriTemplate</fictitiousUri>.
+                  operation produces the relative URI <fictitiousUri>/packages/TunnelVisionLabs.Net.UriTemplate</fictitiousUri>.
                   Since this URI does not specify a specific version, NuGet will display the information
                   for the latest version of the package.
                 </para>
               </listItem>
               <listItem>
                 <para>
-                  If the <codeInline>id</codeInline> is specified as <literal>Rackspace.Net.UriTemplate</literal>
+                  If the <codeInline>id</codeInline> is specified as <literal>TunnelVisionLabs.Net.UriTemplate</literal>
                   and the <codeInline>version</codeInline> is specified as <literal>1.0.0</literal>,
                   the template expansion operation produces the relative URI
-                  <fictitiousUri>/packages/Rackspace.Net.UriTemplate/1.0.0</fictitiousUri>. This is the
+                  <fictitiousUri>/packages/TunnelVisionLabs.Net.UriTemplate/1.0.0</fictitiousUri>. This is the
                   path to information about version 1.0.0 of the package.
                 </para>
               </listItem>

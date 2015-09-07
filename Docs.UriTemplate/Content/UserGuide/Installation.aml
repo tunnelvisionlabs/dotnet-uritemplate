@@ -20,8 +20,8 @@
             <linkAlternateText>NuGet Package Manager Home</linkAlternateText>
             <linkUri>https://www.nuget.org</linkUri>
           </externalLink> with the package ID <externalLink>
-            <linkText>Rackspace.Net.UriTemplate</linkText>
-            <linkUri>https://www.nuget.org/packages/Rackspace.Net.UriTemplate</linkUri>
+            <linkText>TunnelVisionLabs.Net.UriTemplate</linkText>
+            <linkUri>https://www.nuget.org/packages/TunnelVisionLabs.Net.UriTemplate</linkUri>
           </externalLink>.  In addition to the release binaries, symbol files and source code
           are published to <externalLink>
             <linkText>SymbolSource</linkText>
@@ -61,13 +61,13 @@
               </listItem>
               <listItem>
                 <para>
-                  In the search box in the top right, enter <userInput>Rackspace.Net.UriTemplate</userInput>.
+                  In the search box in the top right, enter <userInput>TunnelVisionLabs.Net.UriTemplate</userInput>.
                 </para>
               </listItem>
               <listItem>
                 <para>
-                  In the search results, locate and select the <ui>Rackspace URI Template Library</ui> package.
-                  Verify that the <ui>Id</ui> listed in the right hand pane is <literal>Rackspace.Net.UriTemplate</literal>.
+                  In the search results, locate and select the <ui>TunnelVisionLabs.Net.UriTemplate</ui> package.
+                  Verify that the <ui>Id</ui> listed in the right hand pane is <literal>TunnelVisionLabs.Net.UriTemplate</literal>.
                 </para>
               </listItem>
               <listItem>
@@ -173,7 +173,7 @@
                   steps, I'll assume the directory is <localUri>$(SolutionDir)\lib</localUri>.
                 </para>
                 <para>
-                  <system>nuget.exe install Rackspace.Net.UriTemplate</system>
+                  <system>nuget.exe install TunnelVisionLabs.Net.UriTemplate</system>
                 </para>
               </listItem>
               <listItem>
@@ -181,7 +181,7 @@
                   In your project, add a reference to the following assembly.
                 </para>
                 <para>
-                  <localUri>$(SolutionDir)\lib\Rackspace.Net.UriTemplate-$(Version)\lib\$(Framework)\TunnelVisionLabs.Net.UriTemplate.dll</localUri>
+                  <localUri>$(SolutionDir)\lib\TunnelVisionLabs.Net.UriTemplate-$(Version)\lib\$(Framework)\TunnelVisionLabs.Net.UriTemplate.dll</localUri>
                 </para>
               </listItem>
             </list>

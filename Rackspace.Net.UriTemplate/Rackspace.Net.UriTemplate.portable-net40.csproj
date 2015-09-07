@@ -68,7 +68,7 @@
     <None Include="..\Build\keys\TunnelVisionLabs.Net.UriTemplate.snk">
       <Link>TunnelVisionLabs.Net.UriTemplate.snk</Link>
     </None>
-    <None Include="Rackspace.Net.UriTemplate.nuspec" />
+    <None Include="TunnelVisionLabs.Net.UriTemplate.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
