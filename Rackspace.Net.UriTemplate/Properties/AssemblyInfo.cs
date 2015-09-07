@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -10,9 +13,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Rackspace.Net.UriTemplate")]
 [assembly: AssemblyDescription("An implementation of RFC 6570 URI templates for .NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Rackspace Inc.")]
+[assembly: AssemblyCompany("Tunnel Vision Laboratories, LLC")]
 [assembly: AssemblyProduct("Rackspace.Net.UriTemplate")]
-[assembly: AssemblyCopyright("Copyright © Sam Harwell 2014")]
+[assembly: AssemblyCopyright("Copyright © Sam Harwell 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
