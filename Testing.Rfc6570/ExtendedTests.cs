@@ -106,9 +106,11 @@ namespace Testing.Rfc6570
             {
                 { "42", "The Answer to the Ultimate Question of Life, the Universe, and Everything" },
                 { "1337", new[] { "leet", "as", "it", "can", "be" } },
-                { "german", new Dictionary<string, string> {
-                    { "11", "elf" },
-                    { "12", "zwölf" } }
+                { "german", new Dictionary<string, string>
+                    {
+                        { "11", "elf" },
+                        { "12", "zwölf" }
+                    }
                 }
             };
 
