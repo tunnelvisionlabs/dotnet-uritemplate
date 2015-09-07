@@ -13,7 +13,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class NegativeTests
     {
-        public readonly Dictionary<string, object> variables =
+        private readonly Dictionary<string, object> variables =
             new Dictionary<string, object>
             {
                 { "id"                , "thing" },

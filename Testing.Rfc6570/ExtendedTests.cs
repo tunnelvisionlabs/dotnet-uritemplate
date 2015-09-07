@@ -12,7 +12,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class ExtendedTests
     {
-        public static readonly Dictionary<string, object> variables1 =
+        private static readonly Dictionary<string, object> variables1 =
             new Dictionary<string, object>
             {
                 { "id"           , "person" },
@@ -38,7 +38,7 @@ namespace Testing.Rfc6570
                 { "assoc_special_chars", new Dictionary<string, string> { { "šöäŸœñê€£¥‡ÑÒÓÔÕ", "Ö×ØÙÚàáâãäåæçÿ" } } }
             };
 
-        public static readonly HashSet<string> requiredVariables1 =
+        private static readonly HashSet<string> requiredVariables1 =
             new HashSet<string>
             {
                 "id",
@@ -64,7 +64,7 @@ namespace Testing.Rfc6570
                 "assoc_special_chars"
             };
 
-        public static readonly Dictionary<string, object> variables2 =
+        private static readonly Dictionary<string, object> variables2 =
             new Dictionary<string, object>
             {
                 { "id" , new[] { "person", "albums" } },
@@ -78,7 +78,7 @@ namespace Testing.Rfc6570
                 { "geocode" , new[] { "37.76", "-122.427" } }
             };
 
-        public static readonly HashSet<string> requiredVariables2 =
+        private static readonly HashSet<string> requiredVariables2 =
             new HashSet<string>
             {
                 "id",
@@ -92,16 +92,16 @@ namespace Testing.Rfc6570
                 "geocode",
             };
 
-        public static readonly Dictionary<string, object> variables3 =
+        private static readonly Dictionary<string, object> variables3 =
             new Dictionary<string, object>
             {
                 { "empty_list", new string[0] },
                 { "empty_assoc", new Dictionary<string, string>() }
             };
 
-        public static readonly ICollection<string> requiredVariables3 = new string[0];
+        private static readonly ICollection<string> requiredVariables3 = new string[0];
 
-        public static readonly Dictionary<string, object> variables4 =
+        private static readonly Dictionary<string, object> variables4 =
             new Dictionary<string, object>
             {
                 { "42", "The Answer to the Ultimate Question of Life, the Universe, and Everything" },
@@ -112,7 +112,7 @@ namespace Testing.Rfc6570
                 }
             };
 
-        public static readonly HashSet<string> requiredVariables4 =
+        private static readonly HashSet<string> requiredVariables4 =
             new HashSet<string>
             {
                 "42",
