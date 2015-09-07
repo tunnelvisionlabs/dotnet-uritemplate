@@ -12,7 +12,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class ExtendedTests
     {
-        private static readonly Dictionary<string, object> variables1 =
+        private static readonly Dictionary<string, object> Variables1 =
             new Dictionary<string, object>
             {
                 { "id", "person" },
@@ -38,7 +38,7 @@ namespace Testing.Rfc6570
                 { "assoc_special_chars", new Dictionary<string, string> { { "šöäŸœñê€£¥‡ÑÒÓÔÕ", "Ö×ØÙÚàáâãäåæçÿ" } } }
             };
 
-        private static readonly HashSet<string> requiredVariables1 =
+        private static readonly HashSet<string> RequiredVariables1 =
             new HashSet<string>
             {
                 "id",
@@ -64,7 +64,7 @@ namespace Testing.Rfc6570
                 "assoc_special_chars"
             };
 
-        private static readonly Dictionary<string, object> variables2 =
+        private static readonly Dictionary<string, object> Variables2 =
             new Dictionary<string, object>
             {
                 { "id", new[] { "person", "albums" } },
@@ -78,7 +78,7 @@ namespace Testing.Rfc6570
                 { "geocode", new[] { "37.76", "-122.427" } }
             };
 
-        private static readonly HashSet<string> requiredVariables2 =
+        private static readonly HashSet<string> RequiredVariables2 =
             new HashSet<string>
             {
                 "id",
@@ -92,16 +92,16 @@ namespace Testing.Rfc6570
                 "geocode",
             };
 
-        private static readonly Dictionary<string, object> variables3 =
+        private static readonly Dictionary<string, object> Variables3 =
             new Dictionary<string, object>
             {
                 { "empty_list", new string[0] },
                 { "empty_assoc", new Dictionary<string, string>() }
             };
 
-        private static readonly ICollection<string> requiredVariables3 = new string[0];
+        private static readonly ICollection<string> RequiredVariables3 = new string[0];
 
-        private static readonly Dictionary<string, object> variables4 =
+        private static readonly Dictionary<string, object> Variables4 =
             new Dictionary<string, object>
             {
                 { "42", "The Answer to the Ultimate Question of Life, the Universe, and Everything" },
@@ -112,7 +112,7 @@ namespace Testing.Rfc6570
                 }
             };
 
-        private static readonly HashSet<string> requiredVariables4 =
+        private static readonly HashSet<string> RequiredVariables4 =
             new HashSet<string>
             {
                 "42",
@@ -127,16 +127,16 @@ namespace Testing.Rfc6570
         {
             string template = "{/id*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/person", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual(new[] { Variables1["id"] }, (ICollection)match.Bindings["id"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual(new[] { Variables1["id"] }, (ICollection)match.Bindings["id"].Value);
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Testing.Rfc6570
         {
             string template = "{/id*}{?fields,first_name,last.name,token}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             string[] allowed =
                 {
                     "/person?fields=id,name,picture&first_name=John&last.name=Doe&token=12345",
@@ -162,19 +162,19 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
-            CollectionAssert.AreEqual((ICollection)variables1["fields"], (ICollection)match.Bindings["fields"].Value);
-            Assert.AreEqual(variables1["first_name"], match.Bindings["first_name"].Value);
-            Assert.AreEqual(variables1["last.name"], match.Bindings["last.name"].Value);
-            Assert.AreEqual(variables1["token"], match.Bindings["token"].Value);
+            CollectionAssert.AreEqual(new[] { Variables1["id"] }, (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["fields"], (ICollection)match.Bindings["fields"].Value);
+            Assert.AreEqual(Variables1["first_name"], match.Bindings["first_name"].Value);
+            Assert.AreEqual(Variables1["last.name"], match.Bindings["last.name"].Value);
+            Assert.AreEqual(Variables1["token"], match.Bindings["token"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual(new[] { variables1["id"] }, (ICollection)match.Bindings["id"].Value);
-            CollectionAssert.AreEqual((ICollection)variables1["fields"], (ICollection)match.Bindings["fields"].Value);
-            Assert.AreEqual(variables1["first_name"], match.Bindings["first_name"].Value);
-            Assert.AreEqual(variables1["last.name"], match.Bindings["last.name"].Value);
-            Assert.AreEqual(variables1["token"], match.Bindings["token"].Value);
+            CollectionAssert.AreEqual(new[] { Variables1["id"] }, (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["fields"], (ICollection)match.Bindings["fields"].Value);
+            Assert.AreEqual(Variables1["first_name"], match.Bindings["first_name"].Value);
+            Assert.AreEqual(Variables1["last.name"], match.Bindings["last.name"].Value);
+            Assert.AreEqual(Variables1["token"], match.Bindings["token"].Value);
         }
 
         [TestMethod]
@@ -185,7 +185,7 @@ namespace Testing.Rfc6570
         {
             string template = "/search.{format}{?q,geocode,lang,locale,page,result_type}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             string[] allowed =
                 {
                     "/search.json?q=URI%20Templates&geocode=37.76,-122.427&lang=en&page=5",
@@ -196,22 +196,22 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["format"], match.Bindings["format"].Value);
-            Assert.AreEqual(variables1["q"], match.Bindings["q"].Value);
-            CollectionAssert.AreEqual((ICollection)variables1["geocode"], (ICollection)match.Bindings["geocode"].Value);
-            Assert.AreEqual(variables1["lang"], match.Bindings["lang"].Value);
+            Assert.AreEqual(Variables1["format"], match.Bindings["format"].Value);
+            Assert.AreEqual(Variables1["q"], match.Bindings["q"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["geocode"], (ICollection)match.Bindings["geocode"].Value);
+            Assert.AreEqual(Variables1["lang"], match.Bindings["lang"].Value);
             Assert.IsFalse(match.Bindings.ContainsKey("locale"));
-            Assert.AreEqual(variables1["page"], match.Bindings["page"].Value);
+            Assert.AreEqual(Variables1["page"], match.Bindings["page"].Value);
             Assert.IsFalse(match.Bindings.ContainsKey("result_type"));
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["format"], match.Bindings["format"].Value);
-            Assert.AreEqual(variables1["q"], match.Bindings["q"].Value);
-            CollectionAssert.AreEqual((ICollection)variables1["geocode"], (ICollection)match.Bindings["geocode"].Value);
-            Assert.AreEqual(variables1["lang"], match.Bindings["lang"].Value);
+            Assert.AreEqual(Variables1["format"], match.Bindings["format"].Value);
+            Assert.AreEqual(Variables1["q"], match.Bindings["q"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["geocode"], (ICollection)match.Bindings["geocode"].Value);
+            Assert.AreEqual(Variables1["lang"], match.Bindings["lang"].Value);
             Assert.IsFalse(match.Bindings.ContainsKey("locale"));
-            Assert.AreEqual(variables1["page"], match.Bindings["page"].Value);
+            Assert.AreEqual(Variables1["page"], match.Bindings["page"].Value);
             Assert.IsFalse(match.Bindings.ContainsKey("result_type"));
         }
 
@@ -222,16 +222,16 @@ namespace Testing.Rfc6570
         {
             string template = "/test{/Some%20Thing}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/test/foo", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["Some%20Thing"], match.Bindings["Some%20Thing"].Value);
+            Assert.AreEqual(Variables1["Some%20Thing"], match.Bindings["Some%20Thing"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["Some%20Thing"], match.Bindings["Some%20Thing"].Value);
+            Assert.AreEqual(Variables1["Some%20Thing"], match.Bindings["Some%20Thing"].Value);
         }
 
         [TestMethod]
@@ -241,16 +241,16 @@ namespace Testing.Rfc6570
         {
             string template = "/set{?number}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/set?number=6", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["number"].ToString(), match.Bindings["number"].Value);
+            Assert.AreEqual(Variables1["number"].ToString(), match.Bindings["number"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["number"].ToString(), match.Bindings["number"].Value);
+            Assert.AreEqual(Variables1["number"].ToString(), match.Bindings["number"].Value);
         }
 
         [TestMethod]
@@ -260,18 +260,18 @@ namespace Testing.Rfc6570
         {
             string template = "/loc{?long,lat}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/loc?long=37.76&lat=-122.427", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["long"].ToString(), match.Bindings["long"].Value);
-            Assert.AreEqual(variables1["lat"].ToString(), match.Bindings["lat"].Value);
+            Assert.AreEqual(Variables1["long"].ToString(), match.Bindings["long"].Value);
+            Assert.AreEqual(Variables1["lat"].ToString(), match.Bindings["lat"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["long"].ToString(), match.Bindings["long"].Value);
-            Assert.AreEqual(variables1["lat"].ToString(), match.Bindings["lat"].Value);
+            Assert.AreEqual(Variables1["long"].ToString(), match.Bindings["long"].Value);
+            Assert.AreEqual(Variables1["lat"].ToString(), match.Bindings["lat"].Value);
         }
 
         [TestMethod]
@@ -282,26 +282,26 @@ namespace Testing.Rfc6570
         {
             string template = "/base{/group_id,first_name}/pages{/page,lang}{?format,q}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/base/12345/John/pages/5/en?format=json&q=URI%20Templates", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["group_id"], match.Bindings["group_id"].Value);
-            Assert.AreEqual(variables1["first_name"], match.Bindings["first_name"].Value);
-            Assert.AreEqual(variables1["page"], match.Bindings["page"].Value);
-            Assert.AreEqual(variables1["lang"], match.Bindings["lang"].Value);
-            Assert.AreEqual(variables1["format"], match.Bindings["format"].Value);
-            Assert.AreEqual(variables1["q"], match.Bindings["q"].Value);
+            Assert.AreEqual(Variables1["group_id"], match.Bindings["group_id"].Value);
+            Assert.AreEqual(Variables1["first_name"], match.Bindings["first_name"].Value);
+            Assert.AreEqual(Variables1["page"], match.Bindings["page"].Value);
+            Assert.AreEqual(Variables1["lang"], match.Bindings["lang"].Value);
+            Assert.AreEqual(Variables1["format"], match.Bindings["format"].Value);
+            Assert.AreEqual(Variables1["q"], match.Bindings["q"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["group_id"], match.Bindings["group_id"].Value);
-            Assert.AreEqual(variables1["first_name"], match.Bindings["first_name"].Value);
-            Assert.AreEqual(variables1["page"], match.Bindings["page"].Value);
-            Assert.AreEqual(variables1["lang"], match.Bindings["lang"].Value);
-            Assert.AreEqual(variables1["format"], match.Bindings["format"].Value);
-            Assert.AreEqual(variables1["q"], match.Bindings["q"].Value);
+            Assert.AreEqual(Variables1["group_id"], match.Bindings["group_id"].Value);
+            Assert.AreEqual(Variables1["first_name"], match.Bindings["first_name"].Value);
+            Assert.AreEqual(Variables1["page"], match.Bindings["page"].Value);
+            Assert.AreEqual(Variables1["lang"], match.Bindings["lang"].Value);
+            Assert.AreEqual(Variables1["format"], match.Bindings["format"].Value);
+            Assert.AreEqual(Variables1["q"], match.Bindings["q"].Value);
         }
 
         [TestMethod]
@@ -311,16 +311,16 @@ namespace Testing.Rfc6570
         {
             string template = "/sparql{?query}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/sparql?query=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20SELECT%20%3Fbook%20%3Fwho%20WHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["query"], match.Bindings["query"].Value);
+            Assert.AreEqual(Variables1["query"], match.Bindings["query"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["query"], match.Bindings["query"].Value);
+            Assert.AreEqual(Variables1["query"], match.Bindings["query"].Value);
         }
 
         [TestMethod]
@@ -330,16 +330,16 @@ namespace Testing.Rfc6570
         {
             string template = "/go{?uri}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/go?uri=http%3A%2F%2Fexample.org%2F%3Furi%3Dhttp%253A%252F%252Fexample.org%252F", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["uri"], match.Bindings["uri"].Value);
+            Assert.AreEqual(Variables1["uri"], match.Bindings["uri"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["uri"], match.Bindings["uri"].Value);
+            Assert.AreEqual(Variables1["uri"], match.Bindings["uri"].Value);
         }
 
         [TestMethod]
@@ -349,16 +349,16 @@ namespace Testing.Rfc6570
         {
             string template = "/service{?word}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/service?word=dr%C3%BCcken", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["word"], match.Bindings["word"].Value);
+            Assert.AreEqual(Variables1["word"], match.Bindings["word"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["word"], match.Bindings["word"].Value);
+            Assert.AreEqual(Variables1["word"], match.Bindings["word"].Value);
         }
 
         [TestMethod]
@@ -368,16 +368,16 @@ namespace Testing.Rfc6570
         {
             string template = "/lookup{?Stra%C3%9Fe}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/lookup?Stra%C3%9Fe=Gr%C3%BCner%20Weg", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["Stra%C3%9Fe"], match.Bindings["Stra%C3%9Fe"].Value);
+            Assert.AreEqual(Variables1["Stra%C3%9Fe"], match.Bindings["Stra%C3%9Fe"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["Stra%C3%9Fe"], match.Bindings["Stra%C3%9Fe"].Value);
+            Assert.AreEqual(Variables1["Stra%C3%9Fe"], match.Bindings["Stra%C3%9Fe"].Value);
         }
 
         [TestMethod]
@@ -387,16 +387,16 @@ namespace Testing.Rfc6570
         {
             string template = "{random}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("%C5%A1%C3%B6%C3%A4%C5%B8%C5%93%C3%B1%C3%AA%E2%82%AC%C2%A3%C2%A5%E2%80%A1%C3%91%C3%92%C3%93%C3%94%C3%95%C3%96%C3%97%C3%98%C3%99%C3%9A%C3%A0%C3%A1%C3%A2%C3%A3%C3%A4%C3%A5%C3%A6%C3%A7%C3%BF", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["random"], match.Bindings["random"].Value);
+            Assert.AreEqual(Variables1["random"], match.Bindings["random"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables1["random"], match.Bindings["random"].Value);
+            Assert.AreEqual(Variables1["random"], match.Bindings["random"].Value);
         }
 
         [TestMethod]
@@ -406,16 +406,16 @@ namespace Testing.Rfc6570
         {
             string template = "{?assoc_special_chars*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables1);
+            Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("?%C5%A1%C3%B6%C3%A4%C5%B8%C5%93%C3%B1%C3%AA%E2%82%AC%C2%A3%C2%A5%E2%80%A1%C3%91%C3%92%C3%93%C3%94%C3%95=%C3%96%C3%97%C3%98%C3%99%C3%9A%C3%A0%C3%A1%C3%A2%C3%A3%C3%A4%C3%A5%C3%A6%C3%A7%C3%BF", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables1["assoc_special_chars"], (ICollection)match.Bindings["assoc_special_chars"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["assoc_special_chars"], (ICollection)match.Bindings["assoc_special_chars"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
+            match = uriTemplate.Match(uri, RequiredVariables1, new[] { "fields", "geocode" }, new[] { "assoc_special_chars" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables1["assoc_special_chars"], (ICollection)match.Bindings["assoc_special_chars"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables1["assoc_special_chars"], (ICollection)match.Bindings["assoc_special_chars"].Value);
         }
 
         [TestMethod]
@@ -425,7 +425,7 @@ namespace Testing.Rfc6570
         {
             string template = "{/id*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables2);
+            Uri uri = uriTemplate.BindByName(Variables2);
             string[] allowed =
                 {
                     "/person/albums",
@@ -436,11 +436,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "id", "fields", "geocode" }, new string[0]);
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables2["id"], (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["id"], (ICollection)match.Bindings["id"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables2, new[] { "id", "fields", "geocode" }, new string[0]);
+            match = uriTemplate.Match(uri, RequiredVariables2, new[] { "id", "fields", "geocode" }, new string[0]);
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables2["id"], (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["id"], (ICollection)match.Bindings["id"].Value);
         }
 
         [TestMethod]
@@ -451,7 +451,7 @@ namespace Testing.Rfc6570
         {
             string template = "{/id*}{?fields,token}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables2);
+            Uri uri = uriTemplate.BindByName(Variables2);
             string[] allowed =
                 {
                     "/person/albums?fields=id,name,picture&token=12345",
@@ -472,15 +472,15 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "id", "fields", "geocode" }, new string[0]);
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables2["id"], (ICollection)match.Bindings["id"].Value);
-            CollectionAssert.AreEqual((ICollection)variables2["fields"], (ICollection)match.Bindings["fields"].Value);
-            Assert.AreEqual(variables2["token"], match.Bindings["token"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["id"], (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["fields"], (ICollection)match.Bindings["fields"].Value);
+            Assert.AreEqual(Variables2["token"], match.Bindings["token"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables2, new[] { "id", "fields", "geocode" }, new string[0]);
+            match = uriTemplate.Match(uri, RequiredVariables2, new[] { "id", "fields", "geocode" }, new string[0]);
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables2["id"], (ICollection)match.Bindings["id"].Value);
-            CollectionAssert.AreEqual((ICollection)variables2["fields"], (ICollection)match.Bindings["fields"].Value);
-            Assert.AreEqual(variables2["token"], match.Bindings["token"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["id"], (ICollection)match.Bindings["id"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables2["fields"], (ICollection)match.Bindings["fields"].Value);
+            Assert.AreEqual(Variables2["token"], match.Bindings["token"].Value);
         }
 
         [TestMethod]
@@ -490,14 +490,14 @@ namespace Testing.Rfc6570
         {
             string template = "{/empty_list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -509,14 +509,14 @@ namespace Testing.Rfc6570
         {
             string template = "{/empty_list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -528,14 +528,14 @@ namespace Testing.Rfc6570
         {
             string template = "{?empty_list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -547,14 +547,14 @@ namespace Testing.Rfc6570
         {
             string template = "{?empty_list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -566,14 +566,14 @@ namespace Testing.Rfc6570
         {
             string template = "{?empty_assoc}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -585,14 +585,14 @@ namespace Testing.Rfc6570
         {
             string template = "{?empty_assoc*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables3);
+            Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
 
-            match = uriTemplate.Match(uri, requiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
+            match = uriTemplate.Match(uri, RequiredVariables3, new[] { "empty_list" }, new[] { "empty_assoc" });
             Assert.IsNotNull(match);
             Assert.AreEqual(0, match.Bindings.Count);
         }
@@ -604,16 +604,16 @@ namespace Testing.Rfc6570
         {
             string template = "{42}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables4);
+            Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("The%20Answer%20to%20the%20Ultimate%20Question%20of%20Life%2C%20the%20Universe%2C%20and%20Everything", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables4["42"], match.Bindings["42"].Value);
+            Assert.AreEqual(Variables4["42"], match.Bindings["42"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables4, new[] { "1337" }, new[] { "german" });
+            match = uriTemplate.Match(uri, RequiredVariables4, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables4["42"], match.Bindings["42"].Value);
+            Assert.AreEqual(Variables4["42"], match.Bindings["42"].Value);
         }
 
         [TestMethod]
@@ -623,16 +623,16 @@ namespace Testing.Rfc6570
         {
             string template = "{?42}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables4);
+            Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("?42=The%20Answer%20to%20the%20Ultimate%20Question%20of%20Life%2C%20the%20Universe%2C%20and%20Everything", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables4["42"], match.Bindings["42"].Value);
+            Assert.AreEqual(Variables4["42"], match.Bindings["42"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables4, new[] { "1337" }, new[] { "german" });
+            match = uriTemplate.Match(uri, RequiredVariables4, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables4["42"], match.Bindings["42"].Value);
+            Assert.AreEqual(Variables4["42"], match.Bindings["42"].Value);
         }
 
         [TestMethod]
@@ -642,16 +642,16 @@ namespace Testing.Rfc6570
         {
             string template = "{1337}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables4);
+            Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("leet,as,it,can,be", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["1337"], (ICollection)match.Bindings["1337"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["1337"], (ICollection)match.Bindings["1337"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables4, new[] { "1337" }, new[] { "german" });
+            match = uriTemplate.Match(uri, RequiredVariables4, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["1337"], (ICollection)match.Bindings["1337"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["1337"], (ICollection)match.Bindings["1337"].Value);
         }
 
         [TestMethod]
@@ -661,16 +661,16 @@ namespace Testing.Rfc6570
         {
             string template = "{?1337*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables4);
+            Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("?1337=leet&1337=as&1337=it&1337=can&1337=be", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["1337"], (ICollection)match.Bindings["1337"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["1337"], (ICollection)match.Bindings["1337"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables4, new[] { "1337" }, new[] { "german" });
+            match = uriTemplate.Match(uri, RequiredVariables4, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["1337"], (ICollection)match.Bindings["1337"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["1337"], (ICollection)match.Bindings["1337"].Value);
         }
 
         [TestMethod]
@@ -680,7 +680,7 @@ namespace Testing.Rfc6570
         {
             string template = "{?german*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables4);
+            Uri uri = uriTemplate.BindByName(Variables4);
             string[] allowed =
                 {
                     "?11=elf&12=zw%C3%B6lf",
@@ -691,11 +691,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["german"], (ICollection)match.Bindings["german"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["german"], (ICollection)match.Bindings["german"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables4, new[] { "1337" }, new[] { "german" });
+            match = uriTemplate.Match(uri, RequiredVariables4, new[] { "1337" }, new[] { "german" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables4["german"], (ICollection)match.Bindings["german"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables4["german"], (ICollection)match.Bindings["german"].Value);
         }
     }
 }

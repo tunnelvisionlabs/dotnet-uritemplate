@@ -13,7 +13,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class Level3Tests
     {
-        private static readonly IDictionary<string, object> variables =
+        private static readonly IDictionary<string, object> Variables =
             new Dictionary<string, object>
             {
                 { "var", "value" },
@@ -24,7 +24,7 @@ namespace Testing.Rfc6570
                 { "y", "768" },
             };
 
-        private static readonly HashSet<string> requiredVariables =
+        private static readonly HashSet<string> RequiredVariables =
             new HashSet<string>
             {
                 "var",
@@ -42,18 +42,18 @@ namespace Testing.Rfc6570
         {
             string template = "map?{x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("map?1024,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -63,20 +63,20 @@ namespace Testing.Rfc6570
         {
             string template = "{x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("1024,Hello%20World%21,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -86,20 +86,20 @@ namespace Testing.Rfc6570
         {
             string template = "{+x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("1024,Hello%20World!,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -109,18 +109,18 @@ namespace Testing.Rfc6570
         {
             string template = "{+path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/foo/bar,1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -130,20 +130,20 @@ namespace Testing.Rfc6570
         {
             string template = "{#x,hello,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#1024,Hello%20World!,768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["hello"], match.Bindings["hello"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["hello"], match.Bindings["hello"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -153,18 +153,18 @@ namespace Testing.Rfc6570
         {
             string template = "{#path,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#/foo/bar,1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["path"], match.Bindings["path"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["path"], match.Bindings["path"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -174,18 +174,18 @@ namespace Testing.Rfc6570
         {
             string template = "X{.x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("X.1024.768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -195,16 +195,16 @@ namespace Testing.Rfc6570
         {
             string template = "{/var}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -214,18 +214,18 @@ namespace Testing.Rfc6570
         {
             string template = "{/var,x}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/value/1024/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -235,18 +235,18 @@ namespace Testing.Rfc6570
         {
             string template = "{;x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";x=1024;y=768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -256,20 +256,20 @@ namespace Testing.Rfc6570
         {
             string template = "{;x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";x=1024;y=768;empty", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
         }
 
         [TestMethod]
@@ -279,18 +279,18 @@ namespace Testing.Rfc6570
         {
             string template = "{?x,y}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?x=1024&y=768", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
         }
 
         [TestMethod]
@@ -300,20 +300,20 @@ namespace Testing.Rfc6570
         {
             string template = "{?x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?x=1024&y=768&empty=", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
         }
 
         [TestMethod]
@@ -323,16 +323,16 @@ namespace Testing.Rfc6570
         {
             string template = "?fixed=yes{&x}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?fixed=yes&x=1024", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
         }
 
         [TestMethod]
@@ -342,20 +342,20 @@ namespace Testing.Rfc6570
         {
             string template = "{&x,y,empty}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("&x=1024&y=768&empty=", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables);
+            match = uriTemplate.Match(uri, RequiredVariables);
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["x"], match.Bindings["x"].Value);
-            Assert.AreEqual(variables["y"], match.Bindings["y"].Value);
-            Assert.AreEqual(variables["empty"], match.Bindings["empty"].Value);
+            Assert.AreEqual(Variables["x"], match.Bindings["x"].Value);
+            Assert.AreEqual(Variables["y"], match.Bindings["y"].Value);
+            Assert.AreEqual(Variables["empty"], match.Bindings["empty"].Value);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class Level4Tests
     {
-        private static readonly IDictionary<string, object> variables =
+        private static readonly IDictionary<string, object> Variables =
             new Dictionary<string, object>
             {
                 { "var", "value" },
@@ -22,7 +22,7 @@ namespace Testing.Rfc6570
                 { "keys", new Dictionary<string, string> { { "semi", ";" }, { "dot", "." }, { "comma", "," } } }
             };
 
-        private static readonly HashSet<string> requiredVariables =
+        private static readonly HashSet<string> RequiredVariables =
             new HashSet<string>
             {
                 "var",
@@ -39,14 +39,14 @@ namespace Testing.Rfc6570
         {
             string template = "{var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -58,16 +58,16 @@ namespace Testing.Rfc6570
         {
             string template = "{var:30}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -77,16 +77,16 @@ namespace Testing.Rfc6570
         {
             string template = "{list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -96,16 +96,16 @@ namespace Testing.Rfc6570
         {
             string template = "{list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace Testing.Rfc6570
         {
             string template = "{keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "comma,%2C,dot,.,semi,%3B",
@@ -130,11 +130,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -144,7 +144,7 @@ namespace Testing.Rfc6570
         {
             string template = "{keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "comma=%2C,dot=.,semi=%3B",
@@ -159,11 +159,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -173,14 +173,14 @@ namespace Testing.Rfc6570
         {
             string template = "{+path:6}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/foo/b/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("/foo/b", match.Bindings["path"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("/foo/b", match.Bindings["path"].Value);
         }
@@ -192,16 +192,16 @@ namespace Testing.Rfc6570
         {
             string template = "{+list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -211,16 +211,16 @@ namespace Testing.Rfc6570
         {
             string template = "{+list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -230,7 +230,7 @@ namespace Testing.Rfc6570
         {
             string template = "{+keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "comma,,,dot,.,semi,;",
@@ -245,11 +245,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -259,7 +259,7 @@ namespace Testing.Rfc6570
         {
             string template = "{+keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "comma=,,dot=.,semi=;",
@@ -274,11 +274,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -288,16 +288,16 @@ namespace Testing.Rfc6570
         {
             string template = "{#path:6}/here";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#/foo/b/here", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(((string)variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
+            Assert.AreEqual(((string)Variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(((string)variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
+            Assert.AreEqual(((string)Variables["path"]).Substring(0, 6), match.Bindings["path"].Value);
         }
 
         [TestMethod]
@@ -307,16 +307,16 @@ namespace Testing.Rfc6570
         {
             string template = "{#list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -326,16 +326,16 @@ namespace Testing.Rfc6570
         {
             string template = "{#list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -345,7 +345,7 @@ namespace Testing.Rfc6570
         {
             string template = "{#keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "#comma,,,dot,.,semi,;",
@@ -360,11 +360,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -374,7 +374,7 @@ namespace Testing.Rfc6570
         {
             string template = "{#keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "#comma=,,dot=.,semi=;",
@@ -389,11 +389,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -403,14 +403,14 @@ namespace Testing.Rfc6570
         {
             string template = "X{.var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("X.val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -422,16 +422,16 @@ namespace Testing.Rfc6570
         {
             string template = "X{.list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("X.red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -441,16 +441,16 @@ namespace Testing.Rfc6570
         {
             string template = "X{.list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("X.red.green.blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -460,7 +460,7 @@ namespace Testing.Rfc6570
         {
             string template = "X{.keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "X.comma,%2C,dot,.,semi,%3B",
@@ -475,11 +475,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -489,16 +489,16 @@ namespace Testing.Rfc6570
         {
             string template = "{/var:1,var}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/v/value", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            Assert.AreEqual(variables["var"], match.Bindings["var"].Value);
+            Assert.AreEqual(Variables["var"], match.Bindings["var"].Value);
         }
 
         [TestMethod]
@@ -508,16 +508,16 @@ namespace Testing.Rfc6570
         {
             string template = "{/list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -527,16 +527,16 @@ namespace Testing.Rfc6570
         {
             string template = "{/list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/red/green/blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -546,18 +546,18 @@ namespace Testing.Rfc6570
         {
             string template = "{/list*,path:4}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/red/green/blue/%2Ffoo", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
-            Assert.AreEqual(((string)variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
+            Assert.AreEqual(((string)Variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
-            Assert.AreEqual(((string)variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
+            Assert.AreEqual(((string)Variables["path"]).Substring(0, 4), match.Bindings["path"].Value);
         }
 
         [TestMethod]
@@ -567,7 +567,7 @@ namespace Testing.Rfc6570
         {
             string template = "{/keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "/comma,%2C,dot,.,semi,%3B",
@@ -582,11 +582,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -596,7 +596,7 @@ namespace Testing.Rfc6570
         {
             string template = "{/keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "/comma=%2C/dot=./semi=%3B",
@@ -611,11 +611,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -625,14 +625,14 @@ namespace Testing.Rfc6570
         {
             string template = "{;hello:5}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";hello=Hello", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("Hello", match.Bindings["hello"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("Hello", match.Bindings["hello"].Value);
         }
@@ -644,16 +644,16 @@ namespace Testing.Rfc6570
         {
             string template = "{;list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -663,16 +663,16 @@ namespace Testing.Rfc6570
         {
             string template = "{;list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";list=red;list=green;list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -682,7 +682,7 @@ namespace Testing.Rfc6570
         {
             string template = "{;keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     ";keys=comma,%2C,dot,.,semi,%3B",
@@ -697,11 +697,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -711,7 +711,7 @@ namespace Testing.Rfc6570
         {
             string template = "{;keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     ";comma=%2C;dot=.;semi=%3B",
@@ -726,11 +726,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -740,14 +740,14 @@ namespace Testing.Rfc6570
         {
             string template = "{?var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?var=val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -759,16 +759,16 @@ namespace Testing.Rfc6570
         {
             string template = "{?list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -778,16 +778,16 @@ namespace Testing.Rfc6570
         {
             string template = "{?list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?list=red&list=green&list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -797,7 +797,7 @@ namespace Testing.Rfc6570
         {
             string template = "{?keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "?keys=comma,%2C,dot,.,semi,%3B",
@@ -812,11 +812,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -826,7 +826,7 @@ namespace Testing.Rfc6570
         {
             string template = "{?keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "?comma=%2C&dot=.&semi=%3B",
@@ -841,11 +841,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -855,14 +855,14 @@ namespace Testing.Rfc6570
         {
             string template = "{&var:3}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("&var=val", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
             Assert.AreEqual("val", match.Bindings["var"].Value);
         }
@@ -874,16 +874,16 @@ namespace Testing.Rfc6570
         {
             string template = "{&list}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("&list=red,green,blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -893,16 +893,16 @@ namespace Testing.Rfc6570
         {
             string template = "{&list*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("&list=red&list=green&list=blue", uri.OriginalString);
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["list"], (ICollection)match.Bindings["list"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["list"], (ICollection)match.Bindings["list"].Value);
         }
 
         [TestMethod]
@@ -912,7 +912,7 @@ namespace Testing.Rfc6570
         {
             string template = "{&keys}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "&keys=comma,%2C,dot,.,semi,%3B",
@@ -927,11 +927,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
 
         [TestMethod]
@@ -941,7 +941,7 @@ namespace Testing.Rfc6570
         {
             string template = "{&keys*}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            Uri uri = uriTemplate.BindByName(variables);
+            Uri uri = uriTemplate.BindByName(Variables);
             string[] allowed =
                 {
                     "&comma=%2C&dot=.&semi=%3B",
@@ -956,11 +956,11 @@ namespace Testing.Rfc6570
 
             UriTemplateMatch match = uriTemplate.Match(uri, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
 
-            match = uriTemplate.Match(uri, requiredVariables, new[] { "list" }, new[] { "keys" });
+            match = uriTemplate.Match(uri, RequiredVariables, new[] { "list" }, new[] { "keys" });
             Assert.IsNotNull(match);
-            CollectionAssert.AreEqual((ICollection)variables["keys"], (ICollection)match.Bindings["keys"].Value);
+            CollectionAssert.AreEqual((ICollection)Variables["keys"], (ICollection)match.Bindings["keys"].Value);
         }
     }
 }
