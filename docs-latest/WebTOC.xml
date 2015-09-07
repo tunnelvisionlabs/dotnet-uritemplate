@@ -4,53 +4,53 @@
   <HelpTOCNode Title="Welcome" Url="html/6e0966b1-bd21-44ee-bbf3-cd475ac0ebdd.htm" />
   <HelpTOCNode Title="License Agreement" Url="html/80f90212-4ffe-4164-aff3-0272ea42814a.htm" />
   <HelpTOCNode Title="Breaking Changes Policy" Url="html/14557a8c-df73-468e-9b75-56e038b79f36.htm" />
-  <HelpTOCNode Id="6f4c87a5-9056-4b96-9efa-8f2edb897f37" Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm">
+  <HelpTOCNode Id="135d8a57-8447-457d-9bd8-5aa4601a9eca" Title="User Guide" Url="html/6a7fb475-8e7d-4b8e-9f66-c33506fe0115.htm">
     <HelpTOCNode Title="Installation" Url="html/56dfe688-42d6-46f0-9cb7-a9d7176ef249.htm" />
     <HelpTOCNode Title="Template Expansion" Url="html/c41f4654-8fdb-4bf8-9b29-9d9a6f270496.htm" />
     <HelpTOCNode Title="Template Matching" Url="html/7e56a038-ad98-4922-9342-7f68a5b89283.htm" />
     <HelpTOCNode Title="Migration Guide" Url="html/8e5cf0b3-d565-44f8-a763-6586cf5e56db.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="b13eae40-c0e2-4809-b5ee-543e81b58606" Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm">
-    <HelpTOCNode Id="5545a456-634b-4ab4-9858-95c34865bff4" Title="Rackspace.Net" Url="html/N_Rackspace_Net.htm">
-      <HelpTOCNode Id="eab0639c-7584-4321-a99e-0f9fce142f61" Title="UriTemplate Class" Url="html/T_Rackspace_Net_UriTemplate.htm">
-        <HelpTOCNode Title="UriTemplate Constructor " Url="html/M_Rackspace_Net_UriTemplate__ctor.htm" />
-        <HelpTOCNode Id="a9560dbf-5268-4ce9-8775-5003f26f2920" Title="UriTemplate Methods" Url="html/Methods_T_Rackspace_Net_UriTemplate.htm">
-          <HelpTOCNode Id="2b525958-7079-48e5-b4db-86d565248af9" Title="BindByName Method " Url="html/Overload_Rackspace_Net_UriTemplate_BindByName.htm">
-            <HelpTOCNode Title="BindByName Method (IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName.htm" />
-            <HelpTOCNode Title="BindByName Method (IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_1.htm" />
-            <HelpTOCNode Title="BindByName(T) Method (IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1.htm" />
-            <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, Object))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_2.htm" />
-            <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, String))" Url="html/M_Rackspace_Net_UriTemplate_BindByName_3.htm" />
-            <HelpTOCNode Title="BindByName(T) Method (Uri, IDictionary(String, T))" Url="html/M_Rackspace_Net_UriTemplate_BindByName__1_1.htm" />
+  <HelpTOCNode Id="608f4e4c-f78d-459f-bfdb-1b49d292e5ea" Title="API Reference" Url="html/R_Project_URI_Template_API_Reference.htm">
+    <HelpTOCNode Id="fb12f922-c60d-405f-9d2c-9dfd1be897c7" Title="TunnelVisionLabs.Net" Url="html/N_TunnelVisionLabs_Net.htm">
+      <HelpTOCNode Id="3b6c4f14-009d-4305-9f82-50b1fc156b35" Title="UriTemplate Class" Url="html/T_TunnelVisionLabs_Net_UriTemplate.htm">
+        <HelpTOCNode Title="UriTemplate Constructor " Url="html/M_TunnelVisionLabs_Net_UriTemplate__ctor.htm" />
+        <HelpTOCNode Id="9cc7d219-b40c-4397-93b1-d1958ff03b71" Title="UriTemplate Methods" Url="html/Methods_T_TunnelVisionLabs_Net_UriTemplate.htm">
+          <HelpTOCNode Id="8934e3aa-ecfd-412d-a6d8-45607ac93942" Title="BindByName Method " Url="html/Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">
+            <HelpTOCNode Title="BindByName Method (IDictionary(String, Object))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName.htm" />
+            <HelpTOCNode Title="BindByName Method (IDictionary(String, String))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName_1.htm" />
+            <HelpTOCNode Title="BindByName(T) Method (IDictionary(String, T))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName__1.htm" />
+            <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, Object))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName_2.htm" />
+            <HelpTOCNode Title="BindByName Method (Uri, IDictionary(String, String))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName_3.htm" />
+            <HelpTOCNode Title="BindByName(T) Method (Uri, IDictionary(String, T))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_BindByName__1_1.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="1f0e1e8b-e58c-47d1-af6f-5e20bdeee28b" Title="Match Method " Url="html/Overload_Rackspace_Net_UriTemplate_Match.htm">
-            <HelpTOCNode Title="Match Method (Uri)" Url="html/M_Rackspace_Net_UriTemplate_Match.htm" />
-            <HelpTOCNode Title="Match Method (Uri, ICollection(String))" Url="html/M_Rackspace_Net_UriTemplate_Match_1.htm" />
-            <HelpTOCNode Title="Match Method (Uri, Uri)" Url="html/M_Rackspace_Net_UriTemplate_Match_4.htm" />
-            <HelpTOCNode Title="Match Method (Uri, ICollection(String), ICollection(String))" Url="html/M_Rackspace_Net_UriTemplate_Match_2.htm" />
-            <HelpTOCNode Title="Match Method (Uri, ICollection(String), ICollection(String), ICollection(String))" Url="html/M_Rackspace_Net_UriTemplate_Match_3.htm" />
+          <HelpTOCNode Id="107d20c6-ec8b-4d95-a512-d3e156c4f7aa" Title="Match Method " Url="html/Overload_TunnelVisionLabs_Net_UriTemplate_Match.htm">
+            <HelpTOCNode Title="Match Method (Uri)" Url="html/M_TunnelVisionLabs_Net_UriTemplate_Match.htm" />
+            <HelpTOCNode Title="Match Method (Uri, ICollection(String))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_Match_1.htm" />
+            <HelpTOCNode Title="Match Method (Uri, Uri)" Url="html/M_TunnelVisionLabs_Net_UriTemplate_Match_4.htm" />
+            <HelpTOCNode Title="Match Method (Uri, ICollection(String), ICollection(String))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_Match_2.htm" />
+            <HelpTOCNode Title="Match Method (Uri, ICollection(String), ICollection(String), ICollection(String))" Url="html/M_TunnelVisionLabs_Net_UriTemplate_Match_3.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Title="ToString Method " Url="html/M_Rackspace_Net_UriTemplate_ToString.htm" />
+          <HelpTOCNode Title="ToString Method " Url="html/M_TunnelVisionLabs_Net_UriTemplate_ToString.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="c9b61e33-0ecf-4b95-acd2-2da2b7c0cfd9" Title="UriTemplate Properties" Url="html/Properties_T_Rackspace_Net_UriTemplate.htm">
-          <HelpTOCNode Title="Template Property " Url="html/P_Rackspace_Net_UriTemplate_Template.htm" />
+        <HelpTOCNode Id="432276ce-e77e-45b5-a07b-3e37bd35b7f1" Title="UriTemplate Properties" Url="html/Properties_T_TunnelVisionLabs_Net_UriTemplate.htm">
+          <HelpTOCNode Title="Template Property " Url="html/P_TunnelVisionLabs_Net_UriTemplate_Template.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="26989efa-a3f5-4b49-aa23-0d7cfe561b25" Title="UriTemplateMatch Class" Url="html/T_Rackspace_Net_UriTemplateMatch.htm">
-        <HelpTOCNode Title="UriTemplateMatch Methods" Url="html/Methods_T_Rackspace_Net_UriTemplateMatch.htm" />
-        <HelpTOCNode Id="b3c432d8-146d-4d72-b814-6fced8346e8c" Title="UriTemplateMatch Properties" Url="html/Properties_T_Rackspace_Net_UriTemplateMatch.htm">
-          <HelpTOCNode Title="Bindings Property " Url="html/P_Rackspace_Net_UriTemplateMatch_Bindings.htm" />
-          <HelpTOCNode Title="Template Property " Url="html/P_Rackspace_Net_UriTemplateMatch_Template.htm" />
+      <HelpTOCNode Id="e6e6e618-f945-4875-aeb8-d38e63ebbbba" Title="UriTemplateMatch Class" Url="html/T_TunnelVisionLabs_Net_UriTemplateMatch.htm">
+        <HelpTOCNode Title="UriTemplateMatch Methods" Url="html/Methods_T_TunnelVisionLabs_Net_UriTemplateMatch.htm" />
+        <HelpTOCNode Id="52d25072-cedd-4388-8ffa-8a2d42f08c4e" Title="UriTemplateMatch Properties" Url="html/Properties_T_TunnelVisionLabs_Net_UriTemplateMatch.htm">
+          <HelpTOCNode Title="Bindings Property " Url="html/P_TunnelVisionLabs_Net_UriTemplateMatch_Bindings.htm" />
+          <HelpTOCNode Title="Template Property " Url="html/P_TunnelVisionLabs_Net_UriTemplateMatch_Template.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="f4e0ad3a-555b-4f7f-ba8d-128c89e9689f" Title="VariableReference Class" Url="html/T_Rackspace_Net_VariableReference.htm">
-        <HelpTOCNode Id="afad2bcd-e4f0-42ca-80a6-6d627ca7a55c" Title="VariableReference Methods" Url="html/Methods_T_Rackspace_Net_VariableReference.htm">
-          <HelpTOCNode Title="ToString Method " Url="html/M_Rackspace_Net_VariableReference_ToString.htm" />
+      <HelpTOCNode Id="b6d55143-ebb5-4174-b6a9-5774d3dd93bc" Title="VariableReference Class" Url="html/T_TunnelVisionLabs_Net_VariableReference.htm">
+        <HelpTOCNode Id="9a7e6e97-0e84-4389-8351-8ef4e7d1eb82" Title="VariableReference Methods" Url="html/Methods_T_TunnelVisionLabs_Net_VariableReference.htm">
+          <HelpTOCNode Title="ToString Method " Url="html/M_TunnelVisionLabs_Net_VariableReference_ToString.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="59433a67-0ec9-4e2e-b0c6-6c733a56cfa1" Title="VariableReference Properties" Url="html/Properties_T_Rackspace_Net_VariableReference.htm">
-          <HelpTOCNode Title="Composite Property " Url="html/P_Rackspace_Net_VariableReference_Composite.htm" />
-          <HelpTOCNode Title="Name Property " Url="html/P_Rackspace_Net_VariableReference_Name.htm" />
-          <HelpTOCNode Title="Prefix Property " Url="html/P_Rackspace_Net_VariableReference_Prefix.htm" />
+        <HelpTOCNode Id="1748a13e-ec1f-4629-a177-ff3420b5f1ac" Title="VariableReference Properties" Url="html/Properties_T_TunnelVisionLabs_Net_VariableReference.htm">
+          <HelpTOCNode Title="Composite Property " Url="html/P_TunnelVisionLabs_Net_VariableReference_Composite.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_TunnelVisionLabs_Net_VariableReference_Name.htm" />
+          <HelpTOCNode Title="Prefix Property " Url="html/P_TunnelVisionLabs_Net_VariableReference_Prefix.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>

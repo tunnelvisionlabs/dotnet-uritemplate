@@ -13,7 +13,7 @@
           path segments syntax and query parameters. In addition to the syntax changes,
           there are differences in the behavior of the template matching operation. This
           will require additional consideration for code making use of the
-          <a href="Overload_Rackspace_Net_UriTemplate_Match.htm">Match<span id="LSTAA424284_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+          <a href="Overload_TunnelVisionLabs_Net_UriTemplate_Match.htm">Match<span id="LST8FC4B7FB_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
           operation.
         </p><h4 class="subHeading">Path Variables</h4><div class="subsection"><p>
               In most cases, expansion variables which appear in the path portion of a .NET
@@ -67,19 +67,19 @@
           inserted into templates to produce a bound URI.
         </p><h4 class="subHeading" id="BindByPosition">Bind By Position</h4><div class="subsection"><p>
               This library does not contain an equivalent to the
-              <a href="http://msdn2.microsoft.com/en-us/library/bb550237" target="_blank">BindByPosition(Uri, <span id="LSTAA424284_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_1?cpp=array<");</script>String<span id="LSTAA424284_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_2?cpp=>|cs=[]|vb=()|nu=[]|fs=[]");</script>)</a>
+              <a href="http://msdn2.microsoft.com/en-us/library/bb550237" target="_blank">BindByPosition(Uri, <span id="LST8FC4B7FB_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_1?cpp=array<");</script>String<span id="LST8FC4B7FB_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_2?cpp=>|cs=[]|vb=()|nu=[]|fs=[]");</script>)</a>
               method. Any calls which use this method must be converted to use
-              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTAA424284_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_3?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              <a href="Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">BindByName<span id="LST8FC4B7FB_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_3?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
               when migrating existing code to this library.
             </p></div><h4 class="subHeading" id="RelativeResolution">Relative Resolution</h4><div class="subsection"><p>
               For the various
-              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTAA424284_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_4?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              <a href="Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">BindByName<span id="LST8FC4B7FB_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_4?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
               methods which take a base address as a parameter, this library uses the
               <a href="http://msdn2.microsoft.com/en-us/library/ceyeze4f" target="_blank">Uri(Uri, Uri)</a>
               constructor to implement the resolution of relative addresses against a base
               address. While the .NET Framework's URI Template implementation behaves in a
               manner "similar" to
-              <a href="http://msdn2.microsoft.com/en-us/library/dd781134" target="_blank">Combine<span id="LSTAA424284_5"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTAA424284_5?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>, the
+              <a href="http://msdn2.microsoft.com/en-us/library/dd781134" target="_blank">Combine<span id="LST8FC4B7FB_5"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST8FC4B7FB_5?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>, the
               behavior of this library is consistent with <a href="http://tools.ietf.org/html/rfc3986#section-5.2" title="RFC 3986 §5.2 (Relative Resolution - URI Generic Syntax)" target="_blank">RFC 3986 §5.2</a>. As a result, this library differs from the .NET Framework's
               implementation in two key instances.
             </p><div class="alert"><table><tr><th><img src="../icons/AlertNote.png" alt="Note"> Note</th></tr><tr><td><p>
@@ -98,10 +98,4 @@
                   <span class="code">/</span> character. In this case, the last path segment is
                   removed from the base address during the resolution process. In other words,
                   everything after the last <span class="code">/</span> character is ignored.
-                </p></li></ul></div></div></div></div><div id="pageFooter" class="pageFooter"><div class="feedbackLink">Send comments on this topic to
-        <a id="HT_MailLink" href="mailto:sam.harwell%40rackspace.com?Subject=URI Template API Reference">sam.harwell@rackspace.com</a></div><script type="text/javascript">
-        var HT_mailLink = document.getElementById("HT_MailLink");
-        var HT_mailLinkText = HT_mailLink.innerHTML;
-        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
-        HT_mailLink.innerHTML = HT_mailLinkText;
-        </script></div></body></html>
+                </p></li></ul></div></div></div></div><div id="pageFooter" class="pageFooter"><a href="https://github.com/tunnelvisionlabs/dotnet-uritemplate">URI Template Library Home</a></div></body></html>

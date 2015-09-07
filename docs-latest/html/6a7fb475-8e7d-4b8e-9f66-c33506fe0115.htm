@@ -11,7 +11,7 @@
           guidelines for the use of URI Templates on the Internet.
         </blockquote><p>
           In this library, URI Templates are represented by instances of the
-          <a href="T_Rackspace_Net_UriTemplate.htm">UriTemplate</a> class.
+          <a href="T_TunnelVisionLabs_Net_UriTemplate.htm">UriTemplate</a> class.
         </p><h4 class="subHeading">Example</h4><div class="subsection"><p>
               The following example shows a URI template describing the path to information
               about a package hosted at NuGet.
@@ -23,16 +23,16 @@
               desired NuGet package. The following list shows two specific ways these values could
               be assigned:
             </p><ul><li><p>
-                  If the <span class="code">id</span> is specified as <span class="literal">Rackspace.Net.UriTemplate</span>,
+                  If the <span class="code">id</span> is specified as <span class="literal">TunnelVisionLabs.Net.UriTemplate</span>,
                   but the <span class="code">version</span> is left unspecified, the template expansion
-                  operation produces the relative URI <em>/packages/Rackspace.Net.UriTemplate</em>.
+                  operation produces the relative URI <em>/packages/TunnelVisionLabs.Net.UriTemplate</em>.
                   Since this URI does not specify a specific version, NuGet will display the information
                   for the latest version of the package.
                 </p></li><li><p>
-                  If the <span class="code">id</span> is specified as <span class="literal">Rackspace.Net.UriTemplate</span>
+                  If the <span class="code">id</span> is specified as <span class="literal">TunnelVisionLabs.Net.UriTemplate</span>
                   and the <span class="code">version</span> is specified as <span class="literal">1.0.0</span>,
                   the template expansion operation produces the relative URI
-                  <em>/packages/Rackspace.Net.UriTemplate/1.0.0</em>. This is the
+                  <em>/packages/TunnelVisionLabs.Net.UriTemplate/1.0.0</em>. This is the
                   path to information about version 1.0.0 of the package.
                 </p></li></ul></div></div><div class="collapsibleAreaRegion" id="Operations"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">Basic Operations</span></div><div id="ID2RBSection" class="collapsibleSection"><p>
           The following sections describe the basic operations supported by this library
@@ -40,7 +40,7 @@
         </p><h4 class="subHeading">Expansion</h4><div class="subsection"><p>
               Template expansion is the process of assigning values to the expressions in a URI
               Template to produce a URI. The expansion functionality is provided by the
-              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTB6190BF4_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB6190BF4_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              <a href="Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">BindByName<span id="LSTD4CF6151_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTD4CF6151_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
               method and described in further detail in the
               <a href="c41f4654-8fdb-4bf8-9b29-9d9a6f270496.htm">Template Expansion</a> topic.
             </p></div><h4 class="subHeading">Matching</h4><div class="subsection"><p>
@@ -48,13 +48,7 @@
               URI according to the form described by a particular URI Template. This operation is the
               (imperfect) inverse of the expansion operation described previously. The matching
               functionality is provided by the
-              <a href="Overload_Rackspace_Net_UriTemplate_Match.htm">Match<span id="LSTB6190BF4_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB6190BF4_1?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              <a href="Overload_TunnelVisionLabs_Net_UriTemplate_Match.htm">Match<span id="LSTD4CF6151_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTD4CF6151_1?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
               method and described in further detail in the
               <a href="7e56a038-ad98-4922-9342-7f68a5b89283.htm">Template Matching</a> topic.
-            </p></div></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">See Also</span></div><div id="ID3RBSection" class="collapsibleSection"><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><a href="http://tools.ietf.org/html/rfc6570" title="RFC 6570 (URI Template)" target="_blank">RFC 6570 (URI Template)</a></div></div></div></div><div id="pageFooter" class="pageFooter"><div class="feedbackLink">Send comments on this topic to
-        <a id="HT_MailLink" href="mailto:sam.harwell%40rackspace.com?Subject=URI Template API Reference">sam.harwell@rackspace.com</a></div><script type="text/javascript">
-        var HT_mailLink = document.getElementById("HT_MailLink");
-        var HT_mailLinkText = HT_mailLink.innerHTML;
-        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
-        HT_mailLink.innerHTML = HT_mailLinkText;
-        </script></div></body></html>
+            </p></div></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">See Also</span></div><div id="ID3RBSection" class="collapsibleSection"><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><a href="http://tools.ietf.org/html/rfc6570" title="RFC 6570 (URI Template)" target="_blank">RFC 6570 (URI Template)</a></div></div></div></div><div id="pageFooter" class="pageFooter"><a href="https://github.com/tunnelvisionlabs/dotnet-uritemplate">URI Template Library Home</a></div></body></html>

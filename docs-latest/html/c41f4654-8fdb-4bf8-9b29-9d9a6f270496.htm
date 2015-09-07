@@ -3,12 +3,12 @@
         to specific values for its variables. This is the core operation defined
         by RFC 6570 and the primary feature provided by this library. The binding
         operation itself is implemented by the
-        <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LST1E13CF1C_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST1E13CF1C_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+        <a href="Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">BindByName<span id="LST7F1BE4E5_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST7F1BE4E5_0?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
         methods; this page describes a high-level overview of the behavior of
         these methods with respect to RFC 6570.
       </p></div><div class="collapsibleAreaRegion" id="Templates"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png">Creating Templates</span></div><div id="ID1RBSection" class="collapsibleSection"><p>
           URI Template instances are created by calling
-          <a href="M_Rackspace_Net_UriTemplate__ctor.htm">UriTemplate(String)</a>
+          <a href="M_TunnelVisionLabs_Net_UriTemplate__ctor.htm">UriTemplate(String)</a>
           with the template in the form described RFC 6570 (Level 4). URI Templates
           are parsed at the time they are constructed to ensure they meet the
           syntax requirements described in RFC 6570 and identify expression
@@ -63,7 +63,7 @@ Console.WriteLine(boundAddress);
               performance.
             </p><h4 class="subHeading">Use shared template instances</h4><div class="subsection"><p>
                   Instances of the
-                  <a href="T_Rackspace_Net_UriTemplate.htm">UriTemplate</a>
+                  <a href="T_TunnelVisionLabs_Net_UriTemplate.htm">UriTemplate</a>
                   class are safe for use in multi-threaded applications. If a
                   single template string will be used multiple times for expansion
                   or matching, a <span class="code">static</span> variable should be
@@ -91,7 +91,7 @@ Console.WriteLine(boundAddress);
                 <a href="http://msdn2.microsoft.com/en-us/library/s1wwdcbf" target="_blank">String</a>.
               </p></td></tr><tr><td><p>Associative array</p></td><td><p>
                 Any
-                <a href="http://msdn2.microsoft.com/en-us/library/s4ys34ea" target="_blank">IDictionary<span id="LST1E13CF1C_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST1E13CF1C_1?cs=<|vb=(Of |cpp=<|nu=(|fs=<'");</script>TKey, TValue<span id="LST1E13CF1C_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST1E13CF1C_2?cs=>|vb=)|cpp=>|nu=)|fs=>");</script></a>
+                <a href="http://msdn2.microsoft.com/en-us/library/s4ys34ea" target="_blank">IDictionary<span id="LST7F1BE4E5_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST7F1BE4E5_1?cs=<|vb=(Of |cpp=<|nu=(|fs=<'");</script>TKey, TValue<span id="LST7F1BE4E5_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST7F1BE4E5_2?cs=>|vb=)|cpp=>|nu=)|fs=>");</script></a>
                 or
                 <a href="http://msdn2.microsoft.com/en-us/library/9dhwsays" target="_blank">IDictionary</a>.
               </p></td></tr></table></div><p>
@@ -106,19 +106,13 @@ Console.WriteLine(boundAddress);
               to the table above, but is not of type
               <a href="http://msdn2.microsoft.com/en-us/library/s1wwdcbf" target="_blank">String</a>, the value
               is first converted to a string using the
-              <a href="http://msdn2.microsoft.com/en-us/library/7bxwbwt2" target="_blank">ToString<span id="LST1E13CF1C_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST1E13CF1C_3?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a> method.
+              <a href="http://msdn2.microsoft.com/en-us/library/7bxwbwt2" target="_blank">ToString<span id="LST7F1BE4E5_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST7F1BE4E5_3?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a> method.
             </p></li><li><p>
               If the template expansion process is performed using one of the
-              <a href="Overload_Rackspace_Net_UriTemplate_BindByName.htm">BindByName<span id="LST1E13CF1C_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST1E13CF1C_4?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
+              <a href="Overload_TunnelVisionLabs_Net_UriTemplate_BindByName.htm">BindByName<span id="LST7F1BE4E5_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST7F1BE4E5_4?cs=()|vb=|cpp=()|nu=()|fs=()");</script></a>
               methods which includes a <span class="code">baseAddress</span> argument,
               the result of the template expansion is evaluated as a relative URI
               against the base address using the
               <a href="http://msdn2.microsoft.com/en-us/library/ceyeze4f" target="_blank">Uri(Uri, Uri)</a>
               constructor.
-            </p></li></ul></div></div></div><div id="pageFooter" class="pageFooter"><div class="feedbackLink">Send comments on this topic to
-        <a id="HT_MailLink" href="mailto:sam.harwell%40rackspace.com?Subject=URI Template API Reference">sam.harwell@rackspace.com</a></div><script type="text/javascript">
-        var HT_mailLink = document.getElementById("HT_MailLink");
-        var HT_mailLinkText = HT_mailLink.innerHTML;
-        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
-        HT_mailLink.innerHTML = HT_mailLinkText;
-        </script></div></body></html>
+            </p></li></ul></div></div></div><div id="pageFooter" class="pageFooter"><a href="https://github.com/tunnelvisionlabs/dotnet-uritemplate">URI Template Library Home</a></div></body></html>
