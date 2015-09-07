@@ -15,26 +15,26 @@ namespace Testing.Rfc6570
         private static readonly Dictionary<string, object> variables1 =
             new Dictionary<string, object>
             {
-                { "id"           , "person" },
-                { "token"        , "12345" },
-                { "fields"       , new[] { "id", "name", "picture" } },
-                { "format"       , "json" },
-                { "q"            , "URI Templates" },
-                { "page"         , "5" },
-                { "lang"         , "en" },
-                { "geocode"      , new[] { "37.76", "-122.427" } },
-                { "first_name"   , "John" },
-                { "last.name"    , "Doe" },
-                { "Some%20Thing" , "foo" },
-                { "number"       , 6 },
-                { "long"         , 37.76 },
-                { "lat"          , -122.427 },
-                { "group_id"     , "12345" },
-                { "query"        , "PREFIX dc: <http://purl.org/dc/elements/1.1/> SELECT ?book ?who WHERE { ?book dc:creator ?who }" },
-                { "uri"          , "http://example.org/?uri=http%3A%2F%2Fexample.org%2F" },
-                { "word"         , "drücken" },
-                { "Stra%C3%9Fe"  , "Grüner Weg" },
-                { "random"       , "šöäŸœñê€£¥‡ÑÒÓÔÕÖ×ØÙÚàáâãäåæçÿ" },
+                { "id", "person" },
+                { "token", "12345" },
+                { "fields", new[] { "id", "name", "picture" } },
+                { "format", "json" },
+                { "q", "URI Templates" },
+                { "page", "5" },
+                { "lang", "en" },
+                { "geocode", new[] { "37.76", "-122.427" } },
+                { "first_name", "John" },
+                { "last.name", "Doe" },
+                { "Some%20Thing", "foo" },
+                { "number", 6 },
+                { "long", 37.76 },
+                { "lat", -122.427 },
+                { "group_id", "12345" },
+                { "query", "PREFIX dc: <http://purl.org/dc/elements/1.1/> SELECT ?book ?who WHERE { ?book dc:creator ?who }" },
+                { "uri", "http://example.org/?uri=http%3A%2F%2Fexample.org%2F" },
+                { "word", "drücken" },
+                { "Stra%C3%9Fe", "Grüner Weg" },
+                { "random", "šöäŸœñê€£¥‡ÑÒÓÔÕÖ×ØÙÚàáâãäåæçÿ" },
                 { "assoc_special_chars", new Dictionary<string, string> { { "šöäŸœñê€£¥‡ÑÒÓÔÕ", "Ö×ØÙÚàáâãäåæçÿ" } } }
             };
 
@@ -67,15 +67,15 @@ namespace Testing.Rfc6570
         private static readonly Dictionary<string, object> variables2 =
             new Dictionary<string, object>
             {
-                { "id" , new[] { "person", "albums" } },
-                { "token" , "12345" },
-                { "fields" , new[] { "id", "name", "picture" } },
-                { "format" , "atom" },
-                { "q" , "URI Templates" },
-                { "page" , "10" },
-                { "start" , "5" },
-                { "lang" , "en" },
-                { "geocode" , new[] { "37.76", "-122.427" } }
+                { "id", new[] { "person", "albums" } },
+                { "token", "12345" },
+                { "fields", new[] { "id", "name", "picture" } },
+                { "format", "atom" },
+                { "q", "URI Templates" },
+                { "page", "10" },
+                { "start", "5" },
+                { "lang", "en" },
+                { "geocode", new[] { "37.76", "-122.427" } }
             };
 
         private static readonly HashSet<string> requiredVariables2 =
