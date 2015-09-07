@@ -104,7 +104,7 @@ if (-not $SkipKeyCheck) {
 	. .\keys.ps1
 
 	foreach ($pair in $Keys.GetEnumerator()) {
-		$assembly = Resolve-FullPath -Path "..\Rackspace.Net.UriTemplate\bin\$($pair.Key)\$BuildConfig\TunnelVisionLabs.Net.UriTemplate.dll"
+		$assembly = Resolve-FullPath -Path "..\TunnelVisionLabs.Net.UriTemplate\bin\$($pair.Key)\$BuildConfig\TunnelVisionLabs.Net.UriTemplate.dll"
 		# Run the actual check in a separate process or the current process will keep the assembly file locked
 		powershell -Command ".\check-key.ps1 -Assembly '$assembly' -ExpectedKey '$($pair.Value)' -Build '$($pair.Key)'"
 		if (-not $?) {
@@ -121,5 +121,5 @@ if (-not (Test-Path 'nuget')) {
 # The NuGet packages reference XML documentation which is post-processed by SHFB. If the -NoDocs flag is specified,
 # these files are not created so packaging will fail.
 If (-not $NoDocs) {
-	&$nuget 'pack' '..\Rackspace.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.nuspec' '-OutputDirectory' 'nuget' '-Prop' "Configuration=$BuildConfig" '-Version' "$Version" '-Symbols'
+	&$nuget 'pack' '..\TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.nuspec' '-OutputDirectory' 'nuget' '-Prop' "Configuration=$BuildConfig" '-Version' "$Version" '-Symbols'
 }
