@@ -5,6 +5,9 @@
 # Roslyn IntelliSense Cache
 .vs/
 
+# NuGet packages folder
+packages/
+
 # Build output
 */bin/
 */obj/
