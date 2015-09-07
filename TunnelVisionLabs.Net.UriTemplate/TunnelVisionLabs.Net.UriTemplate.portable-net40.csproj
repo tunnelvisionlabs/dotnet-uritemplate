@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\portable-net40\Debug\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\portable-net40\Release\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -67,6 +69,9 @@
     </None>
     <None Include="..\Build\keys\TunnelVisionLabs.Net.UriTemplate.snk">
       <Link>TunnelVisionLabs.Net.UriTemplate.snk</Link>
+    </None>
+    <None Include="..\UriTemplate.ruleset">
+      <Link>UriTemplate.ruleset</Link>
     </None>
     <None Include="packages.TunnelVisionLabs.Net.UriTemplate.portable-net40.config" />
     <None Include="TunnelVisionLabs.Net.UriTemplate.nuspec" />
