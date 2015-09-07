@@ -13,7 +13,7 @@ namespace Testing.Rfc6570
     [TestClass]
     public class NegativeTests
     {
-        private readonly Dictionary<string, object> variables =
+        private static readonly Dictionary<string, object> Variables =
             new Dictionary<string, object>
             {
                 { "id", "thing" },
@@ -213,7 +213,7 @@ namespace Testing.Rfc6570
         {
             string template = "{keys:1}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            uriTemplate.BindByName(variables);
+            uriTemplate.BindByName(Variables);
         }
 
         [TestMethod]
@@ -223,7 +223,7 @@ namespace Testing.Rfc6570
         {
             string template = "{+keys:1}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            uriTemplate.BindByName(variables);
+            uriTemplate.BindByName(Variables);
         }
 
         [TestMethod]
