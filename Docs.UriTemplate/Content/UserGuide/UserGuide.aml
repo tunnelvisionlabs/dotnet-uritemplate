@@ -30,7 +30,7 @@
         </quote>
         <para>
           In this library, URI Templates are represented by instances of the
-          <codeEntityReference>T:Rackspace.Net.UriTemplate</codeEntityReference> class.
+          <codeEntityReference>T:TunnelVisionLabs.Net.UriTemplate</codeEntityReference> class.
         </para>
       </content>
       <sections>
@@ -92,7 +92,7 @@
             <para>
               Template expansion is the process of assigning values to the expressions in a URI
               Template to produce a URI. The expansion functionality is provided by the
-              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.BindByName</codeEntityReference>
               method and described in further detail in the
               <link xlink:href="c41f4654-8fdb-4bf8-9b29-9d9a6f270496"/> topic.
             </para>
@@ -106,7 +106,7 @@
               URI according to the form described by a particular URI Template. This operation is the
               (imperfect) inverse of the expansion operation described previously. The matching
               functionality is provided by the
-              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+              <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.Match</codeEntityReference>
               method and described in further detail in the
               <link xlink:href="7e56a038-ad98-4922-9342-7f68a5b89283"/> topic.
             </para>

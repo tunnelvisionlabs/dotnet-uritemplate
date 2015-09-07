@@ -17,7 +17,7 @@
       <content>
         <para>
           Template matching is performed by the
-          <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+          <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.Match</codeEntityReference>
           methods. At this time, the most up-to-date information about the matching operation
           is provided on that page.
         </para>

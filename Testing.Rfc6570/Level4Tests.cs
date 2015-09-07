@@ -6,7 +6,7 @@ namespace Testing.Rfc6570
     using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rackspace.Net;
+    using TunnelVisionLabs.Net;
     using ICollection = System.Collections.ICollection;
 
     [TestClass]

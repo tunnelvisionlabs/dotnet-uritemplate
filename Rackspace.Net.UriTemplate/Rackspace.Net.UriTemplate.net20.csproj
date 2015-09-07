@@ -7,7 +7,7 @@
     <ProjectGuid>{81C7E452-56D0-46B6-8F65-247B7F18C2BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rackspace.Net</RootNamespace>
+    <RootNamespace>TunnelVisionLabs.Net</RootNamespace>
     <AssemblyName>Rackspace.Net.UriTemplate</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

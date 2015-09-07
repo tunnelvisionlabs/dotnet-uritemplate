@@ -8,7 +8,7 @@ namespace Testing.Rfc6570
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rackspace.Net;
+    using TunnelVisionLabs.Net;
 
     [TestClass]
     public class Level3Tests

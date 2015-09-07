@@ -10,7 +10,7 @@
         to specific values for its variables. This is the core operation defined
         by RFC 6570 and the primary feature provided by this library. The binding
         operation itself is implemented by the
-        <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+        <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.BindByName</codeEntityReference>
         methods; this page describes a high-level overview of the behavior of
         these methods with respect to RFC 6570.
       </para>
@@ -21,7 +21,7 @@
       <content>
         <para>
           URI Template instances are created by calling
-          <codeEntityReference>M:Rackspace.Net.UriTemplate.#ctor(System.String)</codeEntityReference>
+          <codeEntityReference>M:TunnelVisionLabs.Net.UriTemplate.#ctor(System.String)</codeEntityReference>
           with the template in the form described RFC 6570 (Level 4). URI Templates
           are parsed at the time they are constructed to ensure they meet the
           syntax requirements described in RFC 6570 and identify expression
@@ -117,7 +117,7 @@
               <content>
                 <para>
                   Instances of the
-                  <codeEntityReference>T:Rackspace.Net.UriTemplate</codeEntityReference>
+                  <codeEntityReference>T:TunnelVisionLabs.Net.UriTemplate</codeEntityReference>
                   class are safe for use in multi-threaded applications. If a
                   single template string will be used multiple times for expansion
                   or matching, a <codeInline>static</codeInline> variable should be
@@ -229,7 +229,7 @@
           <listItem>
             <para>
               If the template expansion process is performed using one of the
-              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.BindByName</codeEntityReference>
               methods which includes a <codeInline>baseAddress</codeInline> argument,
               the result of the template expansion is evaluated as a relative URI
               against the base address using the

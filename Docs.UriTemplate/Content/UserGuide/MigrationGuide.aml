@@ -33,7 +33,7 @@
           path segments syntax and query parameters. In addition to the syntax changes,
           there are differences in the behavior of the template matching operation. This
           will require additional consideration for code making use of the
-          <codeEntityReference>Overload:Rackspace.Net.UriTemplate.Match</codeEntityReference>
+          <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.Match</codeEntityReference>
           operation.
         </para>
       </content>
@@ -224,7 +224,7 @@
               This library does not contain an equivalent to the
               <codeEntityReference>M:System.UriTemplate.BindByPosition(System.Uri,System.String[])</codeEntityReference>
               method. Any calls which use this method must be converted to use
-              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.BindByName</codeEntityReference>
               when migrating existing code to this library.
             </para>
           </content>
@@ -235,7 +235,7 @@
           <content>
             <para>
               For the various
-              <codeEntityReference>Overload:Rackspace.Net.UriTemplate.BindByName</codeEntityReference>
+              <codeEntityReference>Overload:TunnelVisionLabs.Net.UriTemplate.BindByName</codeEntityReference>
               methods which take a base address as a parameter, this library uses the
               <codeEntityReference>M:System.Uri.#ctor(System.Uri,System.Uri)</codeEntityReference>
               constructor to implement the resolution of relative addresses against a base

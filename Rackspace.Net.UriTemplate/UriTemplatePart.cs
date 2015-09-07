@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace Rackspace.Net
+namespace TunnelVisionLabs.Net
 {
     using System;
     using System.Collections.Generic;
@@ -87,7 +87,7 @@ namespace Rackspace.Net
         /// Provides the implementation of <see cref="BuildPattern"/> for a specific <see cref="UriTemplatePart"/> type.
         /// </summary>
         /// <remarks>
-        /// <para>This method is part of the <see cref="O:Rackspace.Net.UriTemplate.Match"/> algorithm. If the match
+        /// <para>This method is part of the <see cref="O:TunnelVisionLabs.Net.UriTemplate.Match"/> algorithm. If the match
         /// operation is successful, the text of the candidate URI matched by the segment of the regular expression
         /// added to <paramref name="pattern"/> by this method is passed as an argument to the <see cref="Match"/>
         /// method for associating the results with specific variables.</para>
