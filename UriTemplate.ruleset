@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="UriTemplate Code Analysis Rules" Description=" Code Analysis Rules for UriTemplate" ToolsVersion="14.0">
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1202" Action="None" />
+    <Rule Id="SA1204" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1503" Action="None" />
+    <Rule Id="SA1600" Action="Hidden" />
+    <Rule Id="SX1309" Action="Warning" />
+    <Rule Id="SX1309S" Action="Warning" />
+  </Rules>
+</RuleSet>

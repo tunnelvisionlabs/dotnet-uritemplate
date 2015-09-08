@@ -28,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\portable-net40\Debug\Testing.Rfc6570.portable_net40.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\portable-net40\Release\Testing.Rfc6570.portable_net40.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -80,7 +82,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\UriTemplate.ruleset">
+      <Link>UriTemplate.ruleset</Link>
+    </None>
+    <None Include="packages.Testing.Rfc6570.portable-net40.config" />
     <None Include="TestingKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta009\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

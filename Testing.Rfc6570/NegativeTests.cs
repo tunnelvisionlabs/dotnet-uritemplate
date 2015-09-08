@@ -13,26 +13,26 @@ namespace Testing.Rfc6570
     [TestClass]
     public class NegativeTests
     {
-        public readonly Dictionary<string, object> variables =
+        private static readonly Dictionary<string, object> Variables =
             new Dictionary<string, object>
             {
-                { "id"                , "thing" },
-                { "var"               , "value" },
-                { "hello"             , "Hello World!" },
-                { "with space"        , "fail" },
-                { " leading_space"    , "Hi!" },
-                { "trailing_space "   , "Bye!" },
-                { "empty"             , string.Empty },
-                { "path"              , "/foo/bar" },
-                { "x"                 , "1024" },
-                { "y"                 , "768" },
-                { "list"              , new[] { "red", "green", "blue" } },
-                { "keys"              , new Dictionary<string, object> { { "semi", ";" }, { "dot", "." }, { "comma", "," } } },
-                { "example"           , "red" },
-                { "searchTerms"       , "uri templates" },
-                { "~thing"            , "some-user" },
-                { "default-graph-uri" , new[] { "http://www.example/book/", "http://www.example/papers/" } },
-                { "query"             , "PREFIX dc: <http://purl.org/dc/elements/1.1/> SELECT ?book ?who WHERE { ?book dc:creator ?who }" }
+                { "id", "thing" },
+                { "var", "value" },
+                { "hello", "Hello World!" },
+                { "with space", "fail" },
+                { " leading_space", "Hi!" },
+                { "trailing_space ", "Bye!" },
+                { "empty", string.Empty },
+                { "path", "/foo/bar" },
+                { "x", "1024" },
+                { "y", "768" },
+                { "list", new[] { "red", "green", "blue" } },
+                { "keys", new Dictionary<string, object> { { "semi", ";" }, { "dot", "." }, { "comma", "," } } },
+                { "example", "red" },
+                { "searchTerms", "uri templates" },
+                { "~thing", "some-user" },
+                { "default-graph-uri", new[] { "http://www.example/book/", "http://www.example/papers/" } },
+                { "query", "PREFIX dc: <http://purl.org/dc/elements/1.1/> SELECT ?book ?who WHERE { ?book dc:creator ?who }" }
             };
 
         [TestMethod]
@@ -213,7 +213,7 @@ namespace Testing.Rfc6570
         {
             string template = "{keys:1}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            uriTemplate.BindByName(variables);
+            uriTemplate.BindByName(Variables);
         }
 
         [TestMethod]
@@ -223,7 +223,7 @@ namespace Testing.Rfc6570
         {
             string template = "{+keys:1}";
             UriTemplate uriTemplate = new UriTemplate(template);
-            uriTemplate.BindByName(variables);
+            uriTemplate.BindByName(Variables);
         }
 
         [TestMethod]

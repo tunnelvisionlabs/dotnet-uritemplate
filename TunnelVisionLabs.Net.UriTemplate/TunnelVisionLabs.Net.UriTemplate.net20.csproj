@@ -23,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\net20\Debug\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\net20\Release\TunnelVisionLabs.Net.UriTemplate.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\UriTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -68,7 +70,20 @@
     <None Include="..\Build\keys\TunnelVisionLabs.Net.UriTemplate.snk">
       <Link>TunnelVisionLabs.Net.UriTemplate.snk</Link>
     </None>
+    <None Include="..\UriTemplate.ruleset">
+      <Link>UriTemplate.ruleset</Link>
+    </None>
+    <None Include="packages.TunnelVisionLabs.Net.UriTemplate.net20.config" />
     <None Include="TunnelVisionLabs.Net.UriTemplate.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta009\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
