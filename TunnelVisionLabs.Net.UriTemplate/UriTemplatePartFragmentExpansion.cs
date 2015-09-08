@@ -264,7 +264,7 @@ namespace TunnelVisionLabs.Net
                 Group mapKeys = match.Groups["var" + i + "key"];
                 if (mapKeys.Success && mapKeys.Captures.Count > 0)
                 {
-                    Debug.Assert(considerMap);
+                    Debug.Assert(considerMap, "considerMap");
                     Group mapValues = match.Groups["var" + i + "value"];
                     Dictionary<string, string> map = new Dictionary<string, string>();
                     for (int j = 0; j < mapKeys.Captures.Count; j++)
@@ -277,7 +277,7 @@ namespace TunnelVisionLabs.Net
                 // next try an array
                 if (!considerString || group.Captures.Count > 1)
                 {
-                    Debug.Assert(considerArray);
+                    Debug.Assert(considerArray, "considerArray");
                     List<string> list = new List<string>(group.Captures.Count);
                     foreach (Capture capture in group.Captures)
                         list.Add(DecodeCharacters(capture.Value));
@@ -286,7 +286,7 @@ namespace TunnelVisionLabs.Net
                     continue;
                 }
 
-                Debug.Assert(considerString);
+                Debug.Assert(considerString, "considerString");
                 results.Add(new KeyValuePair<VariableReference, object>(Variables[i], DecodeCharacters(group.Captures[0].Value)));
             }
 
