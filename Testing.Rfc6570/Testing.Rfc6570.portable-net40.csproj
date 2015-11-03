@@ -61,7 +61,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -74,6 +76,7 @@
     <Compile Include="NegativeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCategories.cs" />
+    <Compile Include="AssemblyInitialize.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TunnelVisionLabs.Net.UriTemplate\TunnelVisionLabs.Net.UriTemplate.portable-net40.csproj">
