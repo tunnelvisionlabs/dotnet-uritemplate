@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AssemblyInitialize.cs" />
     <Compile Include="ExtendedTests.cs" />
     <Compile Include="Level1Tests.cs" />
     <Compile Include="Level2Tests.cs" />
