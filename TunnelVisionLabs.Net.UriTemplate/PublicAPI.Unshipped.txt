@@ -1,0 +1,23 @@
+TunnelVisionLabs.Net.UriTemplate
+TunnelVisionLabs.Net.UriTemplate.BindByName(System.Collections.Generic.IDictionary<string, object> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.BindByName(System.Collections.Generic.IDictionary<string, string> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.BindByName(System.Uri baseAddress, System.Collections.Generic.IDictionary<string, object> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.BindByName(System.Uri baseAddress, System.Collections.Generic.IDictionary<string, string> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.BindByName<T>(System.Collections.Generic.IDictionary<string, T> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.BindByName<T>(System.Uri baseAddress, System.Collections.Generic.IDictionary<string, T> parameters) -> System.Uri
+TunnelVisionLabs.Net.UriTemplate.Match(System.Uri baseAddress, System.Uri candidate) -> TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplate.Match(System.Uri candidate) -> TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplate.Match(System.Uri candidate, System.Collections.Generic.ICollection<string> arrayVariables, System.Collections.Generic.ICollection<string> mapVariables) -> TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplate.Match(System.Uri candidate, System.Collections.Generic.ICollection<string> requiredVariables) -> TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplate.Match(System.Uri candidate, System.Collections.Generic.ICollection<string> requiredVariables, System.Collections.Generic.ICollection<string> arrayVariables, System.Collections.Generic.ICollection<string> mapVariables) -> TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplate.Template.get -> string
+TunnelVisionLabs.Net.UriTemplate.UriTemplate(string template) -> void
+TunnelVisionLabs.Net.UriTemplateMatch
+TunnelVisionLabs.Net.UriTemplateMatch.Bindings.get -> System.Collections.Generic.IDictionary<string, System.Collections.Generic.KeyValuePair<TunnelVisionLabs.Net.VariableReference, object>>
+TunnelVisionLabs.Net.UriTemplateMatch.Template.get -> TunnelVisionLabs.Net.UriTemplate
+TunnelVisionLabs.Net.VariableReference
+TunnelVisionLabs.Net.VariableReference.Composite.get -> bool
+TunnelVisionLabs.Net.VariableReference.Name.get -> string
+TunnelVisionLabs.Net.VariableReference.Prefix.get -> int?
+override TunnelVisionLabs.Net.UriTemplate.ToString() -> string
+override TunnelVisionLabs.Net.VariableReference.ToString() -> string
